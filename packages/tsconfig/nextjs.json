@@ -14,7 +14,10 @@
     "noEmit": true,
     "resolveJsonModule": true,
     "strict": false,
-    "target": "es5"
+    "target": "es5",
+    "paths": {
+      "@/lib/*": ["./lib/*"]
+    }
   },
   "include": ["src", "next-env.d.ts"],
   "exclude": ["node_modules"]
