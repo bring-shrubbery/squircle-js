@@ -6,8 +6,8 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsup src/*.tsx --format cjs,esm --dts --external react",
-    "dev": "tsup src/*.tsx --format esm,cjs --watch --dts --external react",
+    "build": "tsup src/index.tsx --format cjs,esm --dts --external react",
+    "dev": "tsup src/index.tsx --format esm,cjs --watch --dts --external react",
     "release": "pnpm run build && changeset publish",
     "lint": "tsc"
   },

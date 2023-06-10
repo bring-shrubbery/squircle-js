@@ -1,5 +1,5 @@
 import { Toaster } from "@/components/ui/toaster";
-import { NoJsSquircle } from "@squircle-element/react/dist/no-js";
+import { SquircleNoScript } from "@squircle-element/react";
 import "./globals.css";
 
 import { Inter } from "next/font/google";
@@ -19,7 +19,7 @@ export default function RootLayout({
       <body className={inter.className}>
         {children}
         <Toaster />
-        <NoJsSquircle />
+        <SquircleNoScript />
       </body>
     </html>
   );

@@ -4,6 +4,8 @@ import { getSvgPath } from "figma-squircle";
 import { useMemo } from "react";
 import { useElementSize } from "usehooks-ts";
 
+export { SquircleNoScript } from "./no-js";
+
 interface SquircleElementProps<E extends React.ElementType> {
   cornerSmoothing?: number;
   cornerRadius?: number;
