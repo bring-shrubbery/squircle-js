@@ -18,6 +18,15 @@ const YourComponent = () => {
 }
 `.trim();
 
+const usage_react_3 = `
+// _app.tsx or root-level layout.tsx
+import { SquircleNoScript } from "@squircle-element/react";
+
+...
+<SquircleNoScript />
+...
+`.trim();
+
 export const UsageSection = () => {
   return (
     <div className="mx-auto container w-full mb-36">
@@ -45,7 +54,7 @@ export const UsageSection = () => {
                 Step 1.{" "}
                 <span className="font-normal">Install the package.</span>
               </h3>
-              <Code content="pnpm install @squircle-element/react" />
+              <Code content="pnpm add @squircle-element/react" />
 
               <h3 className="font-semibold text-lg mb-2 mt-4">
                 Step 2.{" "}
@@ -54,6 +63,14 @@ export const UsageSection = () => {
                 </span>
               </h3>
               <Code raw={usage_react_2} content={<pre>{usage_react_2}</pre>} />
+
+              <h3 className="font-semibold text-lg mb-2 mt-4">
+                Step 3.{" "}
+                <span className="font-normal">
+                  Add global component for noscript.
+                </span>
+              </h3>
+              <Code raw={usage_react_3} content={<pre>{usage_react_3}</pre>} />
             </CardContent>
           </Card>
         </TabsContent>

@@ -36,6 +36,14 @@ const YourComponent = () => {
     </SquircleElement>
   );
 };
+
+// Also add a global component to make sure it still works when JavaScript is disabled.
+// _app.tsx, or root-level layout.tsx
+import { SquircleNoScript } from "@squircle-element/react";
+
+...
+<SquircleNoScript />
+...
 ```
 
 ## License
