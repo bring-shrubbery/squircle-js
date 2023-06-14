@@ -33,7 +33,7 @@ export const SquircleDemoSection = () => {
           cornerRadius={10}
           cornerSmoothing={1}
         >
-          {"<SquircleElement>"}
+          {"<Squircle>"}
         </Squircle>{" "}
         to build your own components.
         <br />

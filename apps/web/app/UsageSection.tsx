@@ -4,17 +4,17 @@ import { Code } from "@/components/ui/code";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const usage_react_2 = `
-import { SquircleElement }
+import { Squircle }
   from "@squircle-js/react"
 
 const YourComponent = () => {
-  return <SquircleElement
+  return <Squircle
     cornerRadius={10}
     cornerSmoothing={1}
     className="p-4 bg-black text-white"
   >
     Squircle!
-  </SquircleElement>
+  </Squircle>
 }
 `.trim();
 
