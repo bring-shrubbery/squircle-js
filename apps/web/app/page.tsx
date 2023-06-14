@@ -1,6 +1,5 @@
 import { Navbar } from "@/components/navbar";
 import { SquircleDemoSection } from "./SquircleDemoSection";
-import { SquircleElement } from "@squircle-js/react";
 import { UsageSection } from "./UsageSection";
 import { ExamplesSection } from "./ExamplesSection";
 import { FeaturesSection } from "./FeaturesSection";
