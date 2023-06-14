@@ -8,7 +8,6 @@
   "scripts": {
     "build": "tsup src/index.tsx --format cjs,esm --dts --external react",
     "dev": "tsup src/index.tsx --format esm,cjs --watch --dts --external react",
-    "release": "pnpm run build && changeset publish",
     "lint": "tsc"
   },
   "dependencies": {
