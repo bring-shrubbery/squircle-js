@@ -1,6 +1,6 @@
 "use client";
 
-import { SquircleElement } from "@squircle-element/react";
+import { Squircle } from "@squircle-js/react";
 import { useState } from "react";
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
@@ -13,28 +13,28 @@ export const SquircleDemoSection = () => {
     <div className="container mx-auto max-w-[960px] md:pt-24 mb-36">
       <h1 className="font-bold text-4xl leading-[180%] sm:text-5xl sm:leading-[150%] md:text-6xl text-center md:mx-auto mb-6 md:leading-[130%]">
         Squircle{" "}
-        <SquircleElement
+        <Squircle
           as="span"
           className="bg-black text-white pl-8 pr-8 pt-2 pb-2"
           cornerRadius={cornerRadius}
           cornerSmoothing={cornerSmoothing}
         >
           Element
-        </SquircleElement>
+        </Squircle>
         <br />
         for your Frontend
       </h1>
 
       <div className="text-center text-lg mb-10">
         Use{" "}
-        <SquircleElement
+        <Squircle
           as="code"
           className="bg-gray-800 text-white py-1 pl-2 pr-2"
           cornerRadius={10}
           cornerSmoothing={1}
         >
           {"<SquircleElement>"}
-        </SquircleElement>{" "}
+        </Squircle>{" "}
         to build your own components.
         <br />
         Available in <span className="font-bold">React</span>, and coming to

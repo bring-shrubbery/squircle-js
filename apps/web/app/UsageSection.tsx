@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const usage_react_2 = `
 import { SquircleElement }
-  from "@squircle-element/react"
+  from "@squircle-js/react"
 
 const YourComponent = () => {
   return <SquircleElement
@@ -20,7 +20,7 @@ const YourComponent = () => {
 
 const usage_react_3 = `
 // _app.tsx or root-level layout.tsx
-import { SquircleNoScript } from "@squircle-element/react";
+import { SquircleNoScript } from "@squircle-js/react";
 
 ...
 <SquircleNoScript />
@@ -54,7 +54,7 @@ export const UsageSection = () => {
                 Step 1.{" "}
                 <span className="font-normal">Install the package.</span>
               </h3>
-              <Code content="pnpm add @squircle-element/react" />
+              <Code content="pnpm add @squircle-js/react" />
 
               <h3 className="font-semibold text-lg mb-2 mt-4">
                 Step 2.{" "}

@@ -2,25 +2,25 @@
 
 import { getSvgPath } from "figma-squircle";
 import { useMemo } from "react";
-import { useElementSize } from "./use-element-size";
 
+import { useElementSize } from "./use-element-size";
 export { SquircleNoScript } from "./no-js";
 
-interface SquircleElementProps<E extends React.ElementType> {
+interface SquircleProps<E extends React.ElementType> {
   cornerSmoothing?: number;
   cornerRadius?: number;
   as?: E;
   children?: React.ReactNode;
 }
 
-function SquircleElement<E extends React.ElementType = "div">({
+function Squircle<E extends React.ElementType = "div">({
   cornerRadius,
   cornerSmoothing = 0.6,
   as,
   style,
   ...props
-}: SquircleElementProps<E> &
-  Omit<React.ComponentPropsWithoutRef<E>, keyof SquircleElementProps<E>>) {
+}: SquircleProps<E> &
+  Omit<React.ComponentPropsWithoutRef<E>, keyof SquircleProps<E>>) {
   const Component = as || "div";
 
   // Note: If you need to pass ref, wrap this component in another, and style to full-width/height.
@@ -49,4 +49,4 @@ function SquircleElement<E extends React.ElementType = "div">({
   );
 }
 
-export { SquircleElement, type SquircleElementProps };
+export { Squircle, type SquircleProps };

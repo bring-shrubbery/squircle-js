@@ -17,13 +17,13 @@ This is a project aiming at bringing the iOS-style squircle to your frontend pro
 Install
 
 ```bash
-pnpm add @squircle-element/react
+pnpm add @squircle-js/react
 ```
 
 Add to your project
 
 ```tsx
-import { SquircleElement } from "@squircle-element/react";
+import { SquircleElement } from "@squircle-js/react";
 
 const YourComponent = () => {
   return (
@@ -39,7 +39,7 @@ const YourComponent = () => {
 
 // Also add a global component to make sure it still works when JavaScript is disabled.
 // _app.tsx, or root-level layout.tsx
-import { SquircleNoScript } from "@squircle-element/react";
+import { SquircleNoScript } from "@squircle-js/react";
 
 ...
 <SquircleNoScript />
