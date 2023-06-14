@@ -1,5 +1,5 @@
 {
-  "name": "@squircle-element/react",
+  "name": "@squircle-js/react",
   "license": "MIT",
   "version": "1.0.1",
   "main": "dist/index.js",

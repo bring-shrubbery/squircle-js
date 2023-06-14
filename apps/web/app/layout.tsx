@@ -1,5 +1,5 @@
 import { Toaster } from "@/components/ui/toaster";
-import { SquircleNoScript } from "@squircle-element/react";
+import { SquircleNoScript } from "@squircle-js/react";
 import "./globals.css";
 
 import { Inter } from "next/font/google";

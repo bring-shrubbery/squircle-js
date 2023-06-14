@@ -1,6 +1,6 @@
 "use client";
 
-import { SquircleElement } from "@squircle-element/react";
+import { SquircleElement } from "@squircle-js/react";
 import { useState } from "react";
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
