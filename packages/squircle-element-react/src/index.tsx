@@ -2,7 +2,7 @@
 
 import { getSvgPath } from "figma-squircle";
 import { useMemo } from "react";
-import { useElementSize } from "usehooks-ts";
+import { useElementSize } from "./use-element-size";
 
 export { SquircleNoScript } from "./no-js";
 
