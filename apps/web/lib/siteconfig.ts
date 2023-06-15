@@ -6,7 +6,7 @@ export const SITECONFIG = {
   githubLink: "https://github.com/bring-shrubbery/squircle-js",
   sponsorLink: "https://github.com/sponsors/bring-shrubbery",
   linkedinLink: "https://linkedin.com/antoni-silvestrovic",
-  quassumLink: "https://quassum.com/?utm_source=squircle-element",
+  quassumLink: "https://quassum.com/?utm_source=squircle-js",
   licenseLink:
     "https://github.com/bring-shrubbery/squircle-js/blob/master/LICENSE",
   antoniGithubLink: "https://github.com/bring-shrubbery",
