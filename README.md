@@ -23,17 +23,17 @@ pnpm add @squircle-js/react
 Add to your project
 
 ```tsx
-import { SquircleElement } from "@squircle-js/react";
+import { Squircle } from "@squircle-js/react";
 
 const YourComponent = () => {
   return (
-    <SquircleElement
+    <Squircle
       cornerRadius={10}
       cornerSmoothing={1}
       className="p-4 bg-black text-white"
     >
       Squircle!
-    </SquircleElement>
+    </Squircle>
   );
 };
 
