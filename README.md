@@ -9,11 +9,11 @@
 
 ## Features
 
-- Responsive squircle element that can be used any an intrinsic component.
-- Fallback solution for No-JavaScript.
-- CommonJS and ES6 (tree-shakeable).
-- Available for React (with `react@18` support), with other frameworks coming later.
-- Documented usage examples.
+- 💃 Responsive squircle element that can be used any an intrinsic component.
+- 🙏 Fallback solution for No-JavaScript.
+- 👌 CommonJS and ES6 (tree-shakeable).
+- 🚀 Available for React (with `react@18` support), with other frameworks coming later.
+- 🧨 Documented usage examples.
 
 ## Usage
 
