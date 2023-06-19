@@ -1,6 +1,11 @@
-# SquircleJS
+<p align="center">
+  <img src="./content/squircle-js-logo.png" width="420px" alt="SquircleJS" />
+</p>
 
-This project aims to bring the iOS-style squircle to your front-end projects.
+<!-- <h1 align="center">SquircleJS</h1> -->
+<p align="center">
+  This project aims to bring the iOS-style squircle to your front-end projects.
+</p>
 
 ## Features
 
