@@ -6,6 +6,9 @@
 <p align="center">
   This project aims to bring the iOS-style squircle to your front-end projects.
 </p>
+<p align="center">
+  <a href="https://squircle.js.org/">📕 Documentation</a>
+</p>
 
 ## Features
 
