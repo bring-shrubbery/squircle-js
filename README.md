@@ -1,10 +1,10 @@
-# Squircle Button
+# SquircleJS
 
-This is a project aiming at bringing the iOS-style squircle to your frontend projects.
+This project aims to bring the iOS-style squircle to your front-end projects.
 
 ## Features
 
-- Responsive squircle element that can be used as any intrinsic component.
+- Responsive squircle element that can be used any an intrinsic component.
 - Fallback solution for No-JavaScript.
 - CommonJS and ES6 (tree-shakeable).
 - Available for React (with `react@18` support), with other frameworks coming later.
