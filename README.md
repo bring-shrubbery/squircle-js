@@ -16,6 +16,7 @@
 - 🙏 Fallback solution for No-JavaScript.
 - 👌 CommonJS and ES6 (tree-shakeable).
 - 🚀 Available for React (with `react@18` support), with other frameworks coming later.
+- 🐁 Just `2.1kB` gzipped.
 - 🧨 Documented usage examples.
 
 ## Usage
