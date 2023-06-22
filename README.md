@@ -38,13 +38,21 @@ Visually, [this post from Figma Blog](https://www.figma.com/blog/desperately-see
 
 ## Usage
 
-### with React
+### With React
 
-Install
+#### Step 1
+
+Star this repo ❤️
+
+#### Step 2
+
+Install the package
 
 ```bash
 pnpm add @squircle-js/react
 ```
+
+#### Step 3
 
 Add to your project
 
