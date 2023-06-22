@@ -19,6 +19,23 @@
 - 🐁 Just `2.1kB` gzipped.
 - 🧨 Documented usage examples.
 
+### Drawbacks
+
+- Uses JavaScript to apply corner smoothing (no way to do it with CSS only for now).
+- Does not currently support `border-width`. Works great with just background color.
+
+## What the 🤡 is a Squircle???
+
+This is a valid question and not everyone is aware of what a Squircle is.
+<q>A squircle is an intermediate shape between a square and a circle</q> - [Webflow Blog](https://webflow.com/blog/squircle-vs-rounded-squares).
+If you've ever seen an iPhone home screen, you've seen a squircle.
+When you add additional corner smoothing to a regular rectangle with rounded corners, you get a squircle.
+It's a [long story](https://www.figma.com/blog/desperately-seeking-squircles/), but in short - you can't achieve Squircles in plain CSS, we have to do extra calculations for that, which is where the [figma-squircle](https://github.com/phamfoo/figma-squircle) package comes in. Building on top of that package, this project adds bindings for UI libraries that make it possible to use it just like a regular html component, without worrying about layout-specific things.
+
+Visually, [this post from Figma Blog](https://www.figma.com/blog/desperately-seeking-squircles/) shows the difference really well:
+
+![ezgif-3-e6f18e029e](https://github.com/bring-shrubbery/squircle-js/assets/29360707/e64bacb9-9881-476b-9064-01a72df06a9e)
+
 ## Usage
 
 ### with React
