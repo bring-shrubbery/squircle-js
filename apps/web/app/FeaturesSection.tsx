@@ -5,11 +5,12 @@ export const FeaturesSection = () => {
         {"Features 👑"}
       </h2>
 
-      <ul className="list-disk list-inside space-y-2">
-        <li>{"Easy to use primitive for building your own components."}</li>
-        <li>{"Available for React, (other libraries coming soon)"}</li>
+      <ul className="list-none list-inside space-y-2">
+        <li>{"💃 Easy to use primitive for building your own components."}</li>
+        <li>{"🚀 Available for React, (other libraries coming soon)"}</li>
+        <li>{"😏 React 18 support (server components)"}</li>
         <li>
-          {"Fallback for no JavaScript (try disabling JS for this page)"}
+          {"🙏 Fallback for no JavaScript (try disabling JS for this page)"}
           <noscript>
             <br />
             <div className="ml-[22px] pt-2">
@@ -18,8 +19,8 @@ export const FeaturesSection = () => {
             </div>
           </noscript>
         </li>
-        <li>{"React 18 support (server components)"}</li>
-        <li>{"CommonJS and ES6"}</li>
+        <li>{"🐁 Just 2.1kB gzipped."}</li>
+        <li>{"👌 CommonJS and ES6"}</li>
       </ul>
     </div>
   );
