@@ -17,11 +17,11 @@ export const SquircleDemoSection = () => {
         </span>{" "}
         <Squircle
           as="span"
-          className="bg-black text-white pl-8 pr-8 pt-2 pb-2 text-6xl sm:text-inherit"
+          className="bg-black pl-8 pr-8 pt-2 pb-2 text-6xl sm:text-inherit"
           cornerRadius={cornerRadius}
           cornerSmoothing={cornerSmoothing}
         >
-          Element
+          <span className="text-white">Element</span>
         </Squircle>
         <br />
         for{" "}
@@ -42,6 +42,9 @@ export const SquircleDemoSection = () => {
           {"<Squircle>"}
         </Squircle>{" "}
         to build your own components.
+        <br />
+        If you <span className="font-bold">don't know what a squircle is</span>,
+        read more below.
         <br />
         Available in <span className="font-bold">React</span>, and coming to
         other frontend frameworks soon!
