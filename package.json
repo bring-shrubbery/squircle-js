@@ -8,12 +8,12 @@
     "release": "pnpm run build && changeset publish"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.26.1",
-    "@turbo/gen": "^1.10.3",
+    "@changesets/cli": "^2.26.2",
+    "@turbo/gen": "^1.10.13",
     "eslint": "^7.32.0",
     "eslint-config-custom": "workspace:*",
     "prettier": "^2.8.8",
-    "turbo": "^1.10.3"
+    "turbo": "^1.10.13"
   },
   "packageManager": "pnpm@7.15.0",
   "name": "squircle-button"
