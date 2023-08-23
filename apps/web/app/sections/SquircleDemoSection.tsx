@@ -25,7 +25,7 @@ export const SquircleDemoSection = () => {
         </Squircle>
         <br />
         for{" "}
-        <span className="relative before:absolute before:-inset-x-1 before:h-1 before:-bottom-1 before:-rotate-2 before:bg-black before:-z-10">
+        <span className="relative before:absolute before:-inset-x-1 before:h-1 before:-bottom-1 before:-rotate-2 before:bg-foreground before:-z-10">
           your
         </span>{" "}
         Frontend
@@ -35,7 +35,7 @@ export const SquircleDemoSection = () => {
         Use{" "}
         <Squircle
           as="code"
-          className="bg-gray-800 text-white py-1 pl-2 pr-2"
+          className="bg-foreground text-white py-1 pl-2 pr-2"
           cornerRadius={10}
           cornerSmoothing={1}
         >
