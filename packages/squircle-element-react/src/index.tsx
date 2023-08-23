@@ -33,10 +33,13 @@ function Squircle<E extends React.ElementType = "div">({
   const Component = as || "div";
 
   // Note: If you need to pass ref, wrap this component in another, and style to full-width/height.
-  const [ref, { width, height }] = useElementSize<HTMLDivElement>();
+  const [ref, { width, height }] = useElementSize<HTMLDivElement>({
+    width: defaultWidth,
+    height: defaultHeight,
+  });
 
-  const actualWidth = w ?? width ?? defaultWidth;
-  const actualHeight = h ?? height ?? defaultHeight;
+  const actualWidth = w ?? width;
+  const actualHeight = h ?? height;
 
   const path = useMemo(() => {
     return getSvgPath({
@@ -54,8 +57,8 @@ function Squircle<E extends React.ElementType = "div">({
       style={{
         ...style,
         borderRadius: cornerRadius,
-        width: actualWidth,
-        height: actualHeight,
+        // width: actualWidth,
+        // height: actualHeight,
         clipPath: `path('${path}')`,
       }}
       data-squircle={cornerRadius}
