@@ -11,6 +11,11 @@ interface SquircleProps<E extends React.ElementType> {
   cornerRadius?: number;
   as?: E;
   children?: React.ReactNode;
+
+  width?: number;
+  height?: number;
+  defaultWidth?: number;
+  defaultHeight?: number;
 }
 
 function Squircle<E extends React.ElementType = "div">({
@@ -18,6 +23,10 @@ function Squircle<E extends React.ElementType = "div">({
   cornerSmoothing = 0.6,
   as,
   style,
+  width: w,
+  height: h,
+  defaultWidth,
+  defaultHeight,
   ...props
 }: SquircleProps<E> &
   Omit<React.ComponentPropsWithoutRef<E>, keyof SquircleProps<E>>) {
@@ -26,14 +35,17 @@ function Squircle<E extends React.ElementType = "div">({
   // Note: If you need to pass ref, wrap this component in another, and style to full-width/height.
   const [ref, { width, height }] = useElementSize<HTMLDivElement>();
 
+  const actualWidth = w ?? width ?? defaultWidth;
+  const actualHeight = h ?? height ?? defaultHeight;
+
   const path = useMemo(() => {
     return getSvgPath({
-      width,
-      height,
+      width: actualWidth,
+      height: actualHeight,
       cornerRadius,
       cornerSmoothing,
     });
-  }, [width, height, cornerRadius, cornerSmoothing]);
+  }, [actualWidth, actualHeight, cornerRadius, cornerSmoothing]);
 
   return (
     <Component
@@ -42,6 +54,8 @@ function Squircle<E extends React.ElementType = "div">({
       style={{
         ...style,
         borderRadius: cornerRadius,
+        width: actualWidth,
+        height: actualHeight,
         clipPath: `path('${path}')`,
       }}
       data-squircle={cornerRadius}

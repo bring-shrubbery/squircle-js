@@ -14,7 +14,7 @@ export default function Page() {
       <SquircleDemoSection />
       <FeaturesSection />
       <UsageSection />
-      {/* <ExamplesSection /> */}
+      <ExamplesSection />
       {/* <HowItWorksSection /> */}
       <LicenseSection />
       <LinksSection />

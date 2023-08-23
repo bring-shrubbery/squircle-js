@@ -5,20 +5,23 @@ import { useToast } from "./use-toast";
 import { ScrollArea } from "./scroll-area";
 
 export const Code = ({
-  content,
+  dangerousHTML,
   raw,
 }: {
-  content: string | JSX.Element;
-  raw?: string;
+  dangerousHTML: string;
+  raw: string;
 }) => {
   const toast = useToast();
 
-  const copyContent = raw || content.toString();
+  const copyContent = raw;
 
   return (
     <code className="relative text-sm sm:text-base inline-flex text-left items-center space-x-4 bg-primary text-primary-foreground rounded-lg p-4 pl-6 pr-14 w-full">
       <ScrollArea orientation="horizontal" className="w-full">
-        <div className="w-fit">{content}</div>
+        <pre
+          className="w-fit"
+          dangerouslySetInnerHTML={{ __html: dangerousHTML }}
+        />
       </ScrollArea>
 
       <button

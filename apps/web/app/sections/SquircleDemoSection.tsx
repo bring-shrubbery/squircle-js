@@ -51,37 +51,41 @@ export const SquircleDemoSection = () => {
       </div>
 
       <div className="space-y-12 mb-8 mx-auto max-w-[360px]">
-        <div className="space-y-4">
-          <Label
-            htmlFor="corner-radius"
-            className="mt-4"
-          >{`Corner Radius (${cornerRadius}px)`}</Label>
-          <Slider
-            id="corner-radius"
-            min={0}
-            max={50}
-            value={[cornerRadius]}
-            onValueChange={(v) => setCornerRadius(v.at(0))}
-          />
+        <div className="space-y-6">
+          <div className="space-y-4">
+            <Label
+              htmlFor="corner-radius"
+              className="mt-4"
+            >{`Corner Radius (${cornerRadius}px)`}</Label>
+            <Slider
+              id="corner-radius"
+              min={0}
+              max={50}
+              value={[cornerRadius]}
+              onValueChange={(v) => setCornerRadius(v.at(0))}
+            />
+          </div>
 
-          <Label htmlFor="corner-smoothing">
-            {`Corner Smoothing (${cornerSmoothing}) `}
-            {cornerSmoothing === 0
-              ? "- Just like regular old button"
-              : cornerSmoothing === 1
-              ? "- Silky smooth!"
-              : cornerSmoothing === 0.6
-              ? "- like iOS icons"
-              : ""}
-          </Label>
-          <Slider
-            id="corner-smoothing"
-            min={0}
-            max={1}
-            step={0.01}
-            value={[cornerSmoothing]}
-            onValueChange={(v) => setCornerSmoothing(v.at(0))}
-          />
+          <div className="space-y-4">
+            <Label htmlFor="corner-smoothing">
+              {`Corner Smoothing (${cornerSmoothing}) `}
+              {cornerSmoothing === 0
+                ? "- Just like regular old button"
+                : cornerSmoothing === 1
+                ? "- Silky smooth!"
+                : cornerSmoothing === 0.6
+                ? "- like iOS icons"
+                : ""}
+            </Label>
+            <Slider
+              id="corner-smoothing"
+              min={0}
+              max={1}
+              step={0.01}
+              value={[cornerSmoothing]}
+              onValueChange={(v) => setCornerSmoothing(v.at(0))}
+            />
+          </div>
         </div>
 
         <div className="space-y-2">
