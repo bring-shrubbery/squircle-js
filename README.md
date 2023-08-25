@@ -10,6 +10,11 @@
   <a href="https://squircle.js.org/">📕 Documentation</a>
 </p>
 
+<p align="center">
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/bring-shrubbery/squircle-js?style=flat&logo=github&color=%230B0F14"/>
+  <img alt="npm" src="https://img.shields.io/npm/dm/%40squircle-js/react?style=flat&logo=npm&color=%230B0F14"/>
+</p>
+
 ## Features
 
 - 💃 Responsive squircle element that can be used any an intrinsic component.
