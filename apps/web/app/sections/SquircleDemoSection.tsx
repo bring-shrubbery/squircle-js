@@ -43,7 +43,8 @@ export const SquircleDemoSection = () => {
         </Squircle>{" "}
         to build your own components.
         <br />
-        If you <span className="font-bold">don't know what a squircle is</span>,
+        If you{" "}
+        <span className="font-bold">don&apos;t know what a squircle is</span>,
         read more below.
         <br />
         Available in <span className="font-bold">React</span>, and coming to

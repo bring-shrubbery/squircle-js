@@ -49,3 +49,5 @@ export const ExamplesSectionDefaultSizeExampleClientComponent = () => {
     </div>
   );
 };
+
+// https://stackoverflow.com/questions/623172/how-to-get-the-image-size-height-width-using-javascript
