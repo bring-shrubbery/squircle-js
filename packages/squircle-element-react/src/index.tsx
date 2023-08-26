@@ -5,15 +5,17 @@ import { useMemo } from "react";
 
 import { useElementSize } from "./use-element-size";
 export { SquircleNoScript } from "./no-js";
+import { Slot } from "@radix-ui/react-slot";
 
 interface SquircleProps<E extends React.ElementType> {
   cornerSmoothing?: number;
   cornerRadius?: number;
-  as?: E;
+  asChild?: boolean;
   children?: React.ReactNode;
 
   width?: number;
   height?: number;
+
   defaultWidth?: number;
   defaultHeight?: number;
 }
@@ -21,7 +23,7 @@ interface SquircleProps<E extends React.ElementType> {
 function Squircle<E extends React.ElementType = "div">({
   cornerRadius,
   cornerSmoothing = 0.6,
-  as,
+  asChild,
   style,
   width: w,
   height: h,
@@ -30,12 +32,12 @@ function Squircle<E extends React.ElementType = "div">({
   ...props
 }: SquircleProps<E> &
   Omit<React.ComponentPropsWithoutRef<E>, keyof SquircleProps<E>>) {
-  const Component = as || "div";
+  const Component = asChild ? Slot : "div";
 
   // Note: If you need to pass ref, wrap this component in another, and style to full-width/height.
   const [ref, { width, height }] = useElementSize<HTMLDivElement>({
-    width: defaultWidth,
-    height: defaultHeight,
+    defaultWidth,
+    defaultHeight,
   });
 
   const actualWidth = w ?? width;
@@ -57,8 +59,8 @@ function Squircle<E extends React.ElementType = "div">({
       style={{
         ...style,
         borderRadius: cornerRadius,
-        // width: actualWidth,
-        // height: actualHeight,
+        width: w ?? defaultWidth,
+        height: h ?? defaultHeight,
         clipPath: `path('${path}')`,
       }}
       data-squircle={cornerRadius}

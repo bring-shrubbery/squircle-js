@@ -16,12 +16,12 @@ export const SquircleDemoSection = () => {
           Squircle
         </span>{" "}
         <Squircle
-          as="span"
-          className="bg-black pl-8 pr-8 pt-2 pb-2 text-6xl sm:text-inherit"
+          asChild
           cornerRadius={cornerRadius}
           cornerSmoothing={cornerSmoothing}
+          className="bg-black text-white pl-8 pr-8 pt-2 pb-2 text-6xl"
         >
-          <span className="text-white">Element</span>
+          <span>Element</span>
         </Squircle>
         <br />
         for{" "}
@@ -34,12 +34,12 @@ export const SquircleDemoSection = () => {
       <div className="text-center text-lg mb-6">
         Use{" "}
         <Squircle
-          as="code"
+          asChild
           className="bg-foreground text-white py-1 pl-2 pr-2"
           cornerRadius={10}
           cornerSmoothing={1}
         >
-          {"<Squircle>"}
+          <span>{"<Squircle>"}</span>
         </Squircle>{" "}
         to build your own components.
         <br />

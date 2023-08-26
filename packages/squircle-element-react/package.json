@@ -11,6 +11,7 @@
     "lint": "tsc"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.0.2",
     "figma-squircle": "^0.3.0"
   },
   "peerDependencies": {

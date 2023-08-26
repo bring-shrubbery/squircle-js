@@ -4,19 +4,15 @@ import { Squircle } from "@squircle-js/react";
 
 import Prism from "prismjs";
 import "prismjs/components/prism-jsx";
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
 const usage = `<Squircle
-  cornerRadius={64}
+  asChild
+  cornerRadius={10}
   cornerSmoothing={1}
-  width={256}
-  height={256}
+  className="bg-black text-white px-2 py-1"
 >
-  <div
-    className="w-full h-full
-    bg-gradient-to-br from-indigo-500
-    via-purple-500 to-pink-500"
-  />
+  <span>Inline Squircle</span>
 </Squircle>`;
 
 const highlightedUsage = Prism.highlight(
@@ -25,34 +21,30 @@ const highlightedUsage = Prism.highlight(
   "jsx"
 );
 
-export const ExampleSectionConstantSizeExample = () => {
+export const ExamplesSectionAsChildExample = () => {
   return (
     <Card className="w-full max-w-[480px] sm:max-w-[508px]">
       <CardContent className="py-6 w-full space-y-4">
         <h3 className="font-semibold text-lg">Code:</h3>
-
         <p>
-          When you know the exact size you want your squircle to be, you can use{" "}
-          <Kode>width</Kode> and <Kode>height</Kode> props to specify it. This
-          is especially useful when you Server Side Render your app, and you
-          know the size of the image you want to squircle.
+          You can use <Kode>asChild</Kode> prop to squircle any element. This is
+          useful when you want to squircle some element that might change size.
+          By default <Kode>Squircle</Kode> is a <Kode>div</Kode> element, but
+          you can change it to any other element by nesting that element inside
+          of <Kode>Squircle</Kode> component and adding <Kode>asChild</Kode>{" "}
+          prop.
         </p>
 
         <Code dangerousHTML={highlightedUsage} raw={usage} />
         <h3 className="font-semibold text-lg">Result:</h3>
 
         <Squircle
-          cornerRadius={64}
+          cornerRadius={10}
           cornerSmoothing={1}
-          width={256}
-          height={256}
-          className="mx-auto"
+          asChild
+          className="bg-black text-white px-2 py-1"
         >
-          <div
-            className="w-full h-full
-    bg-gradient-to-br from-indigo-500
-    via-purple-500 to-pink-500"
-          />
+          <span>Inline Squircle</span>
         </Squircle>
       </CardContent>
     </Card>

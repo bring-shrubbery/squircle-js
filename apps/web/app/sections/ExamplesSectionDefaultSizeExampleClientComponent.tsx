@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Squircle } from "@squircle-js/react";
 import { RotateCcwIcon } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export const ExamplesSectionDefaultSizeExampleClientComponent = () => {
@@ -30,20 +31,14 @@ export const ExamplesSectionDefaultSizeExampleClientComponent = () => {
       </Button>
       {src && (
         <Squircle
-          cornerRadius={64}
+          cornerRadius={50}
           cornerSmoothing={1}
-          // width={256}
-          // height={256}
-          defaultWidth={256}
-          defaultHeight={256}
+          defaultWidth={320}
+          defaultHeight={214}
           className="bg-slate-100 w-fit h-fit"
-          style={{ paddingBottom: !src ? -1 : 0 }}
-          as="img"
-          src={src}
+          asChild
         >
-          {/* <a href="https://unsplash.com/@bring_shrubbery"> */}
-
-          {/* </a> */}
+          <Image src={src} width={320} height={214} alt="" />
         </Squircle>
       )}
     </div>

@@ -9,6 +9,7 @@ import { LinksSection } from "./sections/LinksSection";
 import { UsageSectionReactContent } from "./sections/UsageSectionReactContent";
 import { ExampleSectionConstantSizeExample } from "./sections/ExamplesSectionConstantSizeExample";
 import { ExamplesSectionDefaultSizeExample } from "./sections/ExamplesSectionDefaultSizeExample";
+import { ExamplesSectionAsChildExample } from "./sections/ExamplesSectionAsChildExample";
 
 export default function Page() {
   return (
@@ -20,6 +21,7 @@ export default function Page() {
       <ExamplesSection
         constantSizeExample={<ExampleSectionConstantSizeExample />}
         defaultSizeExample={<ExamplesSectionDefaultSizeExample />}
+        asChildPropExample={<ExamplesSectionAsChildExample />}
       />
       {/* <HowItWorksSection /> */}
       <LicenseSection />

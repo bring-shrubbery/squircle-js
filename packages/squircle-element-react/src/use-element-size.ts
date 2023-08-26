@@ -11,16 +11,16 @@ interface Size {
 export function useElementSize<
   T extends HTMLElement = HTMLDivElement
 >(defaultSize: {
-  width?: number;
-  height?: number;
+  defaultWidth?: number;
+  defaultHeight?: number;
 }): [(node: T | null) => void, Size] {
   // Mutable values like 'ref.current' aren't valid dependencies
   // because mutating them doesn't re-render the component.
   // Instead, we use a state as a ref to be reactive.
   const [ref, setRef] = useState<T | null>(null);
   const [size, setSize] = useState<Size>({
-    width: defaultSize.width ?? 0,
-    height: defaultSize.height ?? 0,
+    width: defaultSize.defaultWidth ?? 0,
+    height: defaultSize.defaultHeight ?? 0,
   });
 
   // Prevent too many rendering using useCallback
