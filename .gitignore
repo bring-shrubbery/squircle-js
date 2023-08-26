@@ -36,3 +36,4 @@ yarn-error.log*
 .vercel
 
 dist
+packages/squircle-element-react/README.md
