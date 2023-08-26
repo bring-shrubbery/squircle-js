@@ -5,7 +5,7 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "release": "pnpm prerelease && run build && changeset publish",
+    "release": "pnpm prerelease && pnpm build && changeset publish",
     "prerelease": "cp ./README.md ./packages/squircle-element-react/README.md"
   },
   "devDependencies": {
