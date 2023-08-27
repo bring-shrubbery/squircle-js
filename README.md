@@ -43,7 +43,7 @@ It's a [long story](https://www.figma.com/blog/desperately-seeking-squircles/), 
 
 Visually, [this post from Figma Blog](https://www.figma.com/blog/desperately-seeking-squircles/) shows the difference really well:
 
-![ezgif-3-e6f18e029e](https://github.com/bring-shrubbery/squircle-js/assets/29360707/e64bacb9-9881-476b-9064-01a72df06a9e)
+![preview-e6f18e029e](https://github.com/bring-shrubbery/squircle-js/assets/29360707/e64bacb9-9881-476b-9064-01a72df06a9e)
 
 ## Usage
 
