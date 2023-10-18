@@ -17,6 +17,7 @@ export const StaticSquircle = ({
   height,
   cornerRadius,
   cornerSmoothing,
+  style,
   ...props
 }: PropsWithChildren<
   StaticSquircleProps & ComponentPropsWithoutRef<"div">
@@ -32,5 +33,7 @@ export const StaticSquircle = ({
     });
   }, [width, height, cornerRadius, cornerSmoothing]);
 
-  return <Component style={{ clipPath: `path('${path}')` }} {...props} />;
+  return (
+    <Component style={{ clipPath: `path('${path}')`, ...style }} {...props} />
+  );
 };
