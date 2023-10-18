@@ -1,5 +1,11 @@
 # @squircle-js/react
 
+## 1.2.0-dev.0
+
+### Minor Changes
+
+- ba8c348: Test StaticSquircle component
+
 ## 1.1.0
 
 ### Minor Changes

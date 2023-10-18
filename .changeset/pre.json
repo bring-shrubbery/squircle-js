@@ -7,5 +7,7 @@
     "@squircle-js/react": "1.1.0",
     "tsconfig": "1.0.0"
   },
-  "changesets": []
+  "changesets": [
+    "little-carpets-watch"
+  ]
 }
