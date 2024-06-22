@@ -1,12 +1,13 @@
 {
+  "name": "squircle-js",
   "private": true,
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "release": "pnpm prerelease && pnpm build && changeset publish",
-    "prerelease": "cp ./README.md ./packages/squircle-element-react/README.md"
+    "lint": "pnpm dlx sherif@latest && turbo run lint",
+    "prerelease": "cp ./README.md ./packages/squircle-element-react/README.md",
+    "release": "pnpm prerelease && pnpm build && changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.5",
@@ -14,8 +15,8 @@
     "eslint": "^7.32.0",
     "eslint-config-custom": "workspace:*",
     "prettier": "^2.8.8",
+    "sherif": "^0.8.4",
     "turbo": "^1.13.4"
   },
-  "packageManager": "pnpm@7.15.0",
-  "name": "squircle-button"
+  "packageManager": "pnpm@8.15.5"
 }

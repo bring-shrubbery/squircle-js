@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "next dev",
+    "lint": "next lint",
+    "start": "next start"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.0",
@@ -36,14 +36,16 @@
     "@radix-ui/react-toggle": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.1",
     "@squircle-js/react": "workspace:*",
-    "@types/prismjs": "^1.26.4",
+    "autoprefixer": "^10.4.19",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^0.2.1",
     "date-fns": "^3.6.0",
+    "eslint-config-custom": "workspace:*",
     "jotai": "^2.8.3",
     "lucide-react": "^0.396.0",
     "next": "^14.2.4",
+    "postcss": "^8.4.38",
     "prism-react-renderer": "^2.3.1",
     "prismjs": "^1.29.0",
     "react": "^18.3.1",
@@ -51,17 +53,15 @@
     "react-dom": "^18.3.1",
     "react-icons": "^5.2.1",
     "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss": "^3.4.4",
+    "tailwindcss-animate": "^1.0.7",
+    "tsconfig": "workspace:*",
+    "typescript": "^5.5.2"
   },
   "devDependencies": {
     "@types/node": "^20.14.8",
+    "@types/prismjs": "^1.26.4",
     "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "autoprefixer": "^10.4.19",
-    "eslint-config-custom": "workspace:*",
-    "postcss": "^8.4.38",
-    "tailwindcss": "^3.4.4",
-    "tsconfig": "workspace:*",
-    "typescript": "^5.5.2"
+    "@types/react-dom": "^18.3.0"
   }
 }
