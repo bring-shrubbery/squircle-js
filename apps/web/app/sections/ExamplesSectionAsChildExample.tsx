@@ -15,11 +15,11 @@ const usage = `<Squircle
   <span>Inline Squircle</span>
 </Squircle>`;
 
-const highlightedUsage = Prism.highlight(
+const highlightedUsage = "jsx" in Prism.languages ? Prism.highlight(
   ["...", usage, "..."].join("\n"),
-  Prism.languages.jsx,
+  Prism.languages['jsx'],
   "jsx"
-);
+) : "";
 
 export const ExamplesSectionAsChildExample = () => {
   return (

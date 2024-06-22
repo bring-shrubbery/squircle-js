@@ -63,7 +63,7 @@ export const SquircleDemoSection = () => {
               min={0}
               max={50}
               value={[cornerRadius]}
-              onValueChange={(v) => setCornerRadius(v.at(0))}
+              onValueChange={(v) => setCornerRadius(v.at(0) ?? 0)}
             />
           </div>
 
@@ -84,7 +84,7 @@ export const SquircleDemoSection = () => {
               max={1}
               step={0.01}
               value={[cornerSmoothing]}
-              onValueChange={(v) => setCornerSmoothing(v.at(0))}
+              onValueChange={(v) => setCornerSmoothing(v.at(0) ?? 0)}
             />
           </div>
         </div>

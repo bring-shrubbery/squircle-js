@@ -1,0 +1,37 @@
+{
+  "name": "@squircle-js/tailwind-config",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./native": "./native.ts",
+    "./web": "./web.ts"
+  },
+  "license": "MIT",
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "postcss": "8.4.38",
+    "tailwindcss": "^3.4.3",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@squircle-js/eslint-config": "workspace:*",
+    "@squircle-js/prettier-config": "workspace:*",
+    "@squircle-js/tsconfig": "workspace:*",
+    "eslint": "^8.57.0",
+    "prettier": "^3.3.0",
+    "typescript": "^5.4.5"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@squircle-js/eslint-config/base"
+    ]
+  },
+  "prettier": "@squircle-js/prettier-config"
+}

@@ -1,29 +1,39 @@
 {
   "name": "@squircle-js/react",
-  "license": "MIT",
   "version": "1.2.0",
+  "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsup src/index.tsx --format cjs,esm --dts --external react",
     "dev": "tsup src/index.tsx --format esm,cjs --watch --dts --external react",
-    "lint": "tsc"
+    "lint": "eslint ."
+  },
+  "prettier": "@squircle-js/prettier-config",
+  "eslintConfig": {
+    "extends": [
+      "@squircle-js/eslint-config/base",
+      "@squircle-js/eslint-config/react"
+    ]
   },
   "dependencies": {
-    "@radix-ui/react-slot": "^1.1.0",
-    "figma-squircle": "^0.3.1"
-  },
-  "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@radix-ui/react-slot": "1.1.0",
+    "figma-squircle": "0.3.1"
   },
   "devDependencies": {
+    "@squircle-js/eslint-config": "workspace:*",
+    "@squircle-js/prettier-config": "workspace:*",
+    "@squircle-js/tsconfig": "workspace:*",
+    "@swc/core": "^1.6.5",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "tsconfig": "workspace:*",
     "tsup": "^8.1.0"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }

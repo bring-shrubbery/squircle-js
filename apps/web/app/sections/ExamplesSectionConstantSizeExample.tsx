@@ -19,11 +19,11 @@ const usage = `<Squircle
   />
 </Squircle>`;
 
-const highlightedUsage = Prism.highlight(
+const highlightedUsage = "jsx" in Prism.languages ? Prism.highlight(
   ["...", usage, "..."].join("\n"),
-  Prism.languages.jsx,
+  Prism.languages['jsx'],
   "jsx"
-);
+) : "";
 
 export const ExampleSectionConstantSizeExample = () => {
   return (
