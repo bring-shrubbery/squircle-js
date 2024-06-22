@@ -1,10 +1,12 @@
 import { Toaster } from "@/components/ui/toaster";
 import { SquircleNoScript } from "@squircle-js/react";
-import "./globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
+import "./globals.css";
 import "./prismjs-atom-one-dark.css";
 
 import { Inter } from "next/font/google";
+import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,6 +24,13 @@ export default function RootLayout({
         {children}
         <Toaster />
         <SquircleNoScript />
+        <SpeedInsights />
+
+        <Script
+          async
+          src="/stats/script.js"
+          data-website-id="462285f6-d3c4-45ce-bb91-fe99a81c97cc"
+        />
       </body>
     </html>
   );

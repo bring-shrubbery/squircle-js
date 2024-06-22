@@ -45,6 +45,7 @@
     "@squircle-js/eslint-config": "workspace:*",
     "@squircle-js/prettier-config": "workspace:*",
     "@squircle-js/react": "workspace:*",
+    "@vercel/speed-insights": "^1.0.12",
     "autoprefixer": "^10.4.19",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
