@@ -9,12 +9,12 @@
     "prerelease": "cp ./README.md ./packages/squircle-element-react/README.md"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.26.2",
-    "@turbo/gen": "^1.10.13",
+    "@changesets/cli": "^2.27.5",
+    "@turbo/gen": "^1.13.4",
     "eslint": "^7.32.0",
     "eslint-config-custom": "workspace:*",
     "prettier": "^2.8.8",
-    "turbo": "^1.10.13"
+    "turbo": "^1.13.4"
   },
   "packageManager": "pnpm@7.15.0",
   "name": "squircle-button"
