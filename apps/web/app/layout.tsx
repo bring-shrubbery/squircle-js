@@ -5,6 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import "./prismjs-atom-one-dark.css";
 
+import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 
@@ -12,6 +13,45 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
 });
+
+export const metadata: Metadata = {
+  title: "Squircle.js",
+  description: "Create squircle shapes with CSS and JavaScript",
+  keywords: [
+    "squircle",
+    "corner smoothing",
+    "ios corner smoothing",
+    "ios continuous corner for web",
+    "ios continuous corner",
+    "ios rounded corners",
+    "continuous corner html",
+    "continuous corner css",
+    "rounded corners",
+    "rounded rectangle",
+    "rounded square",
+    "rounded shape",
+    "rounded",
+    "shape",
+    "css",
+    "javascript",
+    "web development",
+    "web design",
+    "web",
+    "design",
+    "development",
+    "webdev",
+    "webdesign",
+    "webdevelopment",
+  ],
+  abstract: "Create squircle shapes with CSS and JavaScript",
+  alternates: {
+    canonical: "https://squircle.js.org/",
+  },
+  applicationName: "Squircle.js",
+  authors: [
+    { name: "Antoni Silvestrovic", url: "https://github.com/bring-shrubbery" },
+  ],
+};
 
 export default function RootLayout({
   children,
@@ -22,6 +62,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         {children}
+
         <Toaster />
         <SquircleNoScript />
         <SpeedInsights />
