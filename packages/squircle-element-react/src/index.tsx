@@ -1,13 +1,15 @@
 "use client";
 
-import { getSvgPath } from "figma-squircle";
+import * as React from "react";
 import { useMemo } from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { getSvgPath } from "figma-squircle";
 
 import { useElementSize } from "./use-element-size";
-export { SquircleNoScript } from "./no-js";
-import { Slot } from "@radix-ui/react-slot";
 
-interface SquircleProps<E extends React.ElementType> {
+export { SquircleNoScript } from "./no-js";
+
+interface SquircleProps {
   cornerSmoothing?: number;
   cornerRadius?: number;
   asChild?: boolean;
@@ -30,8 +32,8 @@ function Squircle<E extends React.ElementType = "div">({
   defaultWidth,
   defaultHeight,
   ...props
-}: SquircleProps<E> &
-  Omit<React.ComponentPropsWithoutRef<E>, keyof SquircleProps<E>>) {
+}: SquircleProps &
+  Omit<React.ComponentPropsWithoutRef<E>, keyof SquircleProps>) {
   const Component = asChild ? Slot : "div";
 
   // Note: If you need to pass ref, wrap this component in another, and style to full-width/height.

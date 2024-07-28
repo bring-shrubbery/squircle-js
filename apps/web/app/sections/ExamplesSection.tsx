@@ -13,21 +13,21 @@ export const ExamplesSection = ({
   defaultSizeExample: JSX.Element;
   asChildPropExample: JSX.Element;
 }) => {
-  const [language] = useAtom(LANGUAGE_SELECTOR_ATOM);
+  const [language] = useAtom<"react" | "svelte">(LANGUAGE_SELECTOR_ATOM);
 
   const langLabel = language === "react" ? "React" : "";
 
   return (
-    <div className="mx-auto container w-fit mb-36">
-      <h2 className="font-semibold text-2xl mx-auto w-fit mb-4">
-        More {langLabel} examples 🎒
+    <div className="container mx-auto mb-36 w-fit">
+      <h2 className="mx-auto mb-4 w-fit text-2xl font-semibold">
+        {`More ${langLabel} examples 🎒`}
       </h2>
 
-      <Tabs defaultValue="1" className="w-full flex flex-col items-center">
+      <Tabs defaultValue="1" className="flex w-full flex-col items-center">
         <TabsList>
-          <TabsTrigger value="1">Constant size</TabsTrigger>
-          <TabsTrigger value="2">Default size (Image Example)</TabsTrigger>
-          <TabsTrigger value="3">asChild prop</TabsTrigger>
+          <TabsTrigger value="1">{"Constant size"}</TabsTrigger>
+          <TabsTrigger value="2">{"Default size (Image Example)"}</TabsTrigger>
+          <TabsTrigger value="3">{"asChild prop"}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="1">{constantSizeExample}</TabsContent>

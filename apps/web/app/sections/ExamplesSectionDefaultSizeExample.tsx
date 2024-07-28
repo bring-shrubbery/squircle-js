@@ -1,11 +1,12 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Code } from "@/components/ui/code";
-import { Squircle } from "@squircle-js/react";
-
 import Prism from "prismjs";
+
 import "prismjs/components/prism-jsx";
+
+import type { PropsWithChildren } from "react";
+
 import { ExamplesSectionDefaultSizeExampleClientComponent } from "./ExamplesSectionDefaultSizeExampleClientComponent";
-import { PropsWithChildren } from "react";
 
 const usage = `<Squircle
   cornerRadius={50}
@@ -23,17 +24,20 @@ const usage = `<Squircle
   />
 </Squircle>`;
 
-const highlightedUsage = "jsx" in Prism.languages ? Prism.highlight(
-  ["...", usage, "..."].join("\n"),
-  Prism.languages['jsx'],
-  "jsx"
-) : "";
+const highlightedUsage =
+  "jsx" in Prism.languages
+    ? Prism.highlight(
+        ["...", usage, "..."].join("\n"),
+        Prism.languages.jsx,
+        "jsx",
+      )
+    : "";
 
 export const ExamplesSectionDefaultSizeExample = () => {
   return (
     <Card className="w-full max-w-[480px] sm:max-w-[508px]">
-      <CardContent className="py-6 w-full space-y-4">
-        <h3 className="font-semibold text-lg">Code:</h3>
+      <CardContent className="w-full space-y-4 py-6">
+        <h3 className="text-lg font-semibold">Code:</h3>
         <p>
           For images to work you will need to provide either default size, or
           specific size you want the image to be.
@@ -45,7 +49,7 @@ export const ExamplesSectionDefaultSizeExample = () => {
           image it will be updated automatically.
         </p>
         <Code dangerousHTML={highlightedUsage} raw={usage} />
-        <h3 className="font-semibold text-lg">Result:</h3>
+        <h3 className="text-lg font-semibold">Result:</h3>
 
         <ExamplesSectionDefaultSizeExampleClientComponent />
       </CardContent>
@@ -54,7 +58,7 @@ export const ExamplesSectionDefaultSizeExample = () => {
 };
 
 const Kode = ({ children }: PropsWithChildren) => (
-  <code className="bg-slate-200/50 px-1.5 text-sm py-0.5 rounded-md">
+  <code className="rounded-md bg-slate-200/50 px-1.5 py-0.5 text-sm">
     {children}
   </code>
 );

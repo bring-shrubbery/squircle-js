@@ -17,7 +17,7 @@ const usage = `<Squircle
 
 const highlightedUsage = "jsx" in Prism.languages ? Prism.highlight(
   ["...", usage, "..."].join("\n"),
-  Prism.languages['jsx'],
+  Prism.languages.jsx,
   "jsx"
 ) : "";
 

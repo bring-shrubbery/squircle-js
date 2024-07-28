@@ -33,19 +33,19 @@ import { SquircleNoScript } from "@squircle-js/react";
 
 const highlightedUsage1 = "bash" in Prism.languages ? Prism.highlight(
   usage_react_1,
-  Prism.languages['bash'],
+  Prism.languages.bash,
   "bash"
 ) : "";
 
 const highlightedUsage2 = "jsx" in Prism.languages ? Prism.highlight(
   usage_react_2,
-  Prism.languages['jsx'],
+  Prism.languages.jsx,
   "jsx"
 ) : "";
 
 const highlightedUsage3 = "jsx" in Prism.languages ? Prism.highlight(
   usage_react_3,
-  Prism.languages['jsx'],
+  Prism.languages.jsx,
   "jsx"
 ) : "";
 

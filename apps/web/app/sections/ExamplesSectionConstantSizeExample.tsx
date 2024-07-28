@@ -4,7 +4,7 @@ import { Squircle } from "@squircle-js/react";
 
 import Prism from "prismjs";
 import "prismjs/components/prism-jsx";
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
 const usage = `<Squircle
   cornerRadius={64}
@@ -21,7 +21,7 @@ const usage = `<Squircle
 
 const highlightedUsage = "jsx" in Prism.languages ? Prism.highlight(
   ["...", usage, "..."].join("\n"),
-  Prism.languages['jsx'],
+  Prism.languages.jsx,
   "jsx"
 ) : "";
 

@@ -1,15 +1,15 @@
 import { Navbar } from "@/components/navbar";
-import { SquircleDemoSection } from "./sections/SquircleDemoSection";
-import { UsageSection } from "./sections/UsageSection";
+
 import { ExamplesSection } from "./sections/ExamplesSection";
-import { FeaturesSection } from "./sections/FeaturesSection";
-import { HowItWorksSection } from "./sections/HowItWorksSection";
-import { LicenseSection } from "./sections/LicenseSection";
-import { LinksSection } from "./sections/LinksSection";
-import { UsageSectionReactContent } from "./sections/UsageSectionReactContent";
+import { ExamplesSectionAsChildExample } from "./sections/ExamplesSectionAsChildExample";
 import { ExampleSectionConstantSizeExample } from "./sections/ExamplesSectionConstantSizeExample";
 import { ExamplesSectionDefaultSizeExample } from "./sections/ExamplesSectionDefaultSizeExample";
-import { ExamplesSectionAsChildExample } from "./sections/ExamplesSectionAsChildExample";
+import { FeaturesSection } from "./sections/FeaturesSection";
+import { LicenseSection } from "./sections/LicenseSection";
+import { LinksSection } from "./sections/LinksSection";
+import { SquircleDemoSection } from "./sections/SquircleDemoSection";
+import { UsageSection } from "./sections/UsageSection";
+import { UsageSectionReactContent } from "./sections/UsageSectionReactContent";
 
 export default function Page() {
   return (

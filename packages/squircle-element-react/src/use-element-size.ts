@@ -1,5 +1,6 @@
 // From usehooks-ts
 import { useCallback, useState } from "react";
+
 import { useEventListener } from "./use-event-listener";
 import { useIsomorphicLayoutEffect } from "./use-isomorphic-layout-effect";
 
@@ -9,7 +10,7 @@ interface Size {
 }
 
 export function useElementSize<
-  T extends HTMLElement = HTMLDivElement
+  T extends HTMLElement = HTMLDivElement,
 >(defaultSize: {
   defaultWidth?: number;
   defaultHeight?: number;
@@ -26,18 +27,15 @@ export function useElementSize<
   // Prevent too many rendering using useCallback
   const handleSize = useCallback(() => {
     setSize({
-      width: ref?.offsetWidth || 0,
-      height: ref?.offsetHeight || 0,
+      width: ref?.offsetWidth ?? 0,
+      height: ref?.offsetHeight ?? 0,
     });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref?.offsetHeight, ref?.offsetWidth]);
 
   useEventListener("resize", handleSize);
 
   useIsomorphicLayoutEffect(() => {
     handleSize();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref?.offsetHeight, ref?.offsetWidth]);
 
   return [setRef, size];

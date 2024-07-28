@@ -1,15 +1,17 @@
+import type { ComponentPropsWithoutRef, PropsWithChildren } from "react";
+import * as React from "react";
+import { useMemo } from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { getSvgPath } from "figma-squircle";
-import { ComponentPropsWithoutRef, PropsWithChildren, useMemo } from "react";
 
-type StaticSquircleProps = {
+interface StaticSquircleProps {
   asChild?: boolean;
 
   width: number;
   height: number;
   cornerRadius: number;
   cornerSmoothing: number;
-};
+}
 
 export const StaticSquircle = ({
   asChild,
