@@ -1,22 +1,22 @@
+import Link from "next/link";
 import { QuassumIcon } from "@/components/quassum.icon";
 import { SITECONFIG } from "@/lib/siteconfig";
-import Link from "next/link";
-import { IoLogoGithub, IoCash, IoLogoLinkedin } from "react-icons/io5";
+import { IoCash, IoLogoGithub, IoLogoTwitter } from "react-icons/io5";
 
 export const LinksSection = () => {
   return (
-    <div className="mx-auto container w-fit mb-36">
-      <h2 className="font-semibold text-2xl mx-auto w-fit mb-16">
+    <div className="container mx-auto mb-36 w-fit">
+      <h2 className="mx-auto mb-16 w-fit text-2xl font-semibold">
         Build with 💙 by{" "}
         <Link
           href={SITECONFIG.antoniGithubLink}
-          className="hover:text-blue-600 transition-colors"
+          className="transition-colors hover:text-blue-600"
         >
           Antoni
         </Link>
       </h2>
 
-      <div className="flex flex-col sm:flex-row gap-8">
+      <div className="flex flex-col gap-8 sm:flex-row">
         <Link
           href={SITECONFIG.antoniGithubLink}
           className="mx-auto flex flex-col items-center gap-2"
@@ -26,11 +26,11 @@ export const LinksSection = () => {
         </Link>
 
         <Link
-          href={SITECONFIG.linkedinLink}
+          href={SITECONFIG.twitterLink}
           className="mx-auto flex flex-col items-center gap-2"
         >
-          <IoLogoLinkedin size={36} />
-          <span className="font-medium">Hire me? 😏</span>
+          <IoLogoTwitter size={36} />
+          <span className="font-medium">Follow me? 😏</span>
         </Link>
 
         <Link
@@ -45,7 +45,7 @@ export const LinksSection = () => {
           href={SITECONFIG.quassumLink}
           className="mx-auto flex flex-col items-center gap-2"
         >
-          <QuassumIcon className="w-9 h-9" />
+          <QuassumIcon className="h-9 w-9" />
           <span className="font-medium">Quassum 🖤</span>
         </Link>
       </div>
