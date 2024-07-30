@@ -11,6 +11,8 @@ export const SITECONFIG = {
   licenseLink:
     "https://github.com/bring-shrubbery/squircle-js/blob/master/LICENSE",
   antoniGithubLink: "https://github.com/bring-shrubbery",
+  productHuntReviewLink:
+    "https://www.producthunt.com/products/squirclejs/reviews/new",
 };
 
 export type SiteConfig = typeof SITECONFIG;
