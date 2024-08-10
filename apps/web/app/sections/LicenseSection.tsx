@@ -1,10 +1,10 @@
-import { SITECONFIG } from "@/lib/siteconfig";
 import Link from "next/link";
+import { SITECONFIG } from "@/lib/siteconfig";
 
 export const LicenseSection = () => {
   return (
-    <div className="mx-auto container w-fit mb-36">
-      <h2 className="font-semibold text-2xl mx-auto w-fit mb-4">
+    <div className="container mx-auto mb-36 w-fit">
+      <h2 className="mx-auto mb-4 w-fit text-2xl font-semibold">
         License? MIT 🚀
       </h2>
 
@@ -12,7 +12,10 @@ export const LicenseSection = () => {
         You can read the license{" "}
         <Link
           href={SITECONFIG.licenseLink}
-          className="text-blue-600 font-medium hover:text-blue-400"
+          className="font-medium text-blue-600 hover:text-blue-400"
+          data-umami-event="click"
+          data-umami-event-id={`click_license`}
+          data-umami-event-ref="license"
         >
           here
         </Link>
