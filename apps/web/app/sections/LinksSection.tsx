@@ -11,8 +11,11 @@ export const LinksSection = () => {
         <Link
           href={SITECONFIG.antoniGithubLink}
           className="transition-colors hover:text-blue-600"
+          data-umami-event="click"
+          data-umami-event-id={`click_author`}
+          data-umami-event-ref="github"
         >
-          Antoni
+          {"Antoni"}
         </Link>
       </h2>
 
@@ -20,33 +23,45 @@ export const LinksSection = () => {
         <Link
           href={SITECONFIG.antoniGithubLink}
           className="mx-auto flex flex-col items-center gap-2"
+          data-umami-event="click"
+          data-umami-event-id={`click_author`}
+          data-umami-event-ref="github"
         >
           <IoLogoGithub size={36} />
-          <span className="font-medium">Github 👩‍💻</span>
+          <span className="font-medium">{"Github 👩‍💻"}</span>
         </Link>
 
         <Link
           href={SITECONFIG.twitterLink}
           className="mx-auto flex flex-col items-center gap-2"
+          data-umami-event="click"
+          data-umami-event-id={`click_author`}
+          data-umami-event-ref="twitter"
         >
           <IoLogoTwitter size={36} />
-          <span className="font-medium">Follow me? 😏</span>
+          <span className="font-medium">{"Follow me? 😏"}</span>
         </Link>
 
         <Link
           href={SITECONFIG.sponsorLink}
           className="mx-auto flex flex-col items-center gap-2"
+          data-umami-event="click"
+          data-umami-event-id={`click_author`}
+          data-umami-event-ref="sponsor"
         >
           <IoCash size={36} />
-          <span className="font-medium">Sponsor ❤️</span>
+          <span className="font-medium">{"Sponsor ❤️"}</span>
         </Link>
 
         <Link
           href={SITECONFIG.quassumLink}
           className="mx-auto flex flex-col items-center gap-2"
+          data-umami-event="click"
+          data-umami-event-id={`click_author`}
+          data-umami-event-ref="quassum"
         >
           <QuassumIcon className="h-9 w-9" />
-          <span className="font-medium">Quassum 🖤</span>
+          <span className="font-medium">{"Quassum 🖤"}</span>
         </Link>
       </div>
     </div>

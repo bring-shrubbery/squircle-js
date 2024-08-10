@@ -13,6 +13,9 @@ export const ReviewsSection = () => {
         <Link
           href={SITECONFIG.productHuntReviewLink}
           className="font-medium text-blue-600 hover:text-blue-400"
+          data-umami-event="click"
+          data-umami-event-id={`click_review`}
+          data-umami-event-ref="producthunt"
         >
           Product Hunt
         </Link>

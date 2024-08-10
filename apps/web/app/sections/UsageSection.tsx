@@ -2,9 +2,8 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
-import { useAtom } from "jotai";
 import { LANGUAGE_SELECTOR_ATOM } from "@/lib/atoms";
+import { useAtom } from "jotai";
 
 export const UsageSection = ({
   reactUsageContent,
@@ -14,9 +13,9 @@ export const UsageSection = ({
   const [language, setLanguage] = useAtom(LANGUAGE_SELECTOR_ATOM);
 
   return (
-    <div className="mx-auto container w-full mb-36">
-      <h2 className="font-semibold text-2xl mx-auto w-fit mb-4">
-        How do I use it? 🤔
+    <div className="container mx-auto mb-36 w-full">
+      <h2 className="mx-auto mb-4 w-fit text-2xl font-semibold">
+        {"How do I use it? 🤔"}
       </h2>
 
       <Tabs
@@ -24,7 +23,7 @@ export const UsageSection = ({
         value={language}
         // TODO: Update this later when other languages are supported.
         onValueChange={(newLang) => setLanguage(newLang as "react")}
-        className="w-full flex flex-col items-center"
+        className="flex w-full flex-col items-center"
       >
         <TabsList>
           <TabsTrigger value="react">React</TabsTrigger>
@@ -39,7 +38,7 @@ export const UsageSection = ({
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="react" className="w-fit mx-auto">
+        <TabsContent value="react" className="mx-auto w-fit">
           {reactUsageContent}
         </TabsContent>
       </Tabs>
