@@ -23,14 +23,14 @@
     "@squircle-js/eslint-config": "workspace:*",
     "@squircle-js/prettier-config": "workspace:*",
     "@squircle-js/tsconfig": "workspace:*",
-    "@swc/core": "^1.7.3",
+    "@swc/core": "^1.7.10",
     "@types/react": "catalog:react18",
-    "react": "catalog:react18",
-    "react-dom": "catalog:react18",
     "eslint": "catalog:",
     "prettier": "catalog:",
-    "typescript": "catalog:",
-    "tsup": "catalog:"
+    "react": "catalog:react18",
+    "react-dom": "catalog:react18",
+    "tsup": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "react": "catalog:react18",
