@@ -50,6 +50,7 @@
     "jotai": "^2.9.2",
     "lucide-react": "^0.417.0",
     "next": "^14.2.5",
+    "next-plausible": "^3.12.2",
     "prism-react-renderer": "^2.3.1",
     "prismjs": "^1.29.0",
     "react": "^18.3.1",
@@ -73,7 +74,7 @@
     "eslint": "catalog:",
     "jiti": "^1.21.6",
     "prettier": "catalog:",
-    "tailwindcss": "^3.4.4",
+    "tailwindcss": "^3.4.9",
     "typescript": "catalog:"
   }
 }

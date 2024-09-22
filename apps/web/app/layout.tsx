@@ -8,6 +8,7 @@ import "./prismjs-atom-one-dark.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
+import PlausibleProvider from "next-plausible";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -61,11 +62,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        {children}
+        <PlausibleProvider domain="squircle.js.org">
+          {children}
 
-        <Toaster />
-        <SquircleNoScript />
-        <SpeedInsights />
+          <Toaster />
+          <SquircleNoScript />
+          <SpeedInsights />
+        </PlausibleProvider>
 
         <Script
           async

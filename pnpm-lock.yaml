@@ -162,6 +162,9 @@ importers:
       next:
         specifier: ^14.2.5
         version: 14.2.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next-plausible:
+        specifier: ^3.12.2
+        version: 3.12.2(next@14.2.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       prism-react-renderer:
         specifier: ^2.3.1
         version: 2.3.1(react@18.3.1)
@@ -289,7 +292,7 @@ importers:
         version: 7.35.0(eslint@9.9.0(jiti@1.21.6))
       eslint-plugin-react-hooks:
         specifier: rc
-        version: 5.1.0-rc-2d2cc042-20240809(eslint@9.9.0(jiti@1.21.6))
+        version: 5.1.0-rc-e4953922-20240919(eslint@9.9.0(jiti@1.21.6))
       eslint-plugin-turbo:
         specifier: ^2.0.12
         version: 2.0.12(eslint@9.9.0(jiti@1.21.6))
@@ -2499,8 +2502,8 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
 
-  eslint-plugin-react-hooks@5.1.0-rc-2d2cc042-20240809:
-    resolution: {integrity: sha512-PEZ2M6eAd+DWlbrE561PumDgwHNYrLUPEcP4P/el+GjT5HnZh1lvr+UecKez547u49EtICPTEwd9VS2u66edTw==}
+  eslint-plugin-react-hooks@5.1.0-rc-e4953922-20240919:
+    resolution: {integrity: sha512-W/CJVTs49Wn34P3RTMGb5jx7JW8ftUIUzNqYDsWqO/tz26DU3fXrou44jxAvu1HR5VH9DutXgxq7DCgDM2MBGQ==}
     engines: {node: '>=10'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
@@ -3181,6 +3184,13 @@ packages:
   netmask@2.0.2:
     resolution: {integrity: sha512-dBpDMdxv9Irdq66304OLfEmQ9tbNRFnFTuZiLo+bD+r332bBmMJ8GBLXklIXXgxd3+v9+KUnZaUR5PJMa75Gsg==}
     engines: {node: '>= 0.4.0'}
+
+  next-plausible@3.12.2:
+    resolution: {integrity: sha512-jyOYLAdwaZZR6nrzFhN9xfVjzYOG6mIQ/LLDCfdAS99ELy759cKfNxluGo+pI2Xh9cYxTFYYZGlnkyR3IPy4yg==}
+    peerDependencies:
+      next: ^11.1.0 || ^12.0.0 || ^13.0.0 || ^14.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
 
   next@14.2.5:
     resolution: {integrity: sha512-0f8aRfBVL+mpzfBjYfQuLWh2WyAwtJXCRfkPF4UJ5qd2YwrHczsrSzXU4tRMV0OAxR8ZJZWPFn6uhSC56UTsLA==}
@@ -6445,7 +6455,7 @@ snapshots:
       safe-regex-test: 1.0.3
       string.prototype.includes: 2.0.0
 
-  eslint-plugin-react-hooks@5.1.0-rc-2d2cc042-20240809(eslint@9.9.0(jiti@1.21.6)):
+  eslint-plugin-react-hooks@5.1.0-rc-e4953922-20240919(eslint@9.9.0(jiti@1.21.6)):
     dependencies:
       eslint: 9.9.0(jiti@1.21.6)
 
@@ -7180,6 +7190,12 @@ snapshots:
   neo-async@2.6.2: {}
 
   netmask@2.0.2: {}
+
+  next-plausible@3.12.2(next@14.2.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      next: 14.2.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
 
   next@14.2.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
