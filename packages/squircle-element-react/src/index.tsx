@@ -46,6 +46,7 @@ function Squircle<E extends React.ElementType = "div">({
   const actualHeight = h ?? height;
 
   const path = useMemo(() => {
+    if (actualWidth === 0 || actualHeight === 0) return "";
     return getSvgPath({
       width: actualWidth,
       height: actualHeight,
