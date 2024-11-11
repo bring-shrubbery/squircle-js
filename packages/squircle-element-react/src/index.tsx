@@ -12,6 +12,11 @@ export { SquircleNoScript } from "./no-js";
 interface SquircleProps {
   cornerSmoothing?: number;
   cornerRadius?: number;
+  topLeftCornerRadius?: number;
+  topRightCornerRadius?: number;
+  bottomRightCornerRadius?: number;
+  bottomLeftCornerRadius?: number;
+
   asChild?: boolean;
   children?: React.ReactNode;
 
@@ -25,6 +30,10 @@ interface SquircleProps {
 function Squircle<E extends React.ElementType = "div">({
   cornerRadius,
   cornerSmoothing = 0.6,
+  topLeftCornerRadius,
+  topRightCornerRadius,
+  bottomRightCornerRadius,
+  bottomLeftCornerRadius,
   asChild,
   style,
   width: w,
@@ -51,8 +60,21 @@ function Squircle<E extends React.ElementType = "div">({
       height: actualHeight,
       cornerRadius,
       cornerSmoothing,
+      topLeftCornerRadius,
+      topRightCornerRadius,
+      bottomRightCornerRadius,
+      bottomLeftCornerRadius,
     });
-  }, [actualWidth, actualHeight, cornerRadius, cornerSmoothing]);
+  }, [
+      actualWidth,
+      actualHeight,
+      cornerRadius,
+      cornerSmoothing,
+      topLeftCornerRadius,
+      topRightCornerRadius,
+      bottomRightCornerRadius,
+      bottomLeftCornerRadius,
+  ]);
 
   return (
     <Component
@@ -61,6 +83,10 @@ function Squircle<E extends React.ElementType = "div">({
       style={{
         ...style,
         borderRadius: cornerRadius,
+        borderTopLeftRadius: topLeftCornerRadius,
+        borderTopRightRadius: topRightCornerRadius,
+        borderBottomRightRadius: bottomRightCornerRadius,
+        borderBottomLeftRadius: bottomLeftCornerRadius,
         width: w ?? defaultWidth,
         height: h ?? defaultHeight,
         clipPath: `path('${path}')`,
