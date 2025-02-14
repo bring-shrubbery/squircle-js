@@ -96,6 +96,10 @@ import { SquircleNoScript } from "@squircle-js/react";
 
 - [quassum.com](https://quassum.com/?utm_source=squircle-js)
 
+## Support
+
+Please consider following this project's author, Antoni Silvestrovič on [Github](https://github.com/bring-shrubbery) or [Bluesky](https://bsky.app/profile/bring-shrubbery.bsky.social), or by starring the project to show your ❤️ and support.
+
 ## License
 
 This project is licensed under [MIT License](./LICENSE)
