@@ -17,23 +17,23 @@
   "prettier": "@squircle-js/prettier-config",
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.2",
-    "figma-squircle": "0.3.1"
+    "figma-squircle": "1.1.0"
   },
   "devDependencies": {
     "@squircle-js/eslint-config": "workspace:*",
     "@squircle-js/prettier-config": "workspace:*",
     "@squircle-js/tsconfig": "workspace:*",
     "@swc/core": "^1.11.5",
-    "@types/react": "catalog:react18",
+    "@types/react": "catalog:react",
     "eslint": "catalog:",
     "prettier": "catalog:",
-    "react": "catalog:react18",
-    "react-dom": "catalog:react18",
+    "react": "catalog:react",
+    "react-dom": "catalog:react",
     "tsup": "catalog:",
     "typescript": "catalog:"
   },
   "peerDependencies": {
-    "react": "^16 | ^18 | ^19",
-    "react-dom": "^16 | ^18 | ^19"
+    "react": "^17 | ^18 | ^19",
+    "react-dom": "^17 | ^18 | ^19"
   }
 }
