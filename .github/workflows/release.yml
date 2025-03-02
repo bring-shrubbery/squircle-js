@@ -9,8 +9,6 @@ on:
       - "main"
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
-env:
-  CI: true
 
 jobs:
   publish:
