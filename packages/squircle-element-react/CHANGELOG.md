@@ -1,5 +1,11 @@
 # @squircle-js/react
 
+## 1.2.9
+
+### Patch Changes
+
+- dbd647e: Updated npm package metadata
+
 ## 1.2.8
 
 ### Patch Changes
