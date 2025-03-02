@@ -24,6 +24,7 @@ jobs:
           node-version: 22.x
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
+      - run: pnpm add -g @changesets/cli
 
       - name: Create .npmrc
         run: |
