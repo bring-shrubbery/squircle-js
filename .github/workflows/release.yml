@@ -9,6 +9,8 @@ on:
       - "main"
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
+env:
+  CI: true
 
 jobs:
   publish:
@@ -21,23 +23,17 @@ jobs:
           version: 9
       - uses: actions/setup-node@v3
         with:
-          node-version: 22.x
+          node-version: 20
           cache: "pnpm"
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm install
       - run: pnpm add -g @changesets/cli
-
-      - name: Create .npmrc
-        run: |
-          cat << EOF > "$HOME/.npmrc"
-            //registry.npmjs.org/:_authToken=$NPM_TOKEN
-          EOF
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create Release Pull Request or Publish
         id: changesets
         uses: changesets/action@v1
         with:
+          commit: "chore: update versions"
+          title: "chore: update versions"
           publish: pnpm release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
