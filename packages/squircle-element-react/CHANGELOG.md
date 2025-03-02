@@ -1,5 +1,11 @@
 # @squircle-js/react
 
+## 1.2.7
+
+### Patch Changes
+
+- 157c754: Updated CI to include README in the package
+
 ## 1.2.6
 
 ### Patch Changes
