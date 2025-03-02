@@ -19,8 +19,7 @@
     "postinstall": "pnpm lint:ws",
     "typecheck": "turbo run typecheck",
     "ui-add": "turbo run ui-add",
-    "release": "pnpm publish -r",
-    "version": "changeset version"
+    "release": "pnpm publish -r"
   },
   "devDependencies": {
     "@changesets/cli": "^2.28.1",
