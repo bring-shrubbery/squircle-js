@@ -16,14 +16,14 @@
   },
   "prettier": "@squircle-js/prettier-config",
   "dependencies": {
-    "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-slot": "^1.1.2",
     "figma-squircle": "0.3.1"
   },
   "devDependencies": {
     "@squircle-js/eslint-config": "workspace:*",
     "@squircle-js/prettier-config": "workspace:*",
     "@squircle-js/tsconfig": "workspace:*",
-    "@swc/core": "^1.7.10",
+    "@swc/core": "^1.11.5",
     "@types/react": "catalog:react18",
     "eslint": "catalog:",
     "prettier": "catalog:",
@@ -33,7 +33,7 @@
     "typescript": "catalog:"
   },
   "peerDependencies": {
-    "react": "catalog:react18",
-    "react-dom": "catalog:react18"
+    "react": "^16 | ^18 | ^19",
+    "react-dom": "^16 | ^18 | ^19"
   }
 }

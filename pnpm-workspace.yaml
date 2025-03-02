@@ -8,12 +8,12 @@ catalog:
   "@trpc/client": ^11.0.0-rc.466
   "@trpc/react-query": ^11.0.0-rc.466
   "@trpc/server": ^11.0.0-rc.466
-  eslint: 9.9.0
-  prettier: ^3.3.3
-  typescript: ^5.5.3
+  eslint: 9.21.0
+  prettier: ^3.5.2
+  typescript: ^5.8.2
   zod: ^3.23.8
-  postcss: ^8.4.41
-  tsup: ^8.2.4
+  postcss: ^8.5.3
+  tsup: ^8.4.0
 
 catalogs:
   react18:
