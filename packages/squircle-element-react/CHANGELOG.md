@@ -1,5 +1,11 @@
 # @squircle-js/react
 
+## 1.2.5
+
+### Patch Changes
+
+- c95024e: CI update
+
 ## 1.2.4
 
 ### Patch Changes
