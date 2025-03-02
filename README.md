@@ -51,7 +51,7 @@ Visually, [this post from Figma Blog](https://www.figma.com/blog/desperately-see
 
 #### Step 1
 
-Star this repo ❤️
+Star this repo ❤️ and follow [Antoni on Bsky](https://bsky.app/profile/bring-shrubbery.bsky.social)
 
 #### Step 2
 
@@ -73,7 +73,7 @@ const YourComponent = () => {
     <Squircle
       cornerRadius={10}
       cornerSmoothing={1}
-      className="p-4 bg-black text-white"
+      className="bg-black p-4 text-white"
     >
       Squircle!
     </Squircle>
@@ -92,9 +92,17 @@ import { SquircleNoScript } from "@squircle-js/react";
 ...
 ```
 
+## Contributing
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md)
+
 ## Websites using it
 
 - [quassum.com](https://quassum.com/?utm_source=squircle-js)
+
+## Author
+
+Please consider following this project's author, Antoni Silvestrovič on [Github](https://github.com/bring-shrubbery) or [Bluesky](https://bsky.app/profile/bring-shrubbery.bsky.social), or by starring the project to show your ❤️ and support.
 
 ## License
 
