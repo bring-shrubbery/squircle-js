@@ -1,0 +1,56 @@
+{
+  "name": "@squircle-js/vue",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "Vue 3 squircle component",
+  "license": "MIT",
+  "keywords": [
+    "squircles",
+    "ios",
+    "smooth",
+    "vue"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "typings": "./dist/index.d.ts",
+  "files": [
+      "dist"
+  ],
+  "scripts": {
+    "build": "pnpm typecheck && pnpm build-only",
+    "build-only": "vite build",
+    "dev": "vite build --watch",
+    "clean": "rm -rf .turbo dist node_modules",
+    "typecheck": "vue-tsc -p tsconfig.check.json --noEmit",
+    "type-gen": "vue-tsc --declaration  --emitDeclarationOnly",
+    "lint": "eslint"
+  },
+  "peerDependencies": {
+    "vue": ">= 3.2.0"
+  },
+  "dependencies": {
+    "@vueuse/core": "^12.7.0",
+    "figma-squircle": "0.3.1"
+  },
+  "devDependencies": {
+    "@squircle-js/eslint-config": "workspace:*",
+    "@squircle-js/prettier-config": "workspace:*",
+    "@squircle-js/tsconfig": "workspace:*",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/tsconfig": "^0.7.0",
+    "jsdom": "^26.0.0",
+    "vite": "^6.2.0",
+    "vite-plugin-dts": "^4.5.0",
+    "vue": "^3.5.13",
+    "vue-tsc": "^2.2.4"
+  }
+}
