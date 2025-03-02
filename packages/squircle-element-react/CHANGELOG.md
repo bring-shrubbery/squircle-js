@@ -1,11 +1,5 @@
 # @squircle-js/react
 
-## 1.2.8
-
-### Patch Changes
-
-- d4d4165: Dependency update
-
 ## 1.2.7
 
 ### Patch Changes
