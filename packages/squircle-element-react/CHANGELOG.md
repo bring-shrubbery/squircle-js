@@ -1,5 +1,11 @@
 # @squircle-js/react
 
+## 1.2.2
+
+### Patch Changes
+
+- 37ea882: Fix CI
+
 ## 1.2.1
 
 ### Patch Changes
