@@ -1,5 +1,11 @@
 # @squircle-js/react
 
+## 1.2.3
+
+### Patch Changes
+
+- 9c999bf: Updated CI workflow.
+
 ## 1.2.2
 
 ### Patch Changes
