@@ -11,6 +11,10 @@ interface StaticSquircleProps {
   height: number;
   cornerRadius: number;
   cornerSmoothing: number;
+  topLeftCornerRadius?: number;
+  topRightCornerRadius?: number;
+  bottomRightCornerRadius?: number;
+  bottomLeftCornerRadius?: number;
 }
 
 export const StaticSquircle = ({
@@ -19,6 +23,10 @@ export const StaticSquircle = ({
   height,
   cornerRadius,
   cornerSmoothing,
+  topLeftCornerRadius,
+  topRightCornerRadius,
+  bottomRightCornerRadius,
+  bottomLeftCornerRadius,
   style,
   ...props
 }: PropsWithChildren<
@@ -32,8 +40,21 @@ export const StaticSquircle = ({
       height,
       cornerRadius,
       cornerSmoothing,
+      topLeftCornerRadius,
+      topRightCornerRadius,
+      bottomRightCornerRadius,
+      bottomLeftCornerRadius,
     });
-  }, [width, height, cornerRadius, cornerSmoothing]);
+  }, [
+      width,
+      height,
+      cornerRadius,
+      cornerSmoothing,
+      topLeftCornerRadius,
+      topRightCornerRadius,
+      bottomRightCornerRadius,
+      bottomLeftCornerRadius,
+  ]);
 
   return (
     <Component style={{ clipPath: `path('${path}')`, ...style }} {...props} />

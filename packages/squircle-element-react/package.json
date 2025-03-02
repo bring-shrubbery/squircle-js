@@ -1,6 +1,6 @@
 {
   "name": "@squircle-js/react",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "license": "MIT",
   "type": "module",
   "main": "dist/index.js",
@@ -17,7 +17,7 @@
   "prettier": "@squircle-js/prettier-config",
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.0",
-    "figma-squircle": "0.3.1"
+    "figma-squircle": "^1.1.0"
   },
   "devDependencies": {
     "@squircle-js/eslint-config": "workspace:*",
