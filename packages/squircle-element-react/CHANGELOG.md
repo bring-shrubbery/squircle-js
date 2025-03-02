@@ -1,5 +1,12 @@
 # @squircle-js/react
 
+## 1.2.1
+
+### Patch Changes
+
+- 9cea53b: Minor dependency update
+- c361929: Add a check before the getSvgPath to avoid clipping the entire element. Thanks @rafaelrcamargo
+
 ## 1.2.0
 
 ### Minor Changes
