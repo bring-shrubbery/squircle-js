@@ -4,12 +4,11 @@
     "@changesets/changelog-github",
     { "repo": "bring-shrubbery/squircle-js" }
   ],
-  "commit": true,
+  "commit": false,
   "fixed": [],
   "linked": [],
   "access": "public",
   "baseBranch": "main",
-  "skipCI": false,
   "updateInternalDependencies": "patch",
   "privatePackages": {
     "version": false
