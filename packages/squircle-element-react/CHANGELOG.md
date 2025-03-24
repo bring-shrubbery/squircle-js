@@ -1,5 +1,11 @@
 # @squircle-js/react
 
+## 1.2.11
+
+### Patch Changes
+
+- bfdf34a: Update publish flow.
+
 ## 1.2.10
 
 ### Patch Changes
