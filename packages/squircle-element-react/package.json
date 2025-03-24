@@ -1,6 +1,6 @@
 {
   "name": "@squircle-js/react",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "license": "MIT",
   "type": "module",
   "main": "dist/index.js",
