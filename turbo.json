@@ -31,6 +31,10 @@
     },
     "//#clean": {
       "cache": false
+    },
+    "publish": {
+      "dependsOn": ["^topo", "^build"],
+      "outputs": ["node_modules/.cache/tsbuildinfo.json"]
     }
   },
   "globalEnv": [

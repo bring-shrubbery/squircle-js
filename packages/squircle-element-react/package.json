@@ -12,7 +12,8 @@
     "clean": "rm -rf .turbo dist node_modules",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
-    "lint": "eslint"
+    "lint": "eslint",
+    "publish": "changeset publish"
   },
   "prettier": "@squircle-js/prettier-config",
   "dependencies": {
