@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LANGUAGE_SELECTOR_ATOM } from "@/lib/atoms";
@@ -8,7 +9,7 @@ import { useAtom } from "jotai";
 export const UsageSection = ({
   reactUsageContent,
 }: {
-  reactUsageContent: JSX.Element;
+  reactUsageContent: ReactNode;
 }) => {
   const [language, setLanguage] = useAtom(LANGUAGE_SELECTOR_ATOM);
 

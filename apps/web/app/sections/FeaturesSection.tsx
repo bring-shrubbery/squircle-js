@@ -1,11 +1,11 @@
 export const FeaturesSection = () => {
   return (
-    <div className="mx-auto container w-fit mb-36">
-      <h2 className="font-semibold text-2xl mx-auto w-fit mb-4">
+    <div className="container mx-auto mb-36 w-fit">
+      <h2 className="mx-auto mb-4 w-fit text-2xl font-semibold">
         {"Features 👑"}
       </h2>
 
-      <ul className="list-none list-inside space-y-2">
+      <ul className="list-inside list-none space-y-2">
         <li>{"💃 Easy to use primitive for building your own components."}</li>
         <li>{"🚀 Available for React, (other libraries coming soon)"}</li>
         <li>{"😏 React 18 support (server components)"}</li>

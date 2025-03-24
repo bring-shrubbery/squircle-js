@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Code } from "@/components/ui/code";
-
 import Prism from "prismjs";
+
 import "prismjs/components/prism-jsx";
 import "prismjs/components/prism-bash";
 
@@ -31,34 +31,31 @@ import { SquircleNoScript } from "@squircle-js/react";
 ...
 `.trim();
 
-const highlightedUsage1 = "bash" in Prism.languages ? Prism.highlight(
-  usage_react_1,
-  Prism.languages.bash,
-  "bash"
-) : "";
+const highlightedUsage1 =
+  "bash" in Prism.languages
+    ? Prism.highlight(usage_react_1, Prism.languages.bash, "bash")
+    : "";
 
-const highlightedUsage2 = "jsx" in Prism.languages ? Prism.highlight(
-  usage_react_2,
-  Prism.languages.jsx,
-  "jsx"
-) : "";
+const highlightedUsage2 =
+  "jsx" in Prism.languages
+    ? Prism.highlight(usage_react_2, Prism.languages.jsx, "jsx")
+    : "";
 
-const highlightedUsage3 = "jsx" in Prism.languages ? Prism.highlight(
-  usage_react_3,
-  Prism.languages.jsx,
-  "jsx"
-) : "";
+const highlightedUsage3 =
+  "jsx" in Prism.languages
+    ? Prism.highlight(usage_react_3, Prism.languages.jsx, "jsx")
+    : "";
 
 export const UsageSectionReactContent = () => {
   return (
     <Card className="w-full max-w-[480px] sm:max-w-[508px]">
-      <CardContent className="py-6 w-full">
-        <h3 className="font-semibold text-lg mb-2">
+      <CardContent className="w-full py-6">
+        <h3 className="mb-2 text-lg font-semibold">
           Step 1. <span className="font-normal">Install the package.</span>
         </h3>
         <Code dangerousHTML={highlightedUsage1} raw={usage_react_1} />
 
-        <h3 className="font-semibold text-lg mb-2 mt-4">
+        <h3 className="mb-2 mt-4 text-lg font-semibold">
           Step 2.{" "}
           <span className="font-normal">
             Import and use as a a regular div.
@@ -66,7 +63,7 @@ export const UsageSectionReactContent = () => {
         </h3>
         <Code raw={usage_react_2} dangerousHTML={highlightedUsage2} />
 
-        <h3 className="font-semibold text-lg mb-2 mt-4">
+        <h3 className="mb-2 mt-4 text-lg font-semibold">
           Step 3.{" "}
           <span className="font-normal">
             Add global component for noscript support.
