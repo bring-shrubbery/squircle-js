@@ -1,5 +1,11 @@
 # @squircle-js/react
 
+## 1.2.15
+
+### Patch Changes
+
+- [`2cc69d7`](https://github.com/bring-shrubbery/squircle-js/commit/2cc69d797d4053035f3c05898d4fe6178ec843bf) Thanks [@bring-shrubbery](https://github.com/bring-shrubbery)! - Publish fix
+
 ## 1.2.14
 
 ### Patch Changes
