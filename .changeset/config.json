@@ -1,6 +1,9 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@2.3.0/schema.json",
-  "changelog": "@changesets/cli/changelog",
+  "changelog": [
+    "@changesets/changelog-github",
+    { "repo": "bring-shrubbery/squircle-js" }
+  ],
   "commit": true,
   "fixed": [],
   "linked": [],
@@ -8,5 +11,11 @@
   "baseBranch": "main",
   "skipCI": false,
   "updateInternalDependencies": "patch",
-  "ignore": ["web", "@squircle-js/tailwind-config"]
+  "privatePackages": {
+    "version": false
+  },
+  "ignore": ["web", "@squircle-js/tailwind-config"],
+  "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
+    "onlyUpdatePeerDependentsWhenOutOfRange": true
+  }
 }
