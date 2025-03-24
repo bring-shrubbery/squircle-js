@@ -25,6 +25,7 @@ jobs:
           cache: "pnpm"
       - run: pnpm install
       - run: pnpm add -g @changesets/cli
+      - run: pnpm build
 
       - name: Create .npmrc
         run: |
