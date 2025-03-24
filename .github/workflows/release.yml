@@ -66,6 +66,9 @@ jobs:
       - name: Pre-publish requirements
         run: pnpm build && pnpm lint
 
+      - name: Move README into place
+        run: cp README.md packages/squircle-element-react/README.md
+
       - name: release
         id: changesets
         uses: changesets/action@v1
