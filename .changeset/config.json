@@ -4,7 +4,7 @@
     "@changesets/changelog-github",
     { "repo": "bring-shrubbery/squircle-js" }
   ],
-  "commit": true,
+  "commit": false,
   "fixed": [],
   "linked": [],
   "access": "public",
