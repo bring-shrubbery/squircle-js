@@ -19,12 +19,14 @@
     "postinstall": "pnpm lint:ws",
     "typecheck": "turbo run typecheck",
     "ui-add": "turbo run ui-add",
-    "release": "pnpm publish -r"
+    "release": "pnpm publish -r",
+    "knip": "knip"
   },
   "devDependencies": {
     "@changesets/cli": "^2.28.1",
     "@squircle-js/prettier-config": "workspace:*",
     "@turbo/gen": "^2.4.4",
+    "knip": "^5.46.0",
     "prettier": "catalog:",
     "turbo": "^2.4.4",
     "typescript": "catalog:"

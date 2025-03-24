@@ -28,13 +28,11 @@
     "eslint": "catalog:",
     "prettier": "catalog:",
     "react": "catalog:react",
-    "react-dom": "catalog:react",
     "tsup": "catalog:",
     "typescript": "catalog:"
   },
   "peerDependencies": {
-    "react": "^17 | ^18 | ^19",
-    "react-dom": "^17 | ^18 | ^19"
+    "react": "^16.6 | ^17 | ^18 | ^19"
   },
   "repository": {
     "type": "git",
