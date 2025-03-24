@@ -1,5 +1,11 @@
 # @squircle-js/react
 
+## 1.2.10
+
+### Patch Changes
+
+- b193bae: Fix unusable package.
+
 ## 1.2.9
 
 ### Patch Changes
