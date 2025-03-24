@@ -28,12 +28,15 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Pre-publish requirements
+        run: pnpm build && pnpm lint
+
       - name: Create Release Pull Request
         id: changesets
         uses: changesets/action@v1
         with:
           # Use pnpm to run your version script
-          version: pnpm run version
+          version: pnpm run changeset:version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -56,12 +59,15 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Pre-publish requirements
+        run: pnpm build && pnpm lint
+
       - name: release
         id: changesets
         uses: changesets/action@v1
         with:
           # Use pnpm to run your release script
-          publish: pnpm run release
+          publish: pnpm run changeset:release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
