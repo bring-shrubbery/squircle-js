@@ -19,7 +19,7 @@
     "postinstall": "pnpm lint:ws",
     "typecheck": "turbo run typecheck",
     "ui-add": "turbo run ui-add",
-    "release": "turbo run publish",
+    "release": "changeset version && changeset publish",
     "knip": "knip"
   },
   "devDependencies": {
