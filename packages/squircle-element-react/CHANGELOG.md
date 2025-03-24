@@ -1,5 +1,11 @@
 # @squircle-js/react
 
+## 1.2.12
+
+### Patch Changes
+
+- f41f558: Publish fix
+
 ## 1.2.11
 
 ### Patch Changes
