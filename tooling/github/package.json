@@ -1,3 +1,4 @@
 {
-  "name": "@squircle-js/github"
+  "name": "@squircle-js/github",
+  "private": true
 }
