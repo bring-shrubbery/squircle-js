@@ -13,7 +13,7 @@
   "privatePackages": {
     "version": false
   },
-  "ignore": ["web", "@squircle-js/tailwind-config"],
+  "ignore": ["web", "@squircle-js/tailwind-config", "@squircle-js/github"],
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "onlyUpdatePeerDependentsWhenOutOfRange": true
   }
