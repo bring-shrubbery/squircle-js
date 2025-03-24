@@ -32,7 +32,7 @@
     "typescript": "catalog:"
   },
   "peerDependencies": {
-    "react": "^16.6 | ^17 | ^18 | ^19"
+    "react": "^16.8 || ^17 || ^18 || ^19"
   },
   "repository": {
     "type": "git",
