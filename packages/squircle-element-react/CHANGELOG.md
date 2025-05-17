@@ -1,5 +1,11 @@
 # @squircle-js/react
 
+## 1.2.18
+
+### Patch Changes
+
+- [#31](https://github.com/bring-shrubbery/squircle-js/pull/31) [`19c6c1e`](https://github.com/bring-shrubbery/squircle-js/commit/19c6c1e8c036947e48de5cf8e3be62a31cbdfb93) Thanks [@valentin-marquez](https://github.com/valentin-marquez)! - Fix ESM module format in build output to resolve Vite import errors. Ensures .mjs files are generated correctly by tsup for ESM modules.
+
 ## 1.2.17
 
 ### Patch Changes
