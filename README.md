@@ -92,6 +92,13 @@ import { SquircleNoScript } from "@squircle-js/react";
 ...
 ```
 
+## Why not use CSS superellipse() ?
+
+As of 2025, superellipse is only supported on select browsers. If you don't mind supporting just one browser, you should just use CSS. If you want every user to have the same experience, you should use squircle.js.
+
+<img width="1321" height="798" alt="Screenshot 2025-09-05 at 13 54 59" src="https://github.com/user-attachments/assets/2dfe8616-743f-4c23-99b0-cfab89f1ad47" />
+
+
 ## Contributing
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md)
