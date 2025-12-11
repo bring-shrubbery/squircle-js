@@ -9,18 +9,9 @@ catalogs:
     eslint:
       specifier: 9.23.0
       version: 9.23.0
-    postcss:
-      specifier: ^8.5.3
-      version: 8.5.3
     prettier:
       specifier: ^3.5.3
       version: 3.5.3
-    tsup:
-      specifier: ^8.4.0
-      version: 8.4.0
-    typescript:
-      specifier: ^5.7.2
-      version: 5.8.2
   react:
     '@types/react':
       specifier: ^19.0.12
@@ -50,7 +41,7 @@ importers:
         version: link:tooling/prettier
       '@turbo/gen':
         specifier: ^2.4.4
-        version: 2.4.4(@swc/core@1.11.13(@swc/helpers@0.5.15))(@types/node@22.13.13)(typescript@5.8.2)
+        version: 2.4.4(@swc/core@1.11.13)(@types/node@22.13.13)(typescript@5.8.2)
       knip:
         specifier: ^5.46.0
         version: 5.46.0(@types/node@22.13.13)(typescript@5.8.2)
@@ -131,10 +122,10 @@ importers:
         version: 2.6.0
       tailwindcss:
         specifier: ^3.4.17
-        version: 3.4.17(ts-node@10.9.2(@swc/core@1.11.13(@swc/helpers@0.5.15))(@types/node@20.17.27)(typescript@5.8.2))
+        version: 3.4.17(ts-node@10.9.2(@types/node@20.17.27)(typescript@5.8.2))
       tailwindcss-animate:
         specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.4.17(ts-node@10.9.2(@swc/core@1.11.13(@swc/helpers@0.5.15))(@types/node@20.17.27)(typescript@5.8.2)))
+        version: 1.0.7(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@20.17.27)(typescript@5.8.2)))
       typescript:
         specifier: ^5.8.2
         version: 5.8.2
@@ -284,10 +275,10 @@ importers:
         version: 8.5.3
       tailwindcss:
         specifier: ^3.4.17
-        version: 3.4.17(ts-node@10.9.2(@swc/core@1.11.13(@swc/helpers@0.5.15))(@types/node@22.13.13)(typescript@5.8.2))
+        version: 3.4.17(ts-node@10.9.2(@swc/core@1.11.13)(@types/node@22.13.13)(typescript@5.8.2))
       tailwindcss-animate:
         specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.4.17(ts-node@10.9.2(@swc/core@1.11.13(@swc/helpers@0.5.15))(@types/node@22.13.13)(typescript@5.8.2)))
+        version: 1.0.7(tailwindcss@3.4.17(ts-node@10.9.2(@swc/core@1.11.13)(@types/node@22.13.13)(typescript@5.8.2)))
     devDependencies:
       '@squircle-js/eslint-config':
         specifier: workspace:*
@@ -2848,6 +2839,7 @@ packages:
   next@15.2.3:
     resolution: {integrity: sha512-x6eDkZxk2rPpu46E1ZVUWIBhYCLszmUY6fvHBFcbzJ9dD+qRX6vcHusaqqDlnY+VngKzKbAiG2iRCkPbmi8f7w==}
     engines: {node: ^18.18.0 || ^19.8.0 || >= 20.0.0}
+    deprecated: This version has a security vulnerability. Please upgrade to a patched version. See https://nextjs.org/blog/CVE-2025-66478 for more details.
     hasBin: true
     peerDependencies:
       '@opentelemetry/api': ^1.1.0
@@ -3500,6 +3492,7 @@ packages:
   source-map@0.8.0-beta.0:
     resolution: {integrity: sha512-2ymg6oRBpebeZi9UUNsgQ89bhx01TcTkmNTGnNO88imTmbSgy4nfujrgVEFKWpMTEGA11EDkTt7mqObTPdigIA==}
     engines: {node: '>= 8'}
+    deprecated: The work that was done in this beta branch won't be included in future versions
 
   spawndamnit@3.0.1:
     resolution: {integrity: sha512-MmnduQUuHCoFckZoWnXsTg7JaiLBJrKFj9UI2MbRPGaJeVpsLcVBu6P/IGZovziM/YBsellCmsprgNA+w0CzVg==}
@@ -4980,7 +4973,7 @@ snapshots:
 
   '@tsconfig/node16@1.0.4': {}
 
-  '@turbo/gen@2.4.4(@swc/core@1.11.13(@swc/helpers@0.5.15))(@types/node@22.13.13)(typescript@5.8.2)':
+  '@turbo/gen@2.4.4(@swc/core@1.11.13)(@types/node@22.13.13)(typescript@5.8.2)':
     dependencies:
       '@turbo/workspaces': 2.4.4
       commander: 10.0.1
@@ -4990,7 +4983,7 @@ snapshots:
       node-plop: 0.26.3
       picocolors: 1.0.1
       proxy-agent: 6.5.0
-      ts-node: 10.9.2(@swc/core@1.11.13(@swc/helpers@0.5.15))(@types/node@22.13.13)(typescript@5.8.2)
+      ts-node: 10.9.2(@swc/core@1.11.13)(@types/node@22.13.13)(typescript@5.8.2)
       update-check: 1.5.4
       validate-npm-package-name: 5.0.1
     transitivePeerDependencies:
@@ -6953,21 +6946,21 @@ snapshots:
       camelcase-css: 2.0.1
       postcss: 8.5.3
 
-  postcss-load-config@4.0.2(postcss@8.5.3)(ts-node@10.9.2(@swc/core@1.11.13(@swc/helpers@0.5.15))(@types/node@20.17.27)(typescript@5.8.2)):
+  postcss-load-config@4.0.2(postcss@8.5.3)(ts-node@10.9.2(@swc/core@1.11.13)(@types/node@22.13.13)(typescript@5.8.2)):
     dependencies:
       lilconfig: 3.1.3
       yaml: 2.7.0
     optionalDependencies:
       postcss: 8.5.3
-      ts-node: 10.9.2(@swc/core@1.11.13(@swc/helpers@0.5.15))(@types/node@20.17.27)(typescript@5.8.2)
+      ts-node: 10.9.2(@swc/core@1.11.13)(@types/node@22.13.13)(typescript@5.8.2)
 
-  postcss-load-config@4.0.2(postcss@8.5.3)(ts-node@10.9.2(@swc/core@1.11.13(@swc/helpers@0.5.15))(@types/node@22.13.13)(typescript@5.8.2)):
+  postcss-load-config@4.0.2(postcss@8.5.3)(ts-node@10.9.2(@types/node@20.17.27)(typescript@5.8.2)):
     dependencies:
       lilconfig: 3.1.3
       yaml: 2.7.0
     optionalDependencies:
       postcss: 8.5.3
-      ts-node: 10.9.2(@swc/core@1.11.13(@swc/helpers@0.5.15))(@types/node@22.13.13)(typescript@5.8.2)
+      ts-node: 10.9.2(@types/node@20.17.27)(typescript@5.8.2)
 
   postcss-load-config@6.0.1(jiti@2.4.2)(postcss@8.5.3)(yaml@2.7.0):
     dependencies:
@@ -7507,15 +7500,15 @@ snapshots:
 
   tailwind-merge@2.6.0: {}
 
-  tailwindcss-animate@1.0.7(tailwindcss@3.4.17(ts-node@10.9.2(@swc/core@1.11.13(@swc/helpers@0.5.15))(@types/node@20.17.27)(typescript@5.8.2))):
+  tailwindcss-animate@1.0.7(tailwindcss@3.4.17(ts-node@10.9.2(@swc/core@1.11.13)(@types/node@22.13.13)(typescript@5.8.2))):
     dependencies:
-      tailwindcss: 3.4.17(ts-node@10.9.2(@swc/core@1.11.13(@swc/helpers@0.5.15))(@types/node@20.17.27)(typescript@5.8.2))
+      tailwindcss: 3.4.17(ts-node@10.9.2(@swc/core@1.11.13)(@types/node@22.13.13)(typescript@5.8.2))
 
-  tailwindcss-animate@1.0.7(tailwindcss@3.4.17(ts-node@10.9.2(@swc/core@1.11.13(@swc/helpers@0.5.15))(@types/node@22.13.13)(typescript@5.8.2))):
+  tailwindcss-animate@1.0.7(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@20.17.27)(typescript@5.8.2))):
     dependencies:
-      tailwindcss: 3.4.17(ts-node@10.9.2(@swc/core@1.11.13(@swc/helpers@0.5.15))(@types/node@22.13.13)(typescript@5.8.2))
+      tailwindcss: 3.4.17(ts-node@10.9.2(@types/node@20.17.27)(typescript@5.8.2))
 
-  tailwindcss@3.4.17(ts-node@10.9.2(@swc/core@1.11.13(@swc/helpers@0.5.15))(@types/node@20.17.27)(typescript@5.8.2)):
+  tailwindcss@3.4.17(ts-node@10.9.2(@swc/core@1.11.13)(@types/node@22.13.13)(typescript@5.8.2)):
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
@@ -7534,7 +7527,7 @@ snapshots:
       postcss: 8.5.3
       postcss-import: 15.1.0(postcss@8.5.3)
       postcss-js: 4.0.1(postcss@8.5.3)
-      postcss-load-config: 4.0.2(postcss@8.5.3)(ts-node@10.9.2(@swc/core@1.11.13(@swc/helpers@0.5.15))(@types/node@20.17.27)(typescript@5.8.2))
+      postcss-load-config: 4.0.2(postcss@8.5.3)(ts-node@10.9.2(@swc/core@1.11.13)(@types/node@22.13.13)(typescript@5.8.2))
       postcss-nested: 6.2.0(postcss@8.5.3)
       postcss-selector-parser: 6.1.2
       resolve: 1.22.10
@@ -7542,7 +7535,7 @@ snapshots:
     transitivePeerDependencies:
       - ts-node
 
-  tailwindcss@3.4.17(ts-node@10.9.2(@swc/core@1.11.13(@swc/helpers@0.5.15))(@types/node@22.13.13)(typescript@5.8.2)):
+  tailwindcss@3.4.17(ts-node@10.9.2(@types/node@20.17.27)(typescript@5.8.2)):
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
@@ -7561,7 +7554,7 @@ snapshots:
       postcss: 8.5.3
       postcss-import: 15.1.0(postcss@8.5.3)
       postcss-js: 4.0.1(postcss@8.5.3)
-      postcss-load-config: 4.0.2(postcss@8.5.3)(ts-node@10.9.2(@swc/core@1.11.13(@swc/helpers@0.5.15))(@types/node@22.13.13)(typescript@5.8.2))
+      postcss-load-config: 4.0.2(postcss@8.5.3)(ts-node@10.9.2(@types/node@20.17.27)(typescript@5.8.2))
       postcss-nested: 6.2.0(postcss@8.5.3)
       postcss-selector-parser: 6.1.2
       resolve: 1.22.10
@@ -7624,28 +7617,7 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
-  ts-node@10.9.2(@swc/core@1.11.13(@swc/helpers@0.5.15))(@types/node@20.17.27)(typescript@5.8.2):
-    dependencies:
-      '@cspotcode/source-map-support': 0.8.1
-      '@tsconfig/node10': 1.0.11
-      '@tsconfig/node12': 1.0.11
-      '@tsconfig/node14': 1.0.3
-      '@tsconfig/node16': 1.0.4
-      '@types/node': 20.17.27
-      acorn: 8.14.0
-      acorn-walk: 8.3.4
-      arg: 4.1.3
-      create-require: 1.1.1
-      diff: 4.0.2
-      make-error: 1.3.6
-      typescript: 5.8.2
-      v8-compile-cache-lib: 3.0.1
-      yn: 3.1.1
-    optionalDependencies:
-      '@swc/core': 1.11.13(@swc/helpers@0.5.15)
-    optional: true
-
-  ts-node@10.9.2(@swc/core@1.11.13(@swc/helpers@0.5.15))(@types/node@22.13.13)(typescript@5.8.2):
+  ts-node@10.9.2(@swc/core@1.11.13)(@types/node@22.13.13)(typescript@5.8.2):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
@@ -7664,6 +7636,25 @@ snapshots:
       yn: 3.1.1
     optionalDependencies:
       '@swc/core': 1.11.13(@swc/helpers@0.5.15)
+
+  ts-node@10.9.2(@types/node@20.17.27)(typescript@5.8.2):
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      '@tsconfig/node10': 1.0.11
+      '@tsconfig/node12': 1.0.11
+      '@tsconfig/node14': 1.0.3
+      '@tsconfig/node16': 1.0.4
+      '@types/node': 20.17.27
+      acorn: 8.14.0
+      acorn-walk: 8.3.4
+      arg: 4.1.3
+      create-require: 1.1.1
+      diff: 4.0.2
+      make-error: 1.3.6
+      typescript: 5.8.2
+      v8-compile-cache-lib: 3.0.1
+      yn: 3.1.1
+    optional: true
 
   tsconfig-paths@3.15.0:
     dependencies:
