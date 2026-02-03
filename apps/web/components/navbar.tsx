@@ -4,10 +4,10 @@ import { SITECONFIG } from "@/lib/siteconfig";
 
 export const Navbar = () => {
   return (
-    <nav className="border-gray-200 bg-white dark:bg-gray-900">
-      <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-6">
-        <div className="line-clamp-1 w-0 p-2 text-white opacity-0 hover:text-black sm:w-auto sm:opacity-100">
-          {"Yes, I really didn't put anything in this corner."}
+    <nav className="border-gray-200 bg-white">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between p-6">
+        <div className="line-clamp-1 font-bold font-mono text-2xl">
+          @squircle.js
         </div>
 
         <div className="w-auto">

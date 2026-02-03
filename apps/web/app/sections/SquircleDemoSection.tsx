@@ -10,7 +10,7 @@ export const SquircleDemoSection = () => {
   const [cornerSmoothing, setCornerSmoothing] = useState<number>(1);
 
   return (
-    <div className="container mx-auto mb-36 max-w-[960px] md:pt-24">
+    <div className="container mx-auto mb-36 max-w-240 md:pt-24">
       <h1 className="mb-6 text-center font-bold text-4xl leading-[180%] sm:text-5xl sm:leading-[150%] md:mx-auto md:text-6xl md:leading-[130%]">
         <span className="text-6xl leading-[200%] sm:text-inherit">
           Squircle

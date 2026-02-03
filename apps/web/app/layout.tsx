@@ -6,13 +6,21 @@ import "./globals.css";
 import "./prismjs-atom-one-dark.css";
 
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Cutive_Mono, Inter } from "next/font/google";
 import Script from "next/script";
 import PlausibleProvider from "next-plausible";
 
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
+  variable: "--font-inter",
+});
+
+const cutiveMono = Cutive_Mono({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-cutive-mono",
 });
 
 export const metadata: Metadata = {
@@ -61,7 +69,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={`${inter.variable} ${cutiveMono.variable} font-sans`}>
         <PlausibleProvider domain="squircle.js.org">
           {children}
 
