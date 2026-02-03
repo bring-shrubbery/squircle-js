@@ -1,8 +1,8 @@
 import Link from "next/link";
+import { FaProductHunt } from "react-icons/fa";
 import { IoLogoGithub, IoLogoTwitter } from "react-icons/io5";
 import { QuassumIcon } from "@/components/quassum.icon";
 import { SITECONFIG } from "@/lib/siteconfig";
-import { FaProductHunt } from "react-icons/fa";
 
 export const LinksSection = () => {
   return (

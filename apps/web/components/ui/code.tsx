@@ -1,10 +1,9 @@
 "use client";
 
+import { Squircle } from "@squircle-js/react";
 import { CopyIcon } from "lucide-react";
-
 import { ScrollArea } from "./scroll-area";
 import { useToast } from "./use-toast";
-import { Squircle } from "@squircle-js/react";
 
 export const Code = ({
   dangerousHTML,
@@ -18,7 +17,7 @@ export const Code = ({
   const copyContent = raw;
 
   return (
-    <Squircle cornerRadius={16} cornerSmoothing={1} asChild>
+    <Squircle asChild cornerRadius={16} cornerSmoothing={1}>
       <code className="relative inline-flex w-full items-center space-x-4 bg-primary p-4 pr-14 pl-6 text-left text-primary-foreground text-sm sm:text-base">
         <ScrollArea className="w-full" orientation="horizontal">
           <pre

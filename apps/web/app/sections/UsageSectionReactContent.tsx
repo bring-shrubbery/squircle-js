@@ -4,8 +4,7 @@ import { Code } from "@/components/ui/code";
 
 import "prismjs/components/prism-jsx";
 import "prismjs/components/prism-bash";
-import { ExternalLink, ExternalLinkIcon } from "lucide-react";
-import { FaExternalLinkAlt } from "react-icons/fa";
+import { ExternalLinkIcon } from "lucide-react";
 
 const usage_react_1 = "pnpm add @squircle-js/react";
 

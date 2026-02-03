@@ -1,6 +1,6 @@
+import { Squircle } from "@squircle-js/react";
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { Squircle } from "@squircle-js/react";
 
 const Card = React.forwardRef<
   HTMLDivElement,
