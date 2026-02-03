@@ -10,7 +10,7 @@ squircle-js is a monorepo that brings iOS-style squircles (smooth corners) to Re
 
 - `packages/squircle-element-react/` - Main React component library (@squircle-js/react)
 - `apps/web/` - Next.js documentation/demo site
-- `tooling/` - Shared ESLint, Prettier, TypeScript, and Tailwind configs
+- `tooling/` - Shared TypeScript and Tailwind configs
 
 ## Common Commands
 
@@ -21,10 +21,6 @@ pnpm build                # Build all packages via Turbo
 pnpm dev                  # Watch mode for development
 
 # Code Quality
-pnpm lint                 # Run ESLint
-pnpm lint:fix             # Auto-fix linting issues
-pnpm format               # Check Prettier formatting
-pnpm format:fix           # Auto-format code
 pnpm typecheck            # Type check all packages
 
 # Releases

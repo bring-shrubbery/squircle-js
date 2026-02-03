@@ -10,23 +10,16 @@
     "build": "tsup",
     "dev": "tsup --watch",
     "clean": "rm -rf .turbo dist node_modules",
-    "format": "prettier --check . --ignore-path ../../.gitignore",
-    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
-    "lint": "eslint"
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
-  "prettier": "@squircle-js/prettier-config",
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.2",
     "figma-squircle": "1.1.0"
   },
   "devDependencies": {
-    "@squircle-js/eslint-config": "workspace:*",
-    "@squircle-js/prettier-config": "workspace:*",
     "@squircle-js/tsconfig": "workspace:*",
     "@swc/core": "^1.11.5",
     "@types/react": "catalog:react",
-    "eslint": "catalog:",
-    "prettier": "catalog:",
     "react": "catalog:react",
     "tsup": "catalog:",
     "typescript": "catalog:"
