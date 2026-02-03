@@ -1,5 +1,11 @@
 # @squircle-js/react
 
+## 1.3.0
+
+### Minor Changes
+
+- [#33](https://github.com/bring-shrubbery/squircle-js/pull/33) [`c0cf640`](https://github.com/bring-shrubbery/squircle-js/commit/c0cf6407cbed7229360d0c25eaf46082018bad3e) Thanks [@theutkarshdev](https://github.com/theutkarshdev)! - Enable dynamic resizing for squircle component in @squircle-js/react using ResizeObserver. The component now automatically adjusts its size based on its container or props, improving flexibility and usability.
+
 ## 1.2.18
 
 ### Patch Changes
