@@ -1,5 +1,5 @@
 // From usehooks-ts
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { useEventListener } from "./use-event-listener";
 import { useIsomorphicLayoutEffect } from "./use-isomorphic-layout-effect";
@@ -24,19 +24,29 @@ export function useElementSize<
     height: defaultSize.defaultHeight ?? 0,
   });
 
-  // Prevent too many rendering using useCallback
-  const handleSize = useCallback(() => {
+  // Use ResizeObserver for dynamic size changes
+  useEffect(() => {
+    if (!ref) return;
+    const handleResize = () => {
+      setSize({
+        width: ref.offsetWidth ?? 0,
+        height: ref.offsetHeight ?? 0,
+      });
+    };
+    handleResize(); // Initial size
+    const resizeObserver = new (window as any).ResizeObserver(handleResize);
+    resizeObserver.observe(ref);
+    return () => resizeObserver.disconnect();
+  }, [ref]);
+
+  // Fallback: still listen to window resize for edge cases
+  useEventListener("resize", () => {
+    if (!ref) return;
     setSize({
-      width: ref?.offsetWidth ?? 0,
-      height: ref?.offsetHeight ?? 0,
+      width: ref.offsetWidth ?? 0,
+      height: ref.offsetHeight ?? 0,
     });
-  }, [ref?.offsetHeight, ref?.offsetWidth]);
-
-  useEventListener("resize", handleSize);
-
-  useIsomorphicLayoutEffect(() => {
-    handleSize();
-  }, [ref?.offsetHeight, ref?.offsetWidth]);
+  });
 
   return [setRef, size];
 }

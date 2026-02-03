@@ -4,6 +4,7 @@ import { ExamplesSection } from "./sections/ExamplesSection";
 import { ExamplesSectionAsChildExample } from "./sections/ExamplesSectionAsChildExample";
 import { ExampleSectionConstantSizeExample } from "./sections/ExamplesSectionConstantSizeExample";
 import { ExamplesSectionDefaultSizeExample } from "./sections/ExamplesSectionDefaultSizeExample";
+import { ExamplesSectionDynamicSizeExample } from "./sections/ExamplesSectionDynamicSizeExample";
 import { FeaturesSection } from "./sections/FeaturesSection";
 import { LicenseSection } from "./sections/LicenseSection";
 import { LinksSection } from "./sections/LinksSection";
@@ -23,6 +24,7 @@ export default function Page() {
         constantSizeExample={<ExampleSectionConstantSizeExample />}
         defaultSizeExample={<ExamplesSectionDefaultSizeExample />}
         asChildPropExample={<ExamplesSectionAsChildExample />}
+        dynamicSizeExample={<ExamplesSectionDynamicSizeExample />}
       />
       {/* <HowItWorksSection /> */}
       <LicenseSection />
