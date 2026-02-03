@@ -95,34 +95,34 @@ export const ExamplesSectionDynamicSizeExample = () => {
         <div className="space-y-3">
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600">Container Width:</span>
-              <span className="font-mono text-sm font-semibold">
+              <span className="text-gray-600 text-sm">Container Width:</span>
+              <span className="font-mono font-semibold text-sm">
                 {containerWidth}px
               </span>
             </div>
             <Slider
-              value={[containerWidth]}
-              onValueChange={([value]) => setContainerWidth(value)}
-              min={200}
-              max={460}
-              step={1}
               className="w-full"
+              max={460}
+              min={200}
+              onValueChange={([value]) => setContainerWidth(value ?? 460)}
+              step={1}
+              value={[containerWidth]}
             />
           </div>
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600">Products to Show:</span>
-              <span className="font-mono text-sm font-semibold">
+              <span className="text-gray-600 text-sm">Products to Show:</span>
+              <span className="font-mono font-semibold text-sm">
                 {productCount}
               </span>
             </div>
             <Slider
-              value={[productCount]}
-              onValueChange={([value]) => setProductCount(value)}
-              min={1}
-              max={3}
-              step={1}
               className="w-full"
+              max={3}
+              min={1}
+              onValueChange={([value]) => setProductCount(value ?? 3)}
+              step={1}
+              value={[productCount]}
             />
           </div>
           <div className="flex justify-center">
