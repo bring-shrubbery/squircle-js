@@ -94,14 +94,11 @@ importers:
         specifier: ^2.12.1
         version: 2.17.0(@types/react@19.0.12)(react@19.0.0)
       lucide-react:
-        specifier: ^0.477.0
+        specifier: ^0.563.0
         version: 0.563.0(react@19.0.0)
       next:
-        specifier: ^15.2.0
+        specifier: ^15.5.11
         version: 16.1.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      next-plausible:
-        specifier: ^3.12.4
-        version: 3.12.5(next@16.1.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       prism-react-renderer:
         specifier: ^2.4.1
         version: 2.4.1(react@19.0.0)
@@ -118,7 +115,7 @@ importers:
         specifier: ^5.5.0
         version: 5.5.0(react@19.0.0)
       tailwind-merge:
-        specifier: ^2.6.0
+        specifier: ^3.4.0
         version: 3.4.0
       typescript:
         specifier: ^5.8.2
@@ -2461,13 +2458,6 @@ packages:
   netmask@2.0.2:
     resolution: {integrity: sha512-dBpDMdxv9Irdq66304OLfEmQ9tbNRFnFTuZiLo+bD+r332bBmMJ8GBLXklIXXgxd3+v9+KUnZaUR5PJMa75Gsg==}
     engines: {node: '>= 0.4.0'}
-
-  next-plausible@3.12.5:
-    resolution: {integrity: sha512-l1YMuTI9akb2u7z4hyTuxXpudy8KfSteRNXCYpWpnhAoBjaWQlv6sITai1TwcR7wWvVW8DFbLubvMQAsirAjcA==}
-    peerDependencies:
-      next: '^11.1.0 || ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 '
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   next@16.1.6:
     resolution: {integrity: sha512-hkyRkcu5x/41KoqnROkfTm2pZVbKxvbZRuNvKXLRXxs3VfyO0WhY50TQS40EuKO9SW3rBj/sF3WbVwDACeMZyw==}
@@ -5327,20 +5317,13 @@ snapshots:
       object-assign: 4.1.1
       thenify-all: 1.6.0
 
-  nanoid@3.3.11:
-    optional: true
+  nanoid@3.3.11: {}
 
   nanoid@3.3.8: {}
 
   neo-async@2.6.2: {}
 
   netmask@2.0.2: {}
-
-  next-plausible@3.12.5(next@16.1.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
-    dependencies:
-      next: 16.1.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      react: 19.0.0
-      react-dom: 19.0.0(react@19.0.0)
 
   next@16.1.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
@@ -5561,7 +5544,7 @@ snapshots:
 
   postcss@8.4.31:
     dependencies:
-      nanoid: 3.3.8
+      nanoid: 3.3.11
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
