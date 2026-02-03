@@ -5,6 +5,7 @@ import Image from "next/image";
 import Prism from "prismjs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Code } from "@/components/ui/code";
+import { Slider } from "@/components/ui/slider";
 
 import "prismjs/components/prism-jsx";
 
@@ -43,6 +44,7 @@ export const ExamplesSectionDynamicSizeExample = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
+  const [containerWidth, setContainerWidth] = useState(320);
 
   const handleImageError = (productId: string) => {
     setImageErrors((prev) => new Set(prev).add(productId));
@@ -82,74 +84,99 @@ export const ExamplesSectionDynamicSizeExample = () => {
         </p>
         <Code dangerousHTML={highlightedUsage} raw={usage} />
         <h3 className="font-semibold text-lg">Result:</h3>
-        <Squircle
-          className="bg-slate-100 p-4"
-          cornerRadius={36}
-          cornerSmoothing={1}
-        >
-          {loading ? (
-            <div>Loading...</div>
-          ) : error ? (
-            <div className="text-red-500">{error}</div>
-          ) : (
-            <div className="grid gap-4">
-              {products.map((product) => (
-                <a
-                  href={
-                    product.href.startsWith("http")
-                      ? product.href
-                      : `https://quassum.com${product.href}`
-                  }
-                  key={product.id}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <Squircle
-                    className="bg-white p-3 shadow transition-shadow hover:shadow-md"
-                    cornerRadius={24}
-                    cornerSmoothing={1}
-                  >
-                    <div className="flex items-center gap-4">
-                      {imageErrors.has(product.id) ? (
-                        <Squircle
-                          className="flex size-16 items-center justify-center bg-slate-200 font-bold text-slate-500 text-xl"
-                          cornerRadius={16}
-                          cornerSmoothing={1}
-                        >
-                          {product.name.charAt(0).toUpperCase()}
-                        </Squircle>
-                      ) : (
-                        <Squircle
-                          className="size-16 overflow-hidden bg-white"
-                          cornerRadius={16}
-                          cornerSmoothing={1}
-                        >
-                          <Image
-                            alt={product.logoAlt}
-                            className="h-full w-full object-contain"
-                            height={64}
-                            onError={() => handleImageError(product.id)}
-                            src={product.logo}
-                            width={64}
-                          />
-                        </Squircle>
-                      )}
-                      <div className="flex-1">
-                        <div className="font-semibold">{product.name}</div>
-                        <div className="line-clamp-1 text-gray-500 text-sm">
-                          {product.tagline}
-                        </div>
-                        <div className="mt-1 text-gray-400 text-xs capitalize">
-                          {product.pricing}
-                        </div>
-                      </div>
-                    </div>
-                  </Squircle>
-                </a>
-              ))}
+        <div className="space-y-3">
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-600">Container Width:</span>
+              <span className="font-mono text-sm font-semibold">
+                {containerWidth}px
+              </span>
             </div>
-          )}
-        </Squircle>
+            <Slider
+              value={[containerWidth]}
+              onValueChange={([value]) => setContainerWidth(value)}
+              min={200}
+              max={460}
+              step={1}
+              className="w-full"
+            />
+          </div>
+          <div className="flex justify-center">
+            <div style={{ width: `${containerWidth}px` }}>
+              <Squircle
+                className="min-w-0 bg-slate-100 p-4"
+                cornerRadius={36}
+                cornerSmoothing={1}
+              >
+                {loading ? (
+                  <div>Loading...</div>
+                ) : error ? (
+                  <div className="text-red-500">{error}</div>
+                ) : (
+                  <div className="grid min-w-0 gap-4">
+                    {products.map((product) => (
+                      <a
+                        className="min-w-0"
+                        href={
+                          product.href.startsWith("http")
+                            ? product.href
+                            : `https://quassum.com${product.href}`
+                        }
+                        key={product.id}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        <Squircle
+                          className="min-w-0 max-w-full bg-white p-3 shadow transition-shadow hover:shadow-md"
+                          cornerRadius={24}
+                          cornerSmoothing={1}
+                        >
+                          <div className="flex min-w-0 items-center gap-4">
+                            {imageErrors.has(product.id) ? (
+                              <Squircle
+                                className="flex size-16 items-center justify-center bg-slate-200 font-bold text-slate-500 text-xl"
+                                cornerRadius={16}
+                                cornerSmoothing={1}
+                              >
+                                {product.name.charAt(0).toUpperCase()}
+                              </Squircle>
+                            ) : (
+                              <Squircle
+                                className="size-16 overflow-hidden bg-white"
+                                cornerRadius={16}
+                                cornerSmoothing={1}
+                              >
+                                <Image
+                                  alt={product.logoAlt}
+                                  className="h-full w-full object-contain"
+                                  height={64}
+                                  onError={() => handleImageError(product.id)}
+                                  src={product.logo}
+                                  width={64}
+                                />
+                              </Squircle>
+                            )}
+                            <div className="min-w-0 flex-1">
+                              <div className="truncate font-semibold">
+                                {product.name}
+                              </div>
+                              <div className="line-clamp-1 text-gray-500 text-sm">
+                                {product.tagline}
+                              </div>
+                              <div className="mt-1 text-gray-400 text-xs capitalize">
+                                {product.pricing}
+                              </div>
+                            </div>
+                          </div>
+                        </Squircle>
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </Squircle>
+            </div>
+          </div>
+        </div>
       </CardContent>
     </Card>
   );
