@@ -12,11 +12,13 @@ import type { PropsWithChildren } from "react";
 import { useEffect, useState } from "react";
 
 interface Product {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  thumbnail: string;
+  id: string;
+  name: string;
+  tagline: string;
+  logo: string;
+  logoAlt: string;
+  pricing: string;
+  href: string;
 }
 
 const usage = `<Squircle
@@ -40,15 +42,22 @@ export const ExamplesSectionDynamicSizeExample = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
+
+  const handleImageError = (productId: string) => {
+    setImageErrors((prev) => new Set(prev).add(productId));
+  };
 
   useEffect(() => {
-    fetch("https://dummyjson.com/products?limit=3")
+    fetch(
+      "https://quassum.com/api/products?id=onedollarchatbot&id=justscribe&id=squircle-js"
+    )
       .then((res) => res.json())
       .then((data) => {
         setTimeout(() => {
-          setProducts(data.products);
+          setProducts(data);
           setLoading(false);
-        }, 2000); // 2 seconds delay
+        }, 1000);
       })
       .catch((_err) => {
         setError("Failed to fetch products");
@@ -75,7 +84,7 @@ export const ExamplesSectionDynamicSizeExample = () => {
         <h3 className="font-semibold text-lg">Result:</h3>
         <Squircle
           className="bg-slate-100 p-4"
-          cornerRadius={24}
+          cornerRadius={36}
           cornerSmoothing={1}
         >
           {loading ? (
@@ -85,31 +94,58 @@ export const ExamplesSectionDynamicSizeExample = () => {
           ) : (
             <div className="grid gap-4">
               {products.map((product) => (
-                <Squircle
-                  className="bg-white p-3 shadow"
-                  cornerRadius={16}
-                  cornerSmoothing={1}
+                <a
+                  href={
+                    product.href.startsWith("http")
+                      ? product.href
+                      : `https://quassum.com${product.href}`
+                  }
                   key={product.id}
+                  rel="noopener noreferrer"
+                  target="_blank"
                 >
-                  <div className="flex items-center gap-4">
-                    <Image
-                      alt={product.title}
-                      className="h-16 w-16 rounded border object-cover"
-                      height={64}
-                      src={product.thumbnail}
-                      width={64}
-                    />
-                    <div className="flex-1">
-                      <div className="font-semibold">{product.title}</div>
-                      <div className="line-clamp-2 text-gray-500 text-sm">
-                        {product.description}
-                      </div>
-                      <div className="mt-1 font-medium text-sm">
-                        ${product.price}
+                  <Squircle
+                    className="bg-white p-3 shadow transition-shadow hover:shadow-md"
+                    cornerRadius={24}
+                    cornerSmoothing={1}
+                  >
+                    <div className="flex items-center gap-4">
+                      {imageErrors.has(product.id) ? (
+                        <Squircle
+                          className="flex size-16 items-center justify-center bg-slate-200 font-bold text-slate-500 text-xl"
+                          cornerRadius={16}
+                          cornerSmoothing={1}
+                        >
+                          {product.name.charAt(0).toUpperCase()}
+                        </Squircle>
+                      ) : (
+                        <Squircle
+                          className="size-16 overflow-hidden bg-white"
+                          cornerRadius={16}
+                          cornerSmoothing={1}
+                        >
+                          <Image
+                            alt={product.logoAlt}
+                            className="h-full w-full object-contain"
+                            height={64}
+                            onError={() => handleImageError(product.id)}
+                            src={product.logo}
+                            width={64}
+                          />
+                        </Squircle>
+                      )}
+                      <div className="flex-1">
+                        <div className="font-semibold">{product.name}</div>
+                        <div className="line-clamp-1 text-gray-500 text-sm">
+                          {product.tagline}
+                        </div>
+                        <div className="mt-1 text-gray-400 text-xs capitalize">
+                          {product.pricing}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Squircle>
+                  </Squircle>
+                </a>
               ))}
             </div>
           )}
