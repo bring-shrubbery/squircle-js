@@ -10,7 +10,8 @@
     },
     "plugins": [{ "name": "next" }],
     "tsBuildInfoFile": "${configDir}/node_modules/.cache/tsbuildinfo.json",
-    "module": "esnext"
+    "module": "esnext",
+    "strictNullChecks": true
   },
   "include": [".", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

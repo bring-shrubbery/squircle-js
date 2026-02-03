@@ -21,6 +21,8 @@ pnpm build                # Build all packages via Turbo
 pnpm dev                  # Watch mode for development
 
 # Code Quality
+pnpm check                # Lint and format check via Biome (ultracite)
+pnpm fix                  # Auto-fix linting and formatting issues
 pnpm typecheck            # Type check all packages
 
 # Releases

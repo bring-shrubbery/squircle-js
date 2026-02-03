@@ -9,7 +9,8 @@
     "rootDir": ".",
     "outDir": "dist",
     "noImplicitAny": false,
-    "lib": ["es2016", "dom", "es5"]
+    "lib": ["es2016", "dom", "es5"],
+    "strictNullChecks": true
   },
   "include": [
     "src/**/*.ts",

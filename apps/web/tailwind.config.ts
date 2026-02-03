@@ -1,5 +1,5 @@
-import type { Config } from "tailwindcss";
 import baseConfig from "@squircle-js/tailwind-config/web";
+import type { Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
 export default {

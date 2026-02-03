@@ -31,7 +31,7 @@ jobs:
         run: pnpm install
 
       - name: Pre-publish requirements
-        run: pnpm build
+        run: pnpm check && pnpm build
 
       - name: Create Release Pull Request
         id: changesets
@@ -64,7 +64,7 @@ jobs:
         run: pnpm install
 
       - name: Pre-publish requirements
-        run: pnpm build
+        run: pnpm check && pnpm build
 
       - name: Move README into place
         run: cp README.md packages/squircle-element-react/README.md
