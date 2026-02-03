@@ -22,13 +22,20 @@ interface Product {
   href: string;
 }
 
-const usage = `<Squircle
-  cornerRadius={24}
-  cornerSmoothing={1}
-  className="bg-slate-100 p-4"
->
-  {/* Cards fetched from API will be rendered here */}
-</Squircle>`;
+const usage = `// Interactive controls for width and product count
+<Slider onValueChange={setWidth} min={200} max={460} />
+<Slider onValueChange={setCount} min={1} max={3} />
+
+// Resizable container
+<div style={{ width }}>
+  <Squircle cornerRadius={36} cornerSmoothing={1}>
+    {products.slice(0, count).map(product => (
+      <Squircle cornerRadius={24}>
+        {/* Product card content */}
+      </Squircle>
+    ))}
+  </Squircle>
+</div>`;
 
 const highlightedUsage =
   "jsx" in Prism.languages
@@ -73,15 +80,15 @@ export const ExamplesSectionDynamicSizeExample = () => {
       <CardContent className="w-full space-y-4 py-6">
         <h3 className="font-semibold text-lg">Code:</h3>
         <p>
-          This example demonstrates fetching products from an API and displaying
-          them as cards inside a <Kode>Squircle</Kode> container.
+          This interactive example demonstrates how <Kode>Squircle</Kode> adapts
+          dynamically to size changes using <Kode>ResizeObserver</Kode>.
           <br />
           <br />
-          The Squircle container now adapts its height and width dynamically
-          based on the size of its children, thanks to{" "}
-          <Kode>ResizeObserver</Kode>. This ensures the layout remains
-          responsive and visually balanced no matter how many cards are rendered
-          or how their content changes.
+          Use the sliders to adjust the container width and the number of
+          products displayed. Watch how the Squircle automatically updates its
+          shape to match the new dimensions—no manual recalculation needed. This
+          makes it perfect for responsive layouts, animated transitions, and
+          dynamic content.
         </p>
         <Code dangerousHTML={highlightedUsage} raw={usage} />
         <h3 className="font-semibold text-lg">Result:</h3>
