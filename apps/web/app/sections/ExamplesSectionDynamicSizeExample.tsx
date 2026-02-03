@@ -45,6 +45,7 @@ export const ExamplesSectionDynamicSizeExample = () => {
   const [error, setError] = useState<string | null>(null);
   const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
   const [containerWidth, setContainerWidth] = useState(320);
+  const [productCount, setProductCount] = useState(3);
 
   const handleImageError = (productId: string) => {
     setImageErrors((prev) => new Set(prev).add(productId));
@@ -101,6 +102,22 @@ export const ExamplesSectionDynamicSizeExample = () => {
               className="w-full"
             />
           </div>
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-600">Products to Show:</span>
+              <span className="font-mono text-sm font-semibold">
+                {productCount}
+              </span>
+            </div>
+            <Slider
+              value={[productCount]}
+              onValueChange={([value]) => setProductCount(value)}
+              min={1}
+              max={3}
+              step={1}
+              className="w-full"
+            />
+          </div>
           <div className="flex justify-center">
             <div style={{ width: `${containerWidth}px` }}>
               <Squircle
@@ -114,7 +131,7 @@ export const ExamplesSectionDynamicSizeExample = () => {
                   <div className="text-red-500">{error}</div>
                 ) : (
                   <div className="grid min-w-0 gap-4">
-                    {products.map((product) => (
+                    {products.slice(0, productCount).map((product) => (
                       <a
                         className="min-w-0"
                         href={
