@@ -1,19 +1,19 @@
 import Link from "next/link";
+import { IoCash, IoLogoGithub, IoLogoTwitter } from "react-icons/io5";
 import { QuassumIcon } from "@/components/quassum.icon";
 import { SITECONFIG } from "@/lib/siteconfig";
-import { IoCash, IoLogoGithub, IoLogoTwitter } from "react-icons/io5";
 
 export const LinksSection = () => {
   return (
     <div className="container mx-auto mb-36 w-fit">
-      <h2 className="mx-auto mb-16 w-fit text-2xl font-semibold">
+      <h2 className="mx-auto mb-16 w-fit font-semibold text-2xl">
         Build with 💙 by{" "}
         <Link
-          href={SITECONFIG.antoniGithubLink}
           className="transition-colors hover:text-blue-600"
           data-umami-event="click"
-          data-umami-event-id={`click_author`}
+          data-umami-event-id={"click_author"}
           data-umami-event-ref="github"
+          href={SITECONFIG.antoniGithubLink}
         >
           {"Antoni"}
         </Link>
@@ -21,44 +21,44 @@ export const LinksSection = () => {
 
       <div className="flex flex-col gap-8 sm:flex-row">
         <Link
-          href={SITECONFIG.antoniGithubLink}
           className="mx-auto flex flex-col items-center gap-2"
           data-umami-event="click"
-          data-umami-event-id={`click_author`}
+          data-umami-event-id={"click_author"}
           data-umami-event-ref="github"
+          href={SITECONFIG.antoniGithubLink}
         >
           <IoLogoGithub size={36} />
           <span className="font-medium">{"Github 👩‍💻"}</span>
         </Link>
 
         <Link
-          href={SITECONFIG.twitterLink}
           className="mx-auto flex flex-col items-center gap-2"
           data-umami-event="click"
-          data-umami-event-id={`click_author`}
+          data-umami-event-id={"click_author"}
           data-umami-event-ref="twitter"
+          href={SITECONFIG.twitterLink}
         >
           <IoLogoTwitter size={36} />
           <span className="font-medium">{"Follow me? 😏"}</span>
         </Link>
 
         <Link
-          href={SITECONFIG.sponsorLink}
           className="mx-auto flex flex-col items-center gap-2"
           data-umami-event="click"
-          data-umami-event-id={`click_author`}
+          data-umami-event-id={"click_author"}
           data-umami-event-ref="sponsor"
+          href={SITECONFIG.sponsorLink}
         >
           <IoCash size={36} />
           <span className="font-medium">{"Sponsor ❤️"}</span>
         </Link>
 
         <Link
-          href={SITECONFIG.quassumLink}
           className="mx-auto flex flex-col items-center gap-2"
           data-umami-event="click"
-          data-umami-event-id={`click_author`}
+          data-umami-event-id={"click_author"}
           data-umami-event-ref="quassum"
+          href={SITECONFIG.quassumLink}
         >
           <QuassumIcon className="h-9 w-9" />
           <span className="font-medium">{"Quassum 🖤"}</span>

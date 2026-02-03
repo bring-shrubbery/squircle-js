@@ -1,9 +1,9 @@
 "use client";
 
-import * as React from "react";
-import { useMemo } from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { getSvgPath } from "figma-squircle";
+import type * as React from "react";
+import { useMemo } from "react";
 
 import { useElementSize } from "./use-element-size";
 
@@ -46,7 +46,9 @@ function Squircle<E extends React.ElementType = "div">({
   const actualHeight = h ?? height;
 
   const path = useMemo(() => {
-    if (actualWidth === 0 || actualHeight === 0) return "";
+    if (actualWidth === 0 || actualHeight === 0) {
+      return "";
+    }
     return getSvgPath({
       width: actualWidth,
       height: actualHeight,
@@ -58,6 +60,7 @@ function Squircle<E extends React.ElementType = "div">({
   return (
     <Component
       {...props}
+      data-squircle={cornerRadius}
       ref={ref}
       style={{
         ...style,
@@ -66,7 +69,6 @@ function Squircle<E extends React.ElementType = "div">({
         height: h ?? defaultHeight,
         clipPath: `path('${path}')`,
       }}
-      data-squircle={cornerRadius}
     />
   );
 }

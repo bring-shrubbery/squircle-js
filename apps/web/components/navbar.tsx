@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { SITECONFIG } from "@/lib/siteconfig";
 import { IoLogoGithub } from "react-icons/io5";
+import { SITECONFIG } from "@/lib/siteconfig";
 
 export const Navbar = () => {
   return (

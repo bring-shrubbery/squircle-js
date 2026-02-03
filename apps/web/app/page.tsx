@@ -21,9 +21,9 @@ export default function Page() {
       <FeaturesSection />
       <UsageSection reactUsageContent={<UsageSectionReactContent />} />
       <ExamplesSection
+        asChildPropExample={<ExamplesSectionAsChildExample />}
         constantSizeExample={<ExampleSectionConstantSizeExample />}
         defaultSizeExample={<ExamplesSectionDefaultSizeExample />}
-        asChildPropExample={<ExamplesSectionAsChildExample />}
         dynamicSizeExample={<ExamplesSectionDynamicSizeExample />}
       />
       {/* <HowItWorksSection /> */}

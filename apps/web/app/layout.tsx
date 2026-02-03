@@ -1,6 +1,6 @@
-import { Toaster } from "@/components/ui/toaster";
 import { SquircleNoScript } from "@squircle-js/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Toaster } from "@/components/ui/toaster";
 
 import "./globals.css";
 import "./prismjs-atom-one-dark.css";
@@ -72,8 +72,8 @@ export default function RootLayout({
 
         <Script
           async
-          src="/stats/script.js"
           data-website-id="462285f6-d3c4-45ce-bb91-fe99a81c97cc"
+          src="/stats/script.js"
         />
       </body>
     </html>

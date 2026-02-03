@@ -1,9 +1,9 @@
 "use client";
 
+import { Squircle } from "@squircle-js/react";
 import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
-import { Squircle } from "@squircle-js/react";
 
 export const SquircleDemoSection = () => {
   const [cornerRadius, setCornerRadius] = useState<number>(25);
@@ -11,15 +11,15 @@ export const SquircleDemoSection = () => {
 
   return (
     <div className="container mx-auto mb-36 max-w-[960px] md:pt-24">
-      <h1 className="mb-6 text-center text-4xl font-bold leading-[180%] sm:text-5xl sm:leading-[150%] md:mx-auto md:text-6xl md:leading-[130%]">
+      <h1 className="mb-6 text-center font-bold text-4xl leading-[180%] sm:text-5xl sm:leading-[150%] md:mx-auto md:text-6xl md:leading-[130%]">
         <span className="text-6xl leading-[200%] sm:text-inherit">
           Squircle
         </span>{" "}
         <Squircle
           asChild
+          className="bg-black pt-2 pr-8 pb-2 pl-8 text-6xl text-white"
           cornerRadius={cornerRadius}
           cornerSmoothing={cornerSmoothing}
-          className="bg-black pb-2 pl-8 pr-8 pt-2 text-6xl text-white"
         >
           <span>{"Element"}</span>
         </Squircle>
@@ -35,7 +35,7 @@ export const SquircleDemoSection = () => {
         Use{" "}
         <Squircle
           asChild
-          className="bg-foreground py-1 pl-2 pr-2 text-white"
+          className="bg-foreground py-1 pr-2 pl-2 text-white"
           cornerRadius={10}
           cornerSmoothing={1}
         >
@@ -55,15 +55,15 @@ export const SquircleDemoSection = () => {
         <div className="space-y-6">
           <div className="space-y-4">
             <Label
-              htmlFor="corner-radius"
               className="mt-4"
+              htmlFor="corner-radius"
             >{`Corner Radius (${cornerRadius}px)`}</Label>
             <Slider
               id="corner-radius"
-              min={0}
               max={50}
-              value={[cornerRadius]}
+              min={0}
               onValueChange={(v) => setCornerRadius(v.at(0) ?? 0)}
+              value={[cornerRadius]}
             />
           </div>
 
@@ -80,17 +80,17 @@ export const SquircleDemoSection = () => {
             </Label>
             <Slider
               id="corner-smoothing"
-              min={0}
               max={1}
+              min={0}
+              onValueChange={(v) => setCornerSmoothing(v.at(0) ?? 0)}
               step={0.01}
               value={[cornerSmoothing]}
-              onValueChange={(v) => setCornerSmoothing(v.at(0) ?? 0)}
             />
           </div>
         </div>
 
         <div className="space-y-2">
-          <h2 className="mx-auto w-fit text-2xl font-bold">Try it out! 🙌</h2>
+          <h2 className="mx-auto w-fit font-bold text-2xl">Try it out! 🙌</h2>
           <p className="text-center">
             {`Use sliders to control the "Element" component above. The difference is not huge, but makes a difference! 😉`}
           </p>

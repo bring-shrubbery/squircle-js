@@ -1,11 +1,11 @@
+import Prism from "prismjs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Code } from "@/components/ui/code";
-import Prism from "prismjs";
 
 import "prismjs/components/prism-jsx";
 import "prismjs/components/prism-bash";
 
-const usage_react_1 = `pnpm add @squircle-js/react`;
+const usage_react_1 = "pnpm add @squircle-js/react";
 
 const usage_react_2 = `
 import { Squircle }
@@ -50,26 +50,26 @@ export const UsageSectionReactContent = () => {
   return (
     <Card className="w-full max-w-[480px] sm:max-w-[508px]">
       <CardContent className="w-full py-6">
-        <h3 className="mb-2 text-lg font-semibold">
+        <h3 className="mb-2 font-semibold text-lg">
           Step 1. <span className="font-normal">Install the package.</span>
         </h3>
         <Code dangerousHTML={highlightedUsage1} raw={usage_react_1} />
 
-        <h3 className="mb-2 mt-4 text-lg font-semibold">
+        <h3 className="mt-4 mb-2 font-semibold text-lg">
           Step 2.{" "}
           <span className="font-normal">
             Import and use as a a regular div.
           </span>
         </h3>
-        <Code raw={usage_react_2} dangerousHTML={highlightedUsage2} />
+        <Code dangerousHTML={highlightedUsage2} raw={usage_react_2} />
 
-        <h3 className="mb-2 mt-4 text-lg font-semibold">
+        <h3 className="mt-4 mb-2 font-semibold text-lg">
           Step 3.{" "}
           <span className="font-normal">
             Add global component for noscript support.
           </span>
         </h3>
-        <Code raw={usage_react_3} dangerousHTML={highlightedUsage3} />
+        <Code dangerousHTML={highlightedUsage3} raw={usage_react_3} />
       </CardContent>
     </Card>
   );

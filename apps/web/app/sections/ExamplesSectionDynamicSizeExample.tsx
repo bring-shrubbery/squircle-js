@@ -1,23 +1,23 @@
 "use client";
 
+import { Squircle } from "@squircle-js/react";
 import Image from "next/image";
+import Prism from "prismjs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Code } from "@/components/ui/code";
-import { Squircle } from "@squircle-js/react";
-import Prism from "prismjs";
 
 import "prismjs/components/prism-jsx";
 
 import type { PropsWithChildren } from "react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-type Product = {
+interface Product {
   id: number;
   title: string;
   description: string;
   price: number;
   thumbnail: string;
-};
+}
 
 const usage = `<Squircle
   cornerRadius={24}
@@ -32,7 +32,7 @@ const highlightedUsage =
     ? Prism.highlight(
         ["...", usage, "..."].join("\n"),
         Prism.languages.jsx,
-        "jsx",
+        "jsx"
       )
     : "";
 
@@ -50,7 +50,7 @@ export const ExamplesSectionDynamicSizeExample = () => {
           setLoading(false);
         }, 2000); // 2 seconds delay
       })
-      .catch((err) => {
+      .catch((_err) => {
         setError("Failed to fetch products");
         setLoading(false);
       });
@@ -59,7 +59,7 @@ export const ExamplesSectionDynamicSizeExample = () => {
   return (
     <Card className="w-full max-w-[480px] sm:max-w-[508px]">
       <CardContent className="w-full space-y-4 py-6">
-        <h3 className="text-lg font-semibold">Code:</h3>
+        <h3 className="font-semibold text-lg">Code:</h3>
         <p>
           This example demonstrates fetching products from an API and displaying
           them as cards inside a <Kode>Squircle</Kode> container.
@@ -72,11 +72,11 @@ export const ExamplesSectionDynamicSizeExample = () => {
           or how their content changes.
         </p>
         <Code dangerousHTML={highlightedUsage} raw={usage} />
-        <h3 className="text-lg font-semibold">Result:</h3>
+        <h3 className="font-semibold text-lg">Result:</h3>
         <Squircle
+          className="bg-slate-100 p-4"
           cornerRadius={24}
           cornerSmoothing={1}
-          className="bg-slate-100 p-4"
         >
           {loading ? (
             <div>Loading...</div>
@@ -86,25 +86,25 @@ export const ExamplesSectionDynamicSizeExample = () => {
             <div className="grid gap-4">
               {products.map((product) => (
                 <Squircle
-                  key={product.id}
+                  className="bg-white p-3 shadow"
                   cornerRadius={16}
                   cornerSmoothing={1}
-                  className="bg-white p-3 shadow"
+                  key={product.id}
                 >
                   <div className="flex items-center gap-4">
                     <Image
-                      src={product.thumbnail}
                       alt={product.title}
-                      width={64}
-                      height={64}
                       className="h-16 w-16 rounded border object-cover"
+                      height={64}
+                      src={product.thumbnail}
+                      width={64}
                     />
                     <div className="flex-1">
                       <div className="font-semibold">{product.title}</div>
-                      <div className="line-clamp-2 text-sm text-gray-500">
+                      <div className="line-clamp-2 text-gray-500 text-sm">
                         {product.description}
                       </div>
-                      <div className="mt-1 text-sm font-medium">
+                      <div className="mt-1 font-medium text-sm">
                         ${product.price}
                       </div>
                     </div>

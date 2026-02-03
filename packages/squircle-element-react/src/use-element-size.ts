@@ -1,8 +1,7 @@
 // From usehooks-ts
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useEventListener } from "./use-event-listener";
-import { useIsomorphicLayoutEffect } from "./use-isomorphic-layout-effect";
 
 interface Size {
   width: number;
@@ -26,7 +25,9 @@ export function useElementSize<
 
   // Use ResizeObserver for dynamic size changes
   useEffect(() => {
-    if (!ref) return;
+    if (!ref) {
+      return;
+    }
     const handleResize = () => {
       setSize({
         width: ref.offsetWidth ?? 0,
@@ -41,7 +42,9 @@ export function useElementSize<
 
   // Fallback: still listen to window resize for edge cases
   useEventListener("resize", () => {
-    if (!ref) return;
+    if (!ref) {
+      return;
+    }
     setSize({
       width: ref.offsetWidth ?? 0,
       height: ref.offsetHeight ?? 0,
