@@ -10,7 +10,7 @@ squircle-js is a monorepo that brings iOS-style squircles (smooth corners) to Re
 
 - `packages/squircle-element-react/` - Main React component library (@squircle-js/react)
 - `apps/web/` - Next.js documentation/demo site
-- `tooling/` - Shared TypeScript and Tailwind configs
+- `tooling/` - Shared TypeScript config
 
 ## Common Commands
 

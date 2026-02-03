@@ -1,9 +1,0 @@
-{
-  "extends": "@squircle-js/tsconfig/base.json",
-  "compilerOptions": {
-    "tsBuildInfoFile": "${configDir}/node_modules/.cache/tsbuildinfo.json",
-    "strictNullChecks": true
-  },
-  "include": ["."],
-  "exclude": ["node_modules"]
-}
