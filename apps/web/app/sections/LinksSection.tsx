@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { IoCash, IoLogoGithub, IoLogoTwitter } from "react-icons/io5";
+import { IoLogoGithub, IoLogoTwitter } from "react-icons/io5";
 import { QuassumIcon } from "@/components/quassum.icon";
 import { SITECONFIG } from "@/lib/siteconfig";
+import { FaProductHunt } from "react-icons/fa";
 
 export const LinksSection = () => {
   return (
@@ -39,7 +40,9 @@ export const LinksSection = () => {
           href={SITECONFIG.twitterLink}
         >
           <IoLogoTwitter size={36} />
-          <span className="font-medium">{"Follow me? 😏"}</span>
+          <div className="max-w-24 text-center font-medium">
+            {"Follow on Twitter? 😏"}
+          </div>
         </Link>
 
         <Link
@@ -47,10 +50,12 @@ export const LinksSection = () => {
           data-umami-event="click"
           data-umami-event-id={"click_author"}
           data-umami-event-ref="sponsor"
-          href={SITECONFIG.sponsorLink}
+          href={SITECONFIG.producthuntLink}
         >
-          <IoCash size={36} />
-          <span className="font-medium">{"Sponsor ❤️"}</span>
+          <FaProductHunt size={36} />
+          <div className="max-w-24 text-center font-medium">
+            {"Follow on ProductHunt"}
+          </div>
         </Link>
 
         <Link

@@ -1,18 +1,27 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { Squircle } from "@squircle-js/react";
 
 const Card = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div
-    className={cn(
-      "rounded-lg border bg-card text-card-foreground shadow-sm",
-      className
-    )}
-    ref={ref}
-    {...props}
-  />
+  <Squircle
+    className="bg-border p-px drop-shadow-lg"
+    cornerRadius={38}
+    cornerSmoothing={1}
+  >
+    <Squircle asChild cornerRadius={36} cornerSmoothing={1}>
+      <div
+        className={cn(
+          "size-[calc(100%-2px)] bg-card text-card-foreground",
+          className
+        )}
+        ref={ref}
+        {...props}
+      />
+    </Squircle>
+  </Squircle>
 ));
 Card.displayName = "Card";
 

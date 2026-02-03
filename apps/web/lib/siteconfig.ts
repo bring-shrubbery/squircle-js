@@ -5,6 +5,7 @@ export const SITECONFIG = {
     "Use an iOS-style squircle in your frontend project easily. React.js and other versions available.",
   githubLink: "https://github.com/bring-shrubbery/squircle-js",
   sponsorLink: "https://github.com/sponsors/bring-shrubbery",
+  producthuntLink: "https://www.producthunt.com/@bring_shrubbery",
   linkedinLink: "https://linkedin.com/antoni-silvestrovic",
   twitterLink: "https://x.com/bringshrubberyy",
   quassumLink: "https://quassum.com/?utm_source=squircle-js",

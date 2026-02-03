@@ -4,6 +4,8 @@ import { Code } from "@/components/ui/code";
 
 import "prismjs/components/prism-jsx";
 import "prismjs/components/prism-bash";
+import { ExternalLink, ExternalLinkIcon } from "lucide-react";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 const usage_react_1 = "pnpm add @squircle-js/react";
 
@@ -48,15 +50,31 @@ const highlightedUsage3 =
 
 export const UsageSectionReactContent = () => {
   return (
-    <Card className="w-full max-w-[480px] sm:max-w-[508px]">
+    <Card className="w-full max-w-120 sm:max-w-127">
       <CardContent className="w-full py-6">
         <h3 className="mb-2 font-semibold text-lg">
-          Step 1. <span className="font-normal">Install the package.</span>
+          Step 1.{" "}
+          <span className="font-normal">
+            Star this project{" "}
+            <a
+              className="text-blue-600 hover:underline"
+              href="https://github.com/bring-shrubbery/squircle-js"
+              rel="noreferrer noopener"
+              target="_blank"
+            >
+              on Github.{" "}
+              <ExternalLinkIcon className="mb-1 inline-block" size={16} />
+            </a>
+          </span>
+        </h3>
+
+        <h3 className="mb-2 font-semibold text-lg">
+          Step 2. <span className="font-normal">Install the package.</span>
         </h3>
         <Code dangerousHTML={highlightedUsage1} raw={usage_react_1} />
 
         <h3 className="mt-4 mb-2 font-semibold text-lg">
-          Step 2.{" "}
+          Step 3.{" "}
           <span className="font-normal">
             Import and use as a a regular div.
           </span>
@@ -64,7 +82,7 @@ export const UsageSectionReactContent = () => {
         <Code dangerousHTML={highlightedUsage2} raw={usage_react_2} />
 
         <h3 className="mt-4 mb-2 font-semibold text-lg">
-          Step 3.{" "}
+          Step 4.{" "}
           <span className="font-normal">
             Add global component for noscript support.
           </span>

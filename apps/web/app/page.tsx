@@ -8,7 +8,6 @@ import { ExamplesSectionDynamicSizeExample } from "./sections/ExamplesSectionDyn
 import { FeaturesSection } from "./sections/FeaturesSection";
 import { LicenseSection } from "./sections/LicenseSection";
 import { LinksSection } from "./sections/LinksSection";
-import { ReviewsSection } from "./sections/ReviewsSection";
 import { SquircleDemoSection } from "./sections/SquircleDemoSection";
 import { UsageSection } from "./sections/UsageSection";
 import { UsageSectionReactContent } from "./sections/UsageSectionReactContent";
@@ -26,9 +25,7 @@ export default function Page() {
         defaultSizeExample={<ExamplesSectionDefaultSizeExample />}
         dynamicSizeExample={<ExamplesSectionDynamicSizeExample />}
       />
-      {/* <HowItWorksSection /> */}
       <LicenseSection />
-      <ReviewsSection />
       <LinksSection />
     </>
   );
