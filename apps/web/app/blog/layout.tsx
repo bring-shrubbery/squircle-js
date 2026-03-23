@@ -1,5 +1,4 @@
-// TODO: uncomment when Footer component is created in Task 8
-// import { Footer } from "@/components/footer";
+import { Footer } from "@/components/footer";
 
 export default function BlogLayout({
   children,
@@ -11,7 +10,7 @@ export default function BlogLayout({
       <div className="mx-auto max-w-2xl px-6 py-16">
         {children}
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

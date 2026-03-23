@@ -1,6 +1,5 @@
 import { DocsSidebar } from "@/components/docs-sidebar";
-// TODO: uncomment when Footer component is created in Task 8
-// import { Footer } from "@/components/footer";
+import { Footer } from "@/components/footer";
 import { getAllContent } from "@/lib/mdx";
 
 export default function DocsLayout({
@@ -16,7 +15,7 @@ export default function DocsLayout({
         <DocsSidebar items={docsItems} />
         <div className="min-w-0 flex-1">{children}</div>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }
