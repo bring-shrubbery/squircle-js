@@ -7,9 +7,7 @@ export default function BlogLayout({
 }) {
   return (
     <>
-      <div className="mx-auto max-w-2xl px-6 py-16">
-        {children}
-      </div>
+      <div className="mx-auto max-w-2xl px-6 py-16">{children}</div>
       <Footer />
     </>
   );

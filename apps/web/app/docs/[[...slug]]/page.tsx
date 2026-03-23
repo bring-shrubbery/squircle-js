@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
+import { MDXRemote } from "next-mdx-remote/rsc";
 import { mdxComponents } from "@/components/mdx/mdx-components";
 import { getAllContent, getContentBySlug } from "@/lib/mdx";
 
@@ -8,12 +8,9 @@ interface Props {
   params: Promise<{ slug?: string[] }>;
 }
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   const docs = getAllContent("docs");
-  return [
-    { slug: [] },
-    ...docs.map((doc) => ({ slug: [doc.slug] })),
-  ];
+  return [{ slug: [] }, ...docs.map((doc) => ({ slug: [doc.slug] }))];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -41,12 +38,13 @@ export default async function DocsPage({ params }: Props) {
   const { slug } = await params;
   const docSlug = slug?.[0] ?? "getting-started";
 
-  let doc;
-  try {
-    doc = getContentBySlug("docs", docSlug);
-  } catch {
-    notFound();
-  }
+  const doc = (() => {
+    try {
+      return getContentBySlug("docs", docSlug);
+    } catch {
+      notFound();
+    }
+  })();
 
   return (
     <article>

@@ -11,10 +11,7 @@ export const DocsSidebar = ({ items }: { items: DocsFrontmatter[] }) => {
 
   const navLinks = (
     <>
-      <Link
-        className="mb-4 block font-semibold text-lg"
-        href="/docs"
-      >
+      <Link className="mb-4 block font-semibold text-lg" href="/docs">
         Docs
       </Link>
       {items.map((item) => {
@@ -42,7 +39,7 @@ export const DocsSidebar = ({ items }: { items: DocsFrontmatter[] }) => {
     <>
       {/* Mobile toggle */}
       <button
-        className="mb-4 flex items-center gap-2 text-sm font-medium md:hidden"
+        className="mb-4 flex items-center gap-2 font-medium text-sm md:hidden"
         onClick={() => setIsOpen(!isOpen)}
         type="button"
       >
@@ -50,9 +47,7 @@ export const DocsSidebar = ({ items }: { items: DocsFrontmatter[] }) => {
       </button>
 
       {/* Mobile nav */}
-      {isOpen && (
-        <nav className="mb-6 space-y-1 md:hidden">{navLinks}</nav>
-      )}
+      {isOpen && <nav className="mb-6 space-y-1 md:hidden">{navLinks}</nav>}
 
       {/* Desktop sidebar */}
       <nav className="hidden w-56 shrink-0 md:block">

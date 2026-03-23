@@ -33,7 +33,7 @@ export const mdxComponents = {
   ),
   blockquote: (props: ComponentPropsWithoutRef<"blockquote">) => (
     <blockquote
-      className="mb-4 border-l-4 border-muted pl-4 italic"
+      className="mb-4 border-muted border-l-4 pl-4 italic"
       {...props}
     />
   ),
@@ -55,7 +55,14 @@ export const mdxComponents = {
         </CodeBlock>
       );
     }
-    return <pre className="mb-4 overflow-x-auto rounded-lg bg-primary p-4 text-primary-foreground text-sm" {...props}>{children}</pre>;
+    return (
+      <pre
+        className="mb-4 overflow-x-auto rounded-lg bg-primary p-4 text-primary-foreground text-sm"
+        {...props}
+      >
+        {children}
+      </pre>
+    );
   },
   hr: () => <hr className="my-8 border-border" />,
   table: (props: ComponentPropsWithoutRef<"table">) => (

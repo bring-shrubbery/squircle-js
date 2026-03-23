@@ -73,5 +73,5 @@ function Squircle<E extends React.ElementType = "div">({
   );
 }
 
-export { Squircle, type SquircleProps };
 export * from "./StaticSquircle";
+export { Squircle, type SquircleProps };

@@ -18,14 +18,11 @@ export default function BlogIndex() {
       <div className="space-y-8">
         {posts.map((post) => (
           <article key={post.slug}>
-            <Link
-              className="group block"
-              href={`/blog/${post.slug}`}
-            >
+            <Link className="group block" href={`/blog/${post.slug}`}>
               <h2 className="mb-1 font-semibold text-xl group-hover:text-blue-600">
                 {post.title}
               </h2>
-              <time className="mb-2 block text-sm text-muted-foreground">
+              <time className="mb-2 block text-muted-foreground text-sm">
                 {new Date(post.date).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "long",

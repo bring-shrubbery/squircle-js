@@ -6,18 +6,18 @@ export const Footer = () => {
   const docPages = getAllContent("docs");
 
   return (
-    <footer className="border-t border-border">
+    <footer className="border-border border-t">
       <div className="container mx-auto max-w-4xl px-6 py-12">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
           <div>
-            <h3 className="mb-4 font-semibold text-sm uppercase tracking-wider text-muted-foreground">
+            <h3 className="mb-4 font-semibold text-muted-foreground text-sm uppercase tracking-wider">
               Blog
             </h3>
             <ul className="space-y-2">
               {blogPosts.map((post) => (
                 <li key={post.slug}>
                   <Link
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    className="text-muted-foreground text-sm transition-colors hover:text-foreground"
                     href={`/blog/${post.slug}`}
                   >
                     {post.title}
@@ -27,14 +27,14 @@ export const Footer = () => {
             </ul>
           </div>
           <div>
-            <h3 className="mb-4 font-semibold text-sm uppercase tracking-wider text-muted-foreground">
+            <h3 className="mb-4 font-semibold text-muted-foreground text-sm uppercase tracking-wider">
               Docs
             </h3>
             <ul className="space-y-2">
               {docPages.map((doc) => (
                 <li key={doc.slug}>
                   <Link
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    className="text-muted-foreground text-sm transition-colors hover:text-foreground"
                     href={`/docs/${doc.slug}`}
                   >
                     {doc.title}

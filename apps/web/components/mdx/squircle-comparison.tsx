@@ -14,7 +14,7 @@ export const SquircleComparison = () => {
             className="h-32 w-32 bg-foreground"
             style={{ borderRadius: cornerRadius }}
           />
-          <span className="text-sm text-muted-foreground">border-radius</span>
+          <span className="text-muted-foreground text-sm">border-radius</span>
         </div>
         <div className="flex flex-col items-center gap-2">
           <Squircle
@@ -22,11 +22,11 @@ export const SquircleComparison = () => {
             cornerRadius={cornerRadius}
             cornerSmoothing={1}
           />
-          <span className="text-sm text-muted-foreground">squircle</span>
+          <span className="text-muted-foreground text-sm">squircle</span>
         </div>
       </div>
       <label className="block">
-        <span className="mb-1 block text-center text-sm font-medium">
+        <span className="mb-1 block text-center font-medium text-sm">
           Corner Radius: {cornerRadius}px
         </span>
         <input

@@ -17,7 +17,7 @@ export const SquircleDemo = () => {
         />
         <div className="w-full space-y-4">
           <label className="block">
-            <span className="mb-1 block text-sm font-medium">
+            <span className="mb-1 block font-medium text-sm">
               Corner Radius: {cornerRadius}px
             </span>
             <input
@@ -30,7 +30,7 @@ export const SquircleDemo = () => {
             />
           </label>
           <label className="block">
-            <span className="mb-1 block text-sm font-medium">
+            <span className="mb-1 block font-medium text-sm">
               Corner Smoothing: {cornerSmoothing}
             </span>
             <input

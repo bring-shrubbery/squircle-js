@@ -22,7 +22,7 @@ export interface DocsFrontmatter {
 
 export function getContentBySlug<T extends "blog" | "docs">(
   type: T,
-  slug: string,
+  slug: string
 ): {
   frontmatter: T extends "blog" ? BlogFrontmatter : DocsFrontmatter;
   content: string;
@@ -37,7 +37,7 @@ export function getContentBySlug<T extends "blog" | "docs">(
 }
 
 export function getAllContent<T extends "blog" | "docs">(
-  type: T,
+  type: T
 ): (T extends "blog" ? BlogFrontmatter : DocsFrontmatter)[] {
   const dir = path.join(contentDirectory, type);
   const files = fs.readdirSync(dir).filter((f) => f.endsWith(".mdx"));
@@ -52,12 +52,11 @@ export function getAllContent<T extends "blog" | "docs">(
     return items.sort(
       (a, b) =>
         new Date((b as BlogFrontmatter).date).getTime() -
-        new Date((a as BlogFrontmatter).date).getTime(),
+        new Date((a as BlogFrontmatter).date).getTime()
     );
   }
 
   return items.sort(
-    (a, b) =>
-      (a as DocsFrontmatter).order - (b as DocsFrontmatter).order,
+    (a, b) => (a as DocsFrontmatter).order - (b as DocsFrontmatter).order
   );
 }
