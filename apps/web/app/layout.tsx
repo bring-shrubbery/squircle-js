@@ -77,11 +77,13 @@ export default function RootLayout({
         <SquircleNoScript />
         <SpeedInsights />
 
-        <Script
-          data-website-id="462285f6-d3c4-45ce-bb91-fe99a81c97cc"
-          defer
-          src="https://analytics.quassum.com/script.js"
-        />
+        {process.env.NODE_ENV === "production" && (
+          <Script
+            data-website-id="462285f6-d3c4-45ce-bb91-fe99a81c97cc"
+            defer
+            src="https://analytics.quassum.com/script.js"
+          />
+        )}
       </body>
     </html>
   );
