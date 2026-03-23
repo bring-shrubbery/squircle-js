@@ -1,5 +1,3 @@
-import { Navbar } from "@/components/navbar";
-
 import { ExamplesSection } from "./sections/ExamplesSection";
 import { ExamplesSectionAsChildExample } from "./sections/ExamplesSectionAsChildExample";
 import { ExampleSectionConstantSizeExample } from "./sections/ExamplesSectionConstantSizeExample";
@@ -15,7 +13,6 @@ import { UsageSectionReactContent } from "./sections/UsageSectionReactContent";
 export default function Page() {
   return (
     <>
-      <Navbar />
       <SquircleDemoSection />
       <FeaturesSection />
       <UsageSection reactUsageContent={<UsageSectionReactContent />} />

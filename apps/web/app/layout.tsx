@@ -1,5 +1,6 @@
 import { SquircleNoScript } from "@squircle-js/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Navbar } from "@/components/navbar";
 import { Toaster } from "@/components/ui/toaster";
 
 import "./globals.css";
@@ -69,6 +70,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${cutiveMono.variable} font-sans`}>
+        <Navbar />
         {children}
 
         <Toaster />
