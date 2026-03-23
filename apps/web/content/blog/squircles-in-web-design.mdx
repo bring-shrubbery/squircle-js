@@ -1,0 +1,97 @@
+---
+title: "Squircles in Web Design: Why and How"
+description: "Why CSS border-radius can't create squircles, the approaches to implementing smooth corners on the web, and how squircle-js solves the problem."
+date: "2026-03-11"
+keywords: ["squircle css", "squircle web", "smooth corners css", "corner smoothing css", "css superellipse"]
+slug: "squircles-in-web-design"
+---
+
+Web design has a squircle problem. Native app platforms — iOS, macOS, Android — render squircles as a first-class feature. Designers in Figma create squircles with a simple slider. But when it comes time to implement those designs in a browser, CSS has no equivalent. The gap between what designers create and what browsers can render natively has persisted for years.
+
+This article explains why the gap exists, what approaches can bridge it, and how squircle-js provides a practical solution today.
+
+## Why CSS `border-radius` Cannot Create Squircles
+
+The `border-radius` CSS property is well understood and universally supported. But it has a fundamental limitation built into its geometry: it creates rounded rectangles, not squircles.
+
+`border-radius` works by replacing each corner of a box with a circular or elliptical arc. You specify a radius (or separate horizontal and vertical radii), and the browser draws an arc with that geometry at each corner. The flat sides of the box connect to these arcs at precise join points.
+
+At those join points, the curvature changes abruptly — from zero (flat side) to 1/r (the arc). This is a G1 join: the positions and tangents match, but the curvature does not. No matter how you combine `border-radius` values, you cannot produce G2 curvature continuity with CSS `border-radius` alone. The property does not offer the mathematical flexibility to do so.
+
+This means that `border-radius: 20px` and Figma's "Corner Radius: 20, Corner Smoothing: 60%" look similar at a glance but are geometrically different. At medium to large radii, the Figma version is visibly smoother and more refined.
+
+<SquircleComparison />
+
+## The Gap Between Native and Web
+
+The mismatch is most visible in design handoffs. A designer works in Figma, uses corner smoothing to achieve polished squircle corners, and hands off to a developer. The developer opens the design, sees `border-radius: 20px` in the CSS export, implements it, and the result looks slightly wrong — slightly rougher at the corners — without either party being able to clearly articulate why.
+
+This gap compounds across an entire interface. Cards, avatars, buttons, image containers — any element with prominent rounded corners will be subtly downgraded between design and implementation. The cumulative effect is an interface that feels slightly less polished than what the designer intended.
+
+For teams building consumer-facing products where visual quality is a differentiator, this gap is meaningful.
+
+## Approaches to Squircles on the Web
+
+Several approaches exist for achieving squircle geometry in browsers, each with different trade-offs.
+
+### SVG Clip-Path
+
+The most practical approach is generating the squircle curve as an SVG path and using it as a CSS `clip-path`. An SVG path can represent any curve, including the superellipse geometry that defines squircles. The path is applied as a clip mask, and the element is rendered only within that clip region.
+
+This approach works in all modern browsers, requires no special CSS features, and produces accurate squircle geometry. The downsides are that clip-paths remove box shadows and borders (they clip them away), and the path must be regenerated when the element's size changes.
+
+Squircle-js uses this approach. It generates an SVG clip-path from the squircle formula and applies it to the element via CSS. A `ResizeObserver` monitors the element's size and regenerates the path when dimensions change.
+
+### CSS Houdini (Paint API)
+
+CSS Houdini's Paint API allows JavaScript to register custom paint worklets that can draw arbitrary shapes into CSS backgrounds and borders. A Houdini worklet could draw squircle shapes directly, integrating cleanly with the CSS paint model.
+
+The limitation is browser support. As of 2026, CSS Houdini Paint API is supported in Chromium-based browsers but not in Safari or Firefox. For any project that needs to support those browsers, Houdini is not a viable standalone solution.
+
+### The CSS `superellipse()` Proposal
+
+The CSS Working Group has discussed adding a `superellipse()` function to CSS, which would allow developers to specify squircle geometry directly in `border-radius` or a similar property. This would be the ideal solution — native, performant, no JavaScript required.
+
+As of 2026, browser implementations of `superellipse()` remain experimental and are not available for production use. The `corner-shape` property and related proposals are progressing through the standards process, but cross-browser support is still years away for most production deployment targets.
+
+### Pre-rendered SVG Shapes
+
+For static elements with known dimensions, you can pre-compute a squircle SVG path and embed it directly in your HTML or CSS. This eliminates JavaScript runtime overhead and produces accurate geometry.
+
+The limitation is that the path is fixed to specific dimensions. Any responsive behavior — the element growing or shrinking — requires updating the path. This makes pre-rendered SVG unsuitable for most dynamic UI components.
+
+## How squircle-js Bridges the Gap
+
+Squircle-js provides a React component that generates and applies squircle clip-paths dynamically. The library uses the same mathematical algorithm as Figma's corner smoothing feature — powered by the `figma-squircle` package — so the output matches Figma designs precisely.
+
+```jsx
+import { Squircle } from "@squircle-js/react";
+
+<Squircle cornerRadius={20} cornerSmoothing={0.6} className="bg-blue-500 p-6">
+  Card content here
+</Squircle>
+```
+
+The `cornerRadius` prop sets the corner radius in pixels — the same value you would use in Figma. The `cornerSmoothing` prop (default: 0.6) sets the smoothing intensity, matching Figma's corner smoothing slider. At 0.6, you get iOS-style squircle corners. At 1.0, you get the maximum smoothing that the squircle geometry supports.
+
+For elements with known dimensions that do not change, the `StaticSquircle` component skips the `ResizeObserver` entirely, which reduces runtime overhead.
+
+## Known Limitations
+
+The SVG clip-path approach has limitations worth understanding before adopting squircle-js:
+
+**Box shadows:** CSS `box-shadow` is clipped by the clip-path, so squircle elements cannot have visible box shadows. Use drop shadows via CSS filters (`filter: drop-shadow(...)`) instead, which apply outside the clip-path.
+
+**Borders:** `border` is also clipped. For bordered elements, use an inner box background or a wrapping element approach.
+
+**Background-only styling:** The clip-path approach works best when the squircle shape is defined entirely by a background color or image. Complex outline-based styling requires workarounds.
+
+These are trade-offs of the clip-path approach specifically. When native CSS `superellipse()` support arrives, these limitations will disappear — and squircle-js can be replaced with a single CSS property.
+
+## The Path Forward
+
+The web is converging on native squircle support. The `corner-shape` CSS proposals are making progress, and browser vendors have signaled intent to implement. The question is timeline: production-ready cross-browser support is likely two to four years away.
+
+In the meantime, squircle-js provides a practical bridge. It lets web products match the visual quality of native apps and Figma designs today, using the same algorithm that powers Figma's squircle rendering. When native CSS support arrives, migrating away will be straightforward.
+
+Smooth corners are not a trend. They are what users have come to expect from polished digital products. Closing the gap between what designers create and what browsers render is not a nice-to-have — it is the baseline for visual quality that modern audiences notice, even when they cannot name what they are seeing.

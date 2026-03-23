@@ -1,0 +1,74 @@
+---
+title: "What is a Squircle?"
+description: "A squircle is a shape between a square and a circle. Learn what squircles are, their history, the math behind them, and why they're used in modern UI design."
+date: "2026-03-23"
+keywords: ["squircle", "what is a squircle", "squircle shape", "squircle definition"]
+slug: "what-is-a-squircle"
+---
+
+The word "squircle" is a portmanteau of "square" and "circle," and it describes exactly what it sounds like: a shape that sits somewhere between the two. But calling it a mere blend undersells how mathematically precise and visually distinctive a squircle actually is. It is not a rounded rectangle with generous corner radii — it is a fundamentally different curve, one that transitions from flat sides to corners without any abrupt change in curvature.
+
+That distinction is what makes squircles matter in design.
+
+## The Squircle Shape Defined
+
+A rounded rectangle takes a perfect square or rectangle and replaces each corner with a circular arc. The flat side travels straight until it hits the arc, and the arc takes over abruptly. At the join point, the curvature jumps from zero (flat) to a fixed value (the radius of the arc). This discontinuity is mathematically called a G1 join — the positions and tangents match, but the curvatures do not.
+
+A squircle avoids that jump entirely. Its curvature increases gradually and continuously as you move from the middle of each side toward a corner, then decreases again on the other side. There is no hard boundary between "the flat part" and "the curved part." The entire perimeter is one smooth, flowing curve.
+
+<SquircleComparison />
+
+The difference can be subtle at small sizes but becomes immediately apparent when comparing the two shapes side by side, especially at larger corner radii. The squircle looks softer and more organic, while the rounded rectangle looks more mechanical and constructed.
+
+## A Brief History: Piet Hein and the Superellipse
+
+The squircle has a specific mathematical ancestor: the **superellipse**, developed by the Danish polymath Piet Hein in 1959. Hein was commissioned to solve an urban planning problem in Stockholm: how do you design a traffic roundabout that fits a rectangular plaza but still flows like a circle? Neither a rectangle nor an ellipse worked. He turned to the mathematical family of Lamé curves, described by the equation:
+
+```
+|x/a|^n + |y/b|^n = 1
+```
+
+When `n = 2`, this equation produces a standard ellipse (or circle, if `a = b`). When `n` approaches infinity, it converges toward a rectangle. Hein found that `n = 2.5` produced a shape that felt both structured and natural — that was the superellipse. With `a = b` and `n = 4`, you get the shape most commonly called a squircle today.
+
+Hein's superellipse became iconic. It appeared in furniture (the Piet Hein super-elliptical table), in architecture, and in countless design objects across Scandinavia in the 1960s and 70s. The idea that a shape could feel simultaneously square and round resonated deeply with modernist design sensibilities.
+
+## Why Squircles Look More Natural
+
+Human visual perception is finely tuned to detect abrupt curvature changes. When a curve transitions suddenly — like a rounded rectangle does at each corner — the eye notices, even if the brain does not consciously register why. The shape looks slightly "off," slightly constructed.
+
+Squircles eliminate that sensation because their curvature profile mirrors patterns found in nature. The curves of a river bend, a pebble, a leaf — these all change curvature gradually rather than abruptly. When a shape mimics that gradual transition, the human eye reads it as more natural, more organic, more pleasing.
+
+This is the same reason that automotive designers use spline curves instead of circular arcs for car body panels, and why high-end industrial designers obsess over "curvature continuity" when shaping products. The math behind what looks good has been understood for decades. Squircles bring that principle into the realm of UI design.
+
+## Squircles in the Real World
+
+The most prominent modern use of squircles is in iOS app icons. Apple adopted the squircle shape for iOS 7 in 2013 and has used it ever since. Every app icon on an iPhone — from the App Store to your bank's app — uses this shape. The icon grid system, corner radius proportions, and smoothing values are all specified precisely in Apple's Human Interface Guidelines.
+
+Apple's adoption made squircles ubiquitous. Billions of people now see squircles dozens of times per day, even if they could not name the shape. This familiarity has conditioned audiences to perceive the squircle as the "natural" shape for a digital object.
+
+Beyond iOS, squircles appear in:
+
+- **Android app icons** — Google adopted a similar adaptive icon system with squircle masks
+- **Hardware design** — The squircle appears in the physical shape of devices, buttons, and ports where corners need to feel refined
+- **Furniture** — Piet Hein's superelliptical table remains in production and remains influential
+- **Graphic design** — Logos, avatars, cards, and UI components increasingly adopt smooth corners to signal polish
+
+## Squircles vs. Rounded Rectangles: A Summary
+
+| Property | Rounded Rectangle | Squircle |
+|---|---|---|
+| Corner type | Circular arc | Continuous curvature curve |
+| Curvature at joins | Abrupt jump | Smooth transition |
+| Feel | Mechanical, constructed | Organic, natural |
+| CSS support | `border-radius` | Requires SVG or JS |
+| Origin | Basic geometry | Lamé / superellipse math |
+
+The squircle is not a trend or a stylistic preference — it is the mathematically superior shape for UI elements where visual refinement matters. Once you learn to see the difference between a rounded rectangle and a squircle, you cannot unsee it.
+
+## Using Squircles on the Web
+
+The challenge with squircles in web design is that CSS `border-radius` only creates rounded rectangles. There is no native CSS property that produces true squircle geometry — at least not with full browser support yet. The `superellipse()` function has been proposed as a CSS extension, but as of 2026, browser support remains limited.
+
+This is why libraries like squircle-js exist. By generating an SVG clip-path based on the same algorithm used internally by Figma, squircle-js lets web developers apply true squircle shapes to any HTML element — without waiting for browser standards to catch up.
+
+The result is web UI that matches the visual refinement of native iOS apps and modern design tools: smooth, continuous, natural-feeling corners that users have come to expect from polished digital products.

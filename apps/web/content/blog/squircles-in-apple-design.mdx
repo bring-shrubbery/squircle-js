@@ -1,0 +1,67 @@
+---
+title: "How Apple Uses Squircles in iOS Design"
+description: "Discover how and why Apple adopted squircles for iOS app icons, hardware design, and UI elements, replacing traditional rounded rectangles."
+date: "2026-03-17"
+keywords: ["apple squircle", "ios squircle", "ios icon shape", "ios rounded corners", "apple corner smoothing"]
+slug: "squircles-in-apple-design"
+---
+
+If you have used an iPhone, you have seen tens of thousands of squircles without knowing their name. Every app icon on iOS uses this shape — not a rounded rectangle, not a simple circle, but a superellipse with continuously smooth corners. Apple's decision to adopt squircles for iOS 7 in 2013 was one of the most consequential shape choices in the history of consumer software design.
+
+## Before iOS 7: The Rounded Rectangle Era
+
+In the original iPhone OS, app icons used rounded rectangles. The corners were defined by a circular arc — straightforward, consistent, and readable at small sizes. For the era, they were fine. Skeuomorphic design dominated: icons were trying to look like physical objects, and the container shape was secondary to the richly textured content inside.
+
+When iOS 7 arrived in 2013, Apple flattened everything. The textured surfaces, drop shadows, and three-dimensional illusions were stripped away. In their place came flat colors, bold typography, and carefully considered geometry. In this new visual language, the shape of the icon itself became a primary design element rather than a neutral frame.
+
+The rounded rectangle was no longer good enough. Its corners — where the flat edge meets the circular arc — showed a subtle but undeniable visual tension. At the scale of an icon on a high-resolution Retina display, that tension was visible. Apple needed a shape that looked as resolved as the flat design aesthetic it was building.
+
+The answer was the squircle.
+
+## The iOS App Icon Squircle
+
+Apple's iOS app icon shape is a squircle defined with specific mathematical parameters. The corner radius is set to approximately 22.37% of the icon's width — a value carefully chosen to feel generous without making the icon look circular. The corner smoothing parameter, equivalent to what Figma calls "corner smoothing," is set to approximately 60%.
+
+The result is a shape with four sides that remain clearly flat and recognizable as a square, but with corners that flow into those sides with zero abruptness. The icon looks like a cohesive unit. Every pixel of the perimeter participates in the overall form.
+
+This shape is so carefully defined that Apple provides developers with the precise mask to use when designing icons, and applies the mask automatically when icons are displayed on device. Developers do not need to pre-crop their icons — iOS applies the squircle mask itself, ensuring consistency across every icon on the home screen.
+
+## Why Continuous Corners Work for Icons
+
+App icons sit in a grid. Dozens of them appear together on a single screen, all sharing the same container shape. In this context, the quality of that container shape is amplified — any visual roughness is multiplied across every icon in view.
+
+Rounded rectangles in a dense grid create a subtle visual noise. The G1 discontinuities at the corners of every icon create small "events" that the eye registers without consciously identifying. The cumulative effect is a grid that looks slightly busy, slightly rough.
+
+Squircles eliminate that noise. Their continuously smooth corners create shapes that the eye reads as complete and quiet. In a grid, they recede as containers and let the icon content speak. The home screen feels more unified and restful, even though the change from rounded rectangle to squircle is not something most users could articulate.
+
+This is a perfect example of design craft operating below conscious perception but above the threshold of felt experience. Users do not think "those icons have nice curvature continuity." They think "this phone feels premium."
+
+## The Design Philosophy Behind Natural Shapes
+
+Apple's Human Interface Guidelines describe the goal of iOS design as feeling "natural" — intuitive, familiar, aligned with human perception and expectation. The choice of squircles reflects this philosophy at the level of fundamental geometry.
+
+Nature does not produce G1 curves. Rivers bend gradually. Pebbles smooth gradually. Animal bodies curve gradually. The precise circular arcs of a rounded rectangle are artifacts of mathematical construction, not natural form. Squircles, with their gradually varying curvature, approximate the way curvature actually works in the physical world.
+
+Apple designers have spoken about this in terms of the "super-ellipse" and the perceived softness it creates. The goal is not to make icons look organic or hand-drawn — the shapes remain geometric and precise. But geometric precision does not have to mean mechanical abruptness. The squircle is precise *and* natural. That combination is the ideal.
+
+## Squircles Across the Apple Ecosystem
+
+The squircle shape extends beyond iOS app icons throughout Apple's product ecosystem:
+
+**macOS:** macOS app icons use a slightly different squircle — the same continuous-corner geometry but with different proportions, giving them a slightly more rounded appearance. The macOS Big Sur redesign in 2020 brought macOS icons closer to the iOS squircle shape, creating visual consistency across the platform family.
+
+**watchOS:** Apple Watch complications and app icons use squircles adapted for the circular watch face context — essentially squircle-derived shapes that fit within the circular display boundary.
+
+**Hardware design:** Apple's physical products reflect the same sensibility. The rounded corners of MacBooks, iPhones, and iPads are not simple circular arcs. They use continuously varying curvature that creates the characteristic "Apple look" — corners that flow into edges rather than meeting them abruptly. This is a manufacturing challenge that Apple has invested significantly in solving.
+
+**tvOS and visionOS:** The pattern continues across Apple's newer platforms. App icon containers on Apple TV and Apple Vision Pro use squircle geometry adapted to their respective contexts.
+
+## What This Means for Developers and Designers
+
+Apple's adoption of squircles created a visual standard that propagates outward. Users who spend hours daily looking at iOS squircle icons develop visual expectations. When they encounter an app or website that uses plain rounded rectangles in prominent places, something feels slightly off — even if they cannot name it.
+
+For designers, this means that squircles are no longer an optional refinement. For anything that aspires to match the visual quality of native iOS design, continuous corners are the baseline. Figma supports this natively with corner smoothing. The challenge is carrying that fidelity through to the web and cross-platform implementation.
+
+For web developers, the challenge is that CSS has no native equivalent to Apple's squircle geometry. The `border-radius` property creates rounded rectangles. Matching iOS quality on the web requires a different approach — one that generates the squircle curve mathematically and applies it via SVG clip-path. That is exactly what squircle-js provides.
+
+Apple's bet on the squircle was a quiet revolution in digital geometry. A shape most people cannot name is now the visual baseline for what a polished digital product looks like.

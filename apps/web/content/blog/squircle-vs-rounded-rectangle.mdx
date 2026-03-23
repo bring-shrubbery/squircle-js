@@ -1,0 +1,70 @@
+---
+title: "Squircle vs Rounded Rectangle: What's the Difference?"
+description: "Understand the visual and mathematical differences between squircles and rounded rectangles, including corner continuity and when to use each shape."
+date: "2026-03-20"
+keywords: ["squircle vs rounded rectangle", "smooth corners", "continuous corners", "corner continuity"]
+slug: "squircle-vs-rounded-rectangle"
+---
+
+At first glance, a squircle and a rounded rectangle can look nearly identical — especially at small sizes or modest corner radii. But they are mathematically distinct shapes, and the difference becomes clearly visible when you put them side by side. Understanding what separates them will change how you look at UI design.
+
+## The Fundamental Difference: Curvature Continuity
+
+The distinction between a squircle and a rounded rectangle is not about how "round" the corners are. It is about how the curvature changes as you move around the perimeter of the shape.
+
+A **rounded rectangle** is constructed from straight line segments and circular arcs. The sides are flat (curvature = 0). At each corner, a circular arc takes over (curvature = 1/r, where r is the radius). At the exact point where the flat side meets the arc, the curvature jumps instantaneously from zero to its maximum value. The positions and tangents match at that join — meaning the shape has no visible kink — but the curvature does not. Designers and mathematicians call this a G1 join: positional and tangential continuity, but no curvature continuity.
+
+A **squircle** achieves G2 continuity. As you travel from the middle of a side toward a corner, the curvature increases gradually and smoothly. There is no point at which you can say "the flat part ends here and the curve begins." The entire perimeter is a single continuous curve with no abrupt transitions.
+
+<SquircleComparison />
+
+## Why G2 Continuity Matters Visually
+
+The human visual system is surprisingly good at detecting curvature discontinuities, even when viewers cannot articulate what they are seeing. When light reflects off a surface with a G1 join, the highlight changes character abruptly at the join point — the reflection "pops" rather than flowing smoothly. On a screen, where elements are rendered rather than lit physically, the equivalent is a subtle visual tension at the join.
+
+With G2 continuous corners, there is no such pop. The shape reads as one unified form. Your eye travels around it without catching on anything. The shape feels "resolved" in a way that rounded rectangles do not.
+
+This is not a subtle or theoretical difference. Industrial designers, automotive stylists, and typographers have obsessed over curvature continuity for decades precisely because it makes the difference between objects that look refined and objects that look merely adequate.
+
+## Side-by-Side Comparison at Various Radii
+
+The visual gap between the two shapes grows with the corner radius. At very small radii — say, 4px on a 40px element — the shapes are nearly indistinguishable. But as the radius grows, the differences compound:
+
+- **Small radius (4–8px):** The shapes look similar. The G1 discontinuity is hard to see.
+- **Medium radius (16–24px):** The rounded rectangle's corners start to look slightly "bolted on." The squircle's corners flow more naturally into the sides.
+- **Large radius (half of the shorter dimension):** The rounded rectangle becomes a "stadium" shape — a rectangle capped by two semicircles. The squircle approaches a circle, but with sides that remain more clearly flat. The difference is most stark here.
+
+The larger the element and the more prominent its corners, the more a squircle's superior continuity pays off visually.
+
+## The CSS `border-radius` Gap
+
+Every web developer is familiar with CSS `border-radius`. It is simple, well-supported, and works everywhere. But `border-radius` produces rounded rectangles, not squircles. The two values it supports — horizontal and vertical radius — parameterize a circular or elliptical arc at each corner. There is no way to express G2 corner continuity through `border-radius` alone.
+
+This creates a gap between what designers produce in Figma (which has a "corner smoothing" slider that produces squircle geometry) and what developers can render in a browser with CSS alone. A designer can set corner smoothing to 60% in Figma and hand off a component that looks polished. A developer who implements it with `border-radius` will get something close but visually different — less refined in a way that may be hard to articulate but is nonetheless real.
+
+## When to Use Each Shape
+
+Squircles are not always the right choice. Here is a practical guide:
+
+**Use a squircle when:**
+- The element is prominent — a card, an avatar, a button, an icon
+- The corner radius is medium to large (more than about 10–12px on typical UI sizes)
+- You want the element to feel polished, modern, or app-like
+- You are matching or handing off from a Figma design that uses corner smoothing
+
+**Use a rounded rectangle when:**
+- The element is small or the corner radius is tiny — the visual difference is negligible
+- Performance is critical and you cannot afford the overhead of SVG clip-paths
+- You need CSS-only rendering with no JavaScript dependency
+- You are applying borders, outlines, or box shadows that need to follow the corner shape (SVG clip-paths clip all of these)
+
+**Use a simple rectangle when:**
+- The design intentionally wants sharp corners for a utilitarian or editorial aesthetic
+
+## The Corner Smoothing Parameter
+
+When using squircle-js, the key parameter is `cornerSmoothing`, which ranges from 0 to 1. At 0, the shape is a rounded rectangle. At 1, the squircle geometry is fully applied with maximum smoothing. The default is 0.6 — the same value Apple uses for iOS app icons.
+
+Values between 0.4 and 0.7 are the most commonly useful range. Below 0.4, the effect is subtle. Above 0.7, the flat sides begin to visibly curve inward, which can look odd on taller rectangular shapes.
+
+Understanding the squircle vs. rounded rectangle distinction is one of those things that — once seen — permanently sharpens your eye for UI quality. The shapes that once seemed perfectly fine start to look slightly rough. The shapes that use continuous corners start to look obviously better. That awareness is what separates good design from great design.

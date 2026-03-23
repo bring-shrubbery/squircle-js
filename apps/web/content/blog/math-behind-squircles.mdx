@@ -1,0 +1,82 @@
+---
+title: "The Math Behind Squircles: Superellipses Explained"
+description: "Learn the mathematical foundation of squircles, from Piet Hein's superellipse to Lame curves, and how the formula creates smooth corners."
+date: "2026-03-14"
+keywords: ["superellipse", "squircle formula", "squircle math", "lame curve", "piet hein superellipse"]
+slug: "math-behind-squircles"
+---
+
+A squircle is not just an aesthetic choice — it is a mathematically precise shape with a formula and a history. Understanding the math reveals why squircles look the way they do, why they feel more natural than rounded rectangles, and how corner smoothing parameters translate into actual geometry.
+
+## Gabriel Lamé and the Generalized Ellipse
+
+The story starts in the nineteenth century with French mathematician Gabriel Lamé. In 1818, Lamé described a family of curves now known as Lamé curves or superellipses, defined by this equation:
+
+```
+|x/a|^n + |y/b|^n = 1
+```
+
+The parameters `a` and `b` control the width and height of the shape (like a standard ellipse). The exponent `n` controls the character of the curve:
+
+- **n = 1:** A diamond (rhombus)
+- **n = 2:** An ellipse (or circle, when a = b)
+- **n = 4:** A squircle (when a = b)
+- **n → ∞:** Approaches a rectangle
+
+The key insight is that by varying `n`, you can interpolate continuously between these forms. The transition is smooth: there is no sudden jump from "ellipse-like" to "rectangle-like." Every value of `n` produces a coherent, mathematically well-defined shape.
+
+## Piet Hein's Superellipse
+
+In 1959, Swedish city planners were redesigning Sergels torg, a central plaza in Stockholm. They needed a shape for a traffic roundabout that would fit within a rectangular space but flow like a roundabout. Neither a rectangle nor an ellipse worked — rectangles have sharp corners, and ellipses were too narrow. They consulted Piet Hein, a Danish mathematician and poet.
+
+Hein recognized that Lamé's formula, with `n = 2.5`, produced exactly the shape they needed. He called it the **superellipse**. With semi-axes `a` and `b` in a 6:5 ratio and `n = 2.5`, the shape was rectangular enough to use the plaza space efficiently but curved enough to function as a roundabout.
+
+The superellipse became a design sensation. Hein licensed it for a line of furniture — the super-elliptical table, designed with Bruno Mathsson and Arne Jacobsen, remains in production today. The shape appeared in architecture, product design, and graphic design throughout the 1960s and 70s.
+
+The specific case of `n = 4` with `a = b` is what most people today call a squircle. It is a superellipse that is symmetric in all four directions and sits visually halfway between a circle and a square.
+
+## How the Exponent Shapes the Curve
+
+To understand why different values of `n` produce different shapes, think about what the formula is doing. `|x/a|^n + |y/b|^n = 1` is asking: for a point (x, y) to be on the curve, how much of the "budget" of 1 does each coordinate consume?
+
+When `n = 2`, each coordinate consumes its budget quadratically. This produces the familiar smooth curvature of a circle or ellipse.
+
+When `n` is larger — say `n = 4` — each coordinate consumes its budget more aggressively near the edges of the shape. Points near the center of each side sit very close to the maximum x or y value (consuming nearly all of one coordinate's budget) while the other coordinate contributes very little. This means the sides remain flatter for longer before curving into the corners. When the curve finally does curve, it must do so relatively quickly — but because the transition is governed by a smooth mathematical function rather than a switchover between two different curve types, it remains continuous.
+
+This is the key: a Lamé curve is *one* curve, described by *one* equation, with no separate "flat part" and "curved part." The apparent flatness of the sides and the curvature of the corners are both emergent properties of the same underlying formula.
+
+## From Formula to Corner Smoothing
+
+The squircle formula describes an idealized mathematical shape. Practical UI applications need to parameterize the shape more intuitively — in terms that designers understand, like corner radius and smoothing amount.
+
+The `cornerSmoothing` parameter in squircle-js (and in Figma's corner smoothing slider) controls how much the squircle geometry is applied, blending between a pure rounded rectangle (`cornerSmoothing = 0`) and a true squircle corner (`cornerSmoothing = 1`). The default value of 0.6 corresponds to approximately the smoothing Apple uses for iOS app icons.
+
+Under the hood, this parameterization works by computing an SVG path that approximates the squircle curve using cubic Bézier segments. Bézier curves are what SVG and every rendering engine uses to draw smooth curves — they cannot represent a Lamé curve exactly, but with enough segments they can approximate it to within a fraction of a pixel.
+
+The `figma-squircle` package (which powers squircle-js) uses the same algorithm Figma uses internally: it converts the squircle geometry into a set of SVG path commands that, when rendered, are indistinguishable from the true mathematical curve at screen resolutions.
+
+<SquircleDemo />
+
+## Why Continuous Curvature Is the Key Property
+
+What makes a squircle visually superior to a rounded rectangle is not the exponent value or the formula itself — it is the property of **curvature continuity** that the formula naturally produces.
+
+Curvature, mathematically, is 1/r at any point on a curve, where r is the radius of the circle that best fits the curve at that point. For a straight line, curvature is 0 (the best-fit circle has infinite radius). For a circle of radius r, curvature is constant at 1/r.
+
+A rounded rectangle has curvature = 0 on its flat sides and curvature = 1/r at its corners. At the join between side and corner, curvature jumps discontinuously. This is a G1 join — positions and directions match, but curvature does not.
+
+A squircle's curvature changes continuously from 0 at the midpoint of each side (where the curve is momentarily straightest) to a maximum at the corner. There is no jump. Every point transitions smoothly to every neighboring point. This is a G2 join (curvature continuity), and it is what the human visual system perceives as "flowing" or "natural."
+
+The Lamé formula guarantees G2 continuity by construction. Because the shape is described by a single differentiable equation, its curvature is continuous everywhere on the curve.
+
+## Practical Implications
+
+Understanding the math has practical consequences for how you use squircles:
+
+**Scaling:** Squircle geometry scales correctly. If you double the size of an element, the corner smoothing percentage stays the same and the corners scale proportionally. The shape remains perceptually consistent at any size.
+
+**Corner radius limits:** For a true squircle, the maximum useful corner radius is half the shorter dimension of the shape (producing a nearly circular form). Beyond that, the shape starts to look odd because the flat sides disappear. Squircle-js handles this by clamping the radius appropriately.
+
+**Aspect ratio effects:** Squircle geometry on non-square shapes (tall or wide rectangles) produces different visual effects depending on aspect ratio. The corners of a wide rectangle with large radius will look more circular than the corners of a square with the same radius. This is mathematically correct behavior, not a bug.
+
+The math behind squircles is elegant precisely because it produces complex visual behavior from a simple formula. The superellipse is one of those rare cases where mathematical beauty and visual beauty align.

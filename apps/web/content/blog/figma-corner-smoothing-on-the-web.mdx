@@ -1,0 +1,104 @@
+---
+title: "Figma Corner Smoothing on the Web"
+description: "Bridge the gap between Figma's corner smoothing and web development. Learn how squircle-js uses the same algorithm to match Figma designs."
+date: "2026-03-08"
+keywords: ["figma corner smoothing", "figma smooth corners", "figma squircle", "corner smoothing css"]
+slug: "figma-corner-smoothing-on-the-web"
+---
+
+If you design in Figma, you have probably noticed the "Corner smoothing" checkbox in the design panel. Enable it, and your rounded corners take on a subtly different quality — softer, more continuous, unmistakably more refined. It is the same shape Apple uses for iOS app icons. And it is the shape that, until recently, was nearly impossible to reproduce accurately on the web.
+
+Squircle-js changes that by using the exact same algorithm Figma uses — powered by the open-source `figma-squircle` package — so your web implementation can match your Figma designs pixel-perfectly.
+
+## What Figma's Corner Smoothing Does
+
+Figma's corner smoothing is exposed as a percentage slider from 0% to 100% in the design panel, enabled by checking "Corner smoothing" under the corner radius field. At 0%, the shape is a standard rounded rectangle, with circular arcs at each corner. As you increase the smoothing, the corners transition to squircle geometry: the curvature begins changing earlier, extends further along the sides, and never exhibits the abrupt G1 discontinuity of a rounded rectangle.
+
+At 60% corner smoothing — Figma's iOS preset — the shape matches Apple's app icon squircle geometry. This is not a coincidence. Figma implemented corner smoothing specifically to let designers work with iOS-standard shapes without needing to manually draw them.
+
+The underlying geometry is a superellipse — a Lamé curve with a higher exponent than 2 — approximated using cubic Bézier segments. Figma converts the mathematical curve into SVG-compatible path commands that can be rendered by any vector graphics engine.
+
+## The Design-to-Development Gap
+
+Figma's corner smoothing is a powerful tool for designers, but it creates a handoff problem. When a developer inspects a design in Figma and exports CSS, the output is a standard `border-radius` value — not squircle geometry. The CSS `border-radius` property has no concept of corner smoothing. There is no CSS property that corresponds to Figma's slider.
+
+This means that a design created with corner smoothing enabled will look different when implemented with CSS alone. The corners will be slightly rougher, slightly more mechanical. At small radii the difference is negligible. At medium radii — say, 16–24px on a 200px wide card — it is noticeable to a trained eye and felt as a vague sense of lower quality even by users who cannot identify the cause.
+
+For many teams, this gap persists silently. Developers implement what CSS can express. Designers accept the difference as "close enough." The result is that web products consistently look slightly worse than their Figma designs.
+
+## How squircle-js Bridges the Gap
+
+Squircle-js uses the `figma-squircle` package, which was reverse-engineered from Figma's internal squircle rendering algorithm and open-sourced. The package takes the same parameters Figma uses — corner radius and corner smoothing — and outputs an SVG path string that matches Figma's output.
+
+Squircle-js wraps this into React components that handle the full lifecycle:
+
+1. The element is mounted and measured via `ResizeObserver`
+2. The squircle path is computed from the element's dimensions, `cornerRadius`, and `cornerSmoothing`
+3. The path is applied as a CSS `clip-path` to the element
+
+When the element resizes — on window resize, layout changes, or dynamic content — the observer fires, the path is recomputed, and the clip-path updates. The squircle shape always matches the element's actual rendered size.
+
+<SquircleDemo />
+
+## Matching Figma Designs Pixel-Perfectly
+
+The key to pixel-perfect matching is using the same parameter values in squircle-js that you use in Figma.
+
+In Figma, the design panel shows:
+- **Corner radius:** a value in pixels (e.g., 20)
+- **Corner smoothing:** a percentage (e.g., 60%)
+
+In squircle-js:
+- `cornerRadius` corresponds directly to Figma's corner radius in pixels
+- `cornerSmoothing` is the same value expressed as a decimal (60% = 0.6)
+
+```jsx
+// Figma: Corner Radius 20, Corner Smoothing 60%
+<Squircle cornerRadius={20} cornerSmoothing={0.6}>
+  {/* content */}
+</Squircle>
+```
+
+Because both Figma and squircle-js use the `figma-squircle` algorithm, the SVG paths they generate from the same inputs are identical. The rendered shape on the web will match the Figma design exactly — not approximately, but exactly, to the precision of the Bézier approximation (which is below the threshold of any screen's pixel resolution).
+
+## Practical Workflow
+
+A practical design-to-development workflow using squircle-js looks like this:
+
+**In Figma:** Design components with corner smoothing enabled. Note the corner radius and smoothing values you use. You can standardize these — for example, using 0.6 corner smoothing everywhere, which matches iOS defaults.
+
+**In code:** Install squircle-js and replace `div` elements that use `border-radius` with `Squircle` components. Use `cornerRadius` values matching your Figma design. Use `cornerSmoothing={0.6}` as the default, adjusting only where your Figma design differs.
+
+**In review:** Visual QA becomes easier because the implementation and design use the same algorithm. Differences between the Figma design and the web implementation will no longer include corner shape discrepancies — allowing reviewers to focus on spacing, color, and typography.
+
+## Corner Smoothing Values Reference
+
+| Figma Corner Smoothing | squircle-js `cornerSmoothing` | Use Case |
+|---|---|---|
+| 0% | 0 | Standard rounded rectangle |
+| 40% | 0.4 | Subtle smoothing, minimal visual change |
+| 60% | 0.6 | iOS-standard, recommended default |
+| 80% | 0.8 | More pronounced smoothing |
+| 100% | 1.0 | Maximum squircle geometry |
+
+The 60% / 0.6 value is the right starting point for most projects. It matches what billions of users see daily on iOS devices and has become the de facto standard for "polished digital product" aesthetics.
+
+## StaticSquircle for Static Layouts
+
+For elements with fixed, known dimensions — icons, avatar containers, thumbnails — squircle-js provides `StaticSquircle`, which accepts explicit `width` and `height` props and skips the `ResizeObserver` entirely.
+
+```jsx
+<StaticSquircle width={48} height={48} cornerRadius={12} cornerSmoothing={0.6}>
+  <img src="/avatar.jpg" alt="User avatar" />
+</StaticSquircle>
+```
+
+This is more performant for known-size elements and appropriate for server-side rendering where `ResizeObserver` is not available.
+
+## The Bigger Picture
+
+Figma corner smoothing on the web is a specific instance of a broader design quality problem: native apps and design tools have richer visual primitives than CSS, and web implementations fall short as a result. Squircle corners are the most visible instance of this gap, but the underlying issue — that the CSS specification lags behind design tool capabilities — affects multiple areas.
+
+Squircle-js is a practical solution for the specific problem of corner shape fidelity. It does not require waiting for CSS `superellipse()` to achieve cross-browser support, does not require custom rendering engines, and works with standard React and Next.js projects today.
+
+The goal is simple: when you hand off a Figma design with corner smoothing to a developer using squircle-js, the web implementation should look as good as the design. No compromises, no "close enough." The same algorithm, the same shape, the same level of craft.
