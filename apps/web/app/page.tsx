@@ -1,4 +1,3 @@
-import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 
 import { ExamplesSection } from "./sections/ExamplesSection";
@@ -28,7 +27,6 @@ export default function Page() {
       />
       <LicenseSection />
       <LinksSection />
-      <Footer />
     </>
   );
 }

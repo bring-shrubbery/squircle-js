@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { FaProductHunt } from "react-icons/fa";
-import { IoLogoGithub, IoLogoTwitter } from "react-icons/io5";
+import { IoBookOutline, IoLogoGithub, IoLogoTwitter } from "react-icons/io5";
 import { QuassumIcon } from "@/components/quassum.icon";
 import { SITECONFIG } from "@/lib/siteconfig";
 
@@ -67,6 +67,11 @@ export const LinksSection = () => {
         >
           <QuassumIcon className="h-9 w-9" />
           <span className="font-medium">{"Quassum 🖤"}</span>
+        </Link>
+
+        <Link className="mx-auto flex flex-col items-center gap-2" href="/blog">
+          <IoBookOutline size={36} />
+          <span className="font-medium">{"Blog 📝"}</span>
         </Link>
       </div>
     </div>

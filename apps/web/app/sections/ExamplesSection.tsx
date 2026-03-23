@@ -1,6 +1,7 @@
 "use client";
 
 import { useAtom } from "jotai";
+import Link from "next/link";
 import type { JSX } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LANGUAGE_SELECTOR_ATOM } from "@/lib/atoms";
@@ -39,6 +40,15 @@ export const ExamplesSection = ({
         <TabsContent value="3">{asChildPropExample}</TabsContent>
         <TabsContent value="4">{dynamicSizeExample}</TabsContent>
       </Tabs>
+
+      <div className="mx-auto mt-6 w-fit">
+        <Link
+          className="text-muted-foreground text-sm transition-colors hover:text-foreground"
+          href="/docs/examples"
+        >
+          {"More examples & recipes →"}
+        </Link>
+      </div>
     </div>
   );
 };

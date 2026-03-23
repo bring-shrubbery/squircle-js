@@ -1,6 +1,7 @@
 "use client";
 
 import { useAtom } from "jotai";
+import Link from "next/link";
 import type { ReactNode } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -43,6 +44,15 @@ export const UsageSection = ({
           {reactUsageContent}
         </TabsContent>
       </Tabs>
+
+      <div className="mx-auto mt-6 w-fit">
+        <Link
+          className="text-muted-foreground text-sm transition-colors hover:text-foreground"
+          href="/docs"
+        >
+          {"Read the full docs →"}
+        </Link>
+      </div>
     </div>
   );
 };
