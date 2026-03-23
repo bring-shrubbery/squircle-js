@@ -1,5 +1,5 @@
 export const SITECONFIG = {
-  hostname: "https://squircle-button.js.org/",
+  hostname: "https://squircle.js.org",
   title: "Squircle Button for Frontend Projects",
   description:
     "Use an iOS-style squircle in your frontend project easily. React.js and other versions available.",
