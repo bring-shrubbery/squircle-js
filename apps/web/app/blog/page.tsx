@@ -14,22 +14,30 @@ export default function BlogIndex() {
 
   return (
     <>
-      <h1 className="mb-8 font-bold text-3xl">Blog</h1>
-      <div className="space-y-8">
+      <header className="mb-8">
+        <h1 className="mb-2 font-bold text-3xl">Blog</h1>
+        <p className="text-muted-foreground">
+          Articles about squircles, smooth corners, and modern UI design.
+        </p>
+      </header>
+
+      <div className="divide-y divide-border">
         {posts.map((post) => (
-          <article key={post.slug}>
+          <article className="py-6 first:pt-0 last:pb-0" key={post.slug}>
             <Link className="group block" href={`/blog/${post.slug}`}>
-              <h2 className="mb-1 font-semibold text-xl group-hover:text-blue-600">
-                {post.title}
-              </h2>
-              <time className="mb-2 block text-muted-foreground text-sm">
+              <time className="text-muted-foreground text-sm">
                 {new Date(post.date).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
                 })}
               </time>
-              <p className="text-muted-foreground">{post.description}</p>
+              <h2 className="mt-1 font-semibold text-xl group-hover:text-blue-600">
+                {post.title}
+              </h2>
+              <p className="mt-2 text-muted-foreground leading-7">
+                {post.description}
+              </p>
             </Link>
           </article>
         ))}
