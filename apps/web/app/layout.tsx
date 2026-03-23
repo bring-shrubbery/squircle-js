@@ -78,9 +78,9 @@ export default function RootLayout({
         <SpeedInsights />
 
         <Script
-          async
           data-website-id="462285f6-d3c4-45ce-bb91-fe99a81c97cc"
-          src="/stats/script.js"
+          defer
+          src="https://analytics.quassum.com/script.js"
         />
       </body>
     </html>
