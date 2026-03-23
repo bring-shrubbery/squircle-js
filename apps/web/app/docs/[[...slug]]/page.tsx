@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { MDXRemote } from "next-mdx-remote/rsc";
 import { mdxComponents } from "@/components/mdx/mdx-components";
-import { getAllContent, getContentBySlug } from "@/lib/mdx";
+import { compileMdx, getAllContent, getContentBySlug } from "@/lib/mdx";
 
 interface Props {
   params: Promise<{ slug?: string[] }>;
@@ -46,10 +45,12 @@ export default async function DocsPage({ params }: Props) {
     }
   })();
 
+  const Content = await compileMdx(doc.content, mdxComponents);
+
   return (
     <article>
       <h1 className="mb-6 font-bold text-3xl">{doc.frontmatter.title}</h1>
-      <MDXRemote components={mdxComponents} source={doc.content} />
+      <Content />
 
       <script
         dangerouslySetInnerHTML={{

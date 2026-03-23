@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MDXRemote } from "next-mdx-remote/rsc";
 import { mdxComponents } from "@/components/mdx/mdx-components";
-import { getAllContent, getContentBySlug } from "@/lib/mdx";
+import { compileMdx, getAllContent, getContentBySlug } from "@/lib/mdx";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -48,6 +47,8 @@ export default async function BlogPost({ params }: Props) {
     }
   })();
 
+  const Content = await compileMdx(post.content, mdxComponents);
+
   return (
     <article>
       <header className="mb-8">
@@ -61,7 +62,7 @@ export default async function BlogPost({ params }: Props) {
         </time>
       </header>
 
-      <MDXRemote components={mdxComponents} source={post.content} />
+      <Content />
 
       <div className="mt-12 border-border border-t pt-6">
         <Link className="text-blue-600 hover:text-blue-800" href="/blog">

@@ -1,6 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
+import { evaluate } from "@mdx-js/mdx";
 import matter from "gray-matter";
+import type { ComponentType } from "react";
+import * as jsxRuntime from "react/jsx-runtime";
 
 const contentDirectory = path.join(process.cwd(), "content");
 
@@ -34,6 +37,17 @@ export function getContentBySlug<T extends "blog" | "docs">(
     frontmatter: data as T extends "blog" ? BlogFrontmatter : DocsFrontmatter,
     content,
   };
+}
+
+export async function compileMdx(
+  source: string,
+  components: Record<string, ComponentType> = {}
+): Promise<ComponentType> {
+  const { default: Content } = await evaluate(source, {
+    ...(jsxRuntime as Record<string, unknown>),
+    useMDXComponents: () => components,
+  });
+  return Content as ComponentType;
 }
 
 export function getAllContent<T extends "blog" | "docs">(
