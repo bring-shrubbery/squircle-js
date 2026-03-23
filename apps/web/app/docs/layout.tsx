@@ -1,4 +1,5 @@
 import { DocsSidebar } from "@/components/docs-sidebar";
+import { Navbar } from "@/components/navbar";
 import { getAllContent } from "@/lib/mdx";
 
 export default function DocsLayout({
@@ -9,9 +10,12 @@ export default function DocsLayout({
   const docsItems = getAllContent("docs");
 
   return (
-    <div className="mx-auto flex max-w-4xl gap-8 px-6 py-16">
-      <DocsSidebar items={docsItems} />
-      <div className="min-w-0 flex-1">{children}</div>
-    </div>
+    <>
+      <Navbar className="max-w-4xl" />
+      <div className="mx-auto flex max-w-4xl gap-8 px-6 py-16">
+        <DocsSidebar items={docsItems} />
+        <div className="min-w-0 flex-1">{children}</div>
+      </div>
+    </>
   );
 }
