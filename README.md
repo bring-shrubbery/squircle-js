@@ -51,7 +51,7 @@ Visually, [this post from Figma Blog](https://www.figma.com/blog/desperately-see
 
 #### Step 1
 
-Star this repo ❤️ and follow [Antoni on Bsky](https://bsky.app/profile/bring-shrubbery.bsky.social)
+Star this repo ❤️ and follow [Antoni](https://x.com/bringshrubberyy)
 
 #### Step 2
 
