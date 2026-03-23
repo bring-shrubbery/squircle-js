@@ -1,0 +1,72 @@
+---
+title: "Corner Smoothing Explained"
+description: "Understand what cornerSmoothing values mean, from 0 (standard border-radius) to 0.6 (iOS-like) to 1 (maximum smoothing)."
+keywords: ["corner smoothing", "squircle smoothing", "ios corner smoothing", "cornerSmoothing"]
+slug: "corner-smoothing"
+order: 5
+---
+
+## What is corner smoothing?
+
+The `cornerSmoothing` prop controls how much the corner curve extends beyond the strict arc that CSS `border-radius` would produce. It ranges from `0` to `1`.
+
+At `0`, the squircle path is mathematically equivalent to `border-radius` — circular arcs that meet the straight edges at a tangent point. At `1`, the curve smoothly flows from the corner all the way to the midpoint of each side, producing the continuous superellipse shape used in iOS app icons.
+
+<SquircleDemo />
+
+## Values explained
+
+### 0 — Standard border-radius
+
+```jsx
+<Squircle cornerRadius={24} cornerSmoothing={0} className="w-32 h-32 bg-gray-800" />
+```
+
+Equivalent to `border-radius: 24px`. The transition from the straight edge to the corner arc is abrupt at the tangent point. Use this value if you want the squircle path API without any visual difference from CSS.
+
+### 0.6 — iOS style (default)
+
+```jsx
+<Squircle cornerRadius={24} cornerSmoothing={0.6} className="w-32 h-32 bg-gray-800" />
+```
+
+The default value. This matches the corner smoothing Apple uses for iOS app icons and system UI elements. The curve begins extending onto the straight edge, creating a softer, more refined look. The difference becomes most visible at larger `cornerRadius` values.
+
+### 1 — Maximum smoothing
+
+```jsx
+<Squircle cornerRadius={24} cornerSmoothing={1} className="w-32 h-32 bg-gray-800" />
+```
+
+The curve flows from each corner all the way to the middle of each side. This is the "squircle" in its purest mathematical form. Use this for decorative shapes or when you want a distinctly smooth aesthetic. At small radii relative to the element size the effect is subtle; at large radii it becomes pronounced.
+
+## Recommendations
+
+| Use case | Suggested value |
+|---|---|
+| App icons, iOS-style UI | `0.6` |
+| Subtle softening of cards/buttons | `0.4` – `0.6` |
+| Decorative shapes, illustrations | `0.8` – `1` |
+| Matching plain CSS border-radius | `0` |
+
+## How it interacts with cornerRadius
+
+`cornerSmoothing` and `cornerRadius` interact: the smoothing effect only extends as far as the midpoint of each side. On a small element with a large radius, a high smoothing value will look similar to a lower one because there is no room for the curve to extend further. On a large element, the effect is pronounced.
+
+```jsx
+// Small element — smoothing differences are subtle
+<Squircle cornerRadius={8} cornerSmoothing={1} className="w-10 h-10 bg-slate-600" />
+
+// Large element — smoothing differences are very visible
+<Squircle cornerRadius={32} cornerSmoothing={1} className="w-64 h-64 bg-slate-600" />
+```
+
+## Fractional values
+
+Any value between `0` and `1` is valid. You don't need to use the exact values shown above:
+
+```jsx
+<Squircle cornerRadius={20} cornerSmoothing={0.8} className="w-32 h-32 bg-violet-500" />
+```
+
+The interpolation is smooth and continuous, so you can tune the value to match your design system exactly.

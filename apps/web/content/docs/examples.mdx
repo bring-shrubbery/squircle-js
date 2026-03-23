@@ -1,0 +1,199 @@
+---
+title: "Examples & Recipes"
+description: "Common patterns and recipes for using squircle-js: buttons, cards, avatars, image containers, and more."
+keywords: ["squircle examples", "squircle button", "squircle card", "squircle avatar"]
+slug: "examples"
+order: 7
+---
+
+## Button
+
+Using `asChild` renders the squircle clip-path directly on the `button` element with no extra wrapper:
+
+```jsx
+import { Squircle } from "@squircle-js/react";
+
+export function Button({ children, onClick }) {
+  return (
+    <Squircle
+      cornerRadius={12}
+      cornerSmoothing={0.6}
+      className="bg-indigo-600 px-5 py-2.5 text-white font-semibold text-sm"
+      asChild
+    >
+      <button type="button" onClick={onClick}>
+        {children}
+      </button>
+    </Squircle>
+  );
+}
+```
+
+## Card
+
+A card with responsive width — `Squircle` measures itself so no manual sizing is needed:
+
+```jsx
+import { Squircle } from "@squircle-js/react";
+
+export function Card({ title, body }) {
+  return (
+    <Squircle
+      cornerRadius={20}
+      cornerSmoothing={0.6}
+      className="bg-white shadow-md p-6 space-y-2"
+    >
+      <h3 className="font-semibold text-lg">{title}</h3>
+      <p className="text-gray-600 text-sm">{body}</p>
+    </Squircle>
+  );
+}
+```
+
+## Avatar
+
+Fixed-size avatars are a perfect use case for `StaticSquircle` — no ResizeObserver overhead:
+
+```jsx
+import { StaticSquircle } from "@squircle-js/react";
+
+export function Avatar({ src, alt, size = 48 }) {
+  return (
+    <StaticSquircle
+      width={size}
+      height={size}
+      cornerRadius={Math.round(size * 0.25)}
+      cornerSmoothing={0.6}
+      className="overflow-hidden shrink-0"
+      asChild
+    >
+      <img src={src} alt={alt} className="w-full h-full object-cover" />
+    </StaticSquircle>
+  );
+}
+```
+
+## Image container
+
+Clip a hero image with a large squircle radius for a distinctive editorial look:
+
+```jsx
+import { StaticSquircle } from "@squircle-js/react";
+
+export function HeroImage({ src, alt }) {
+  return (
+    <StaticSquircle
+      width={600}
+      height={400}
+      cornerRadius={32}
+      cornerSmoothing={0.8}
+      asChild
+    >
+      <img
+        src={src}
+        alt={alt}
+        className="w-full h-full object-cover"
+      />
+    </StaticSquircle>
+  );
+}
+```
+
+## App icon
+
+Replicate the iOS app icon shape exactly:
+
+```jsx
+import { StaticSquircle } from "@squircle-js/react";
+
+export function AppIcon({ src, name }) {
+  return (
+    <div className="flex flex-col items-center gap-1.5">
+      <StaticSquircle
+        width={60}
+        height={60}
+        cornerRadius={13}
+        cornerSmoothing={0.6}
+        className="overflow-hidden"
+        asChild
+      >
+        <img src={src} alt={name} />
+      </StaticSquircle>
+      <span className="text-xs text-gray-700">{name}</span>
+    </div>
+  );
+}
+```
+
+## Notification badge
+
+Small squircle badges with dynamic content:
+
+```jsx
+import { Squircle } from "@squircle-js/react";
+
+export function Badge({ count }) {
+  return (
+    <Squircle
+      cornerRadius={6}
+      cornerSmoothing={0.6}
+      className="bg-red-500 px-1.5 py-0.5 text-white text-xs font-bold min-w-[20px] text-center"
+    >
+      {count}
+    </Squircle>
+  );
+}
+```
+
+## Animated card with Framer Motion
+
+`asChild` composes with `motion` components since they forward refs and spread props:
+
+```jsx
+import { motion } from "framer-motion";
+import { Squircle } from "@squircle-js/react";
+
+export function AnimatedCard({ children }) {
+  return (
+    <Squircle
+      cornerRadius={20}
+      cornerSmoothing={0.6}
+      className="bg-gradient-to-br from-violet-500 to-indigo-600 p-6"
+      asChild
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        {children}
+      </motion.div>
+    </Squircle>
+  );
+}
+```
+
+## Icon button
+
+Round icon buttons with equal width and height benefit from `StaticSquircle`:
+
+```jsx
+import { StaticSquircle } from "@squircle-js/react";
+
+export function IconButton({ icon: Icon, label, onClick }) {
+  return (
+    <StaticSquircle
+      width={40}
+      height={40}
+      cornerRadius={10}
+      cornerSmoothing={0.6}
+      className="bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
+      asChild
+    >
+      <button type="button" aria-label={label} onClick={onClick}>
+        <Icon className="w-5 h-5 text-gray-700" />
+      </button>
+    </StaticSquircle>
+  );
+}
+```

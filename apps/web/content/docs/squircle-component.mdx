@@ -1,0 +1,93 @@
+---
+title: "Squircle Component"
+description: "API reference for the Squircle component — a responsive squircle element that automatically adapts to its size."
+keywords: ["squircle component", "squircle react component", "squircle api"]
+slug: "squircle-component"
+order: 2
+---
+
+## Overview
+
+`Squircle` is the primary component in `@squircle-js/react`. It wraps a `div` (or any element via `asChild`) and applies a smooth squircle clip-path that automatically updates whenever the element changes size.
+
+```jsx
+import { Squircle } from "@squircle-js/react";
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `cornerRadius` | `number` | — | Corner radius in pixels. Required for a visible squircle effect. |
+| `cornerSmoothing` | `number` | `0.6` | Smoothing intensity from `0` (circle arcs) to `1` (maximum superellipse). |
+| `asChild` | `boolean` | `false` | Merges squircle props onto the immediate child element instead of rendering a `div`. |
+| `width` | `number` | — | Override the measured width. Use when you know the exact size. |
+| `height` | `number` | — | Override the measured height. Use when you know the exact size. |
+| `defaultWidth` | `number` | — | Initial width used before the ResizeObserver fires. Prevents a flash of unstyled content on first render. |
+| `defaultHeight` | `number` | — | Initial height used before the ResizeObserver fires. |
+
+All standard HTML `div` props (`className`, `style`, `onClick`, `data-*`, etc.) are also accepted and forwarded to the rendered element.
+
+## How ResizeObserver works
+
+Internally, `Squircle` attaches a `ResizeObserver` to its DOM node. Whenever the element's size changes — due to CSS, layout shifts, viewport resizing, or content changes — the observer fires, the component recomputes the SVG path, and updates the `clip-path` style.
+
+This means `Squircle` works correctly without any manual size management:
+
+```jsx
+// This works even as the container resizes
+<Squircle cornerRadius={16} className="w-full max-w-sm bg-gray-100 p-6">
+  <p>Responsive squircle container</p>
+</Squircle>
+```
+
+The SVG path is computed using `figma-squircle`'s `getSvgPath` function and applied as `clip-path: path('...')` on the element's inline style.
+
+## Usage examples
+
+### Simple card
+
+```jsx
+<Squircle
+  cornerRadius={20}
+  cornerSmoothing={0.6}
+  className="bg-white shadow-lg p-6"
+>
+  <h2>Card title</h2>
+  <p>Card content goes here.</p>
+</Squircle>
+```
+
+### Fixed size with default dimensions
+
+Supply `defaultWidth` and `defaultHeight` to avoid a flash of the uncliped shape on first render when the size is known ahead of time:
+
+```jsx
+<Squircle
+  cornerRadius={32}
+  defaultWidth={128}
+  defaultHeight={128}
+  className="w-32 h-32 bg-indigo-500"
+/>
+```
+
+### Overriding measured size
+
+Pass `width` and `height` directly to skip ResizeObserver measurement entirely for that render:
+
+```jsx
+<Squircle
+  cornerRadius={16}
+  width={200}
+  height={100}
+  className="bg-emerald-400"
+>
+  Fixed dimensions
+</Squircle>
+```
+
+> When both `width`/`height` props and a measured size are available, the explicit props take precedence. If you always know the size, consider [StaticSquircle](/docs/static-squircle) for better performance.
+
+## CSS fallback
+
+The component always sets `border-radius` and `data-squircle` on the rendered element so that browsers without `clip-path: path()` support still get rounded corners. See [No-JavaScript Fallback](/docs/no-javascript-fallback) for the noscript case.

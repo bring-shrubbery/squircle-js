@@ -1,0 +1,73 @@
+---
+title: "Getting Started"
+description: "Install and start using @squircle-js/react to add iOS-style squircle shapes to your React project."
+keywords: ["squircle-js", "squircle react", "install squircle", "squircle component"]
+slug: "getting-started"
+order: 1
+---
+
+## Installation
+
+Install `@squircle-js/react` using your preferred package manager:
+
+```bash
+npm install @squircle-js/react
+```
+
+```bash
+pnpm add @squircle-js/react
+```
+
+```bash
+yarn add @squircle-js/react
+```
+
+## Basic Usage
+
+Import the `Squircle` component and use it like any other `div`. Set `cornerRadius` to control the corner size and the component handles everything else automatically.
+
+```jsx
+import { Squircle } from "@squircle-js/react";
+
+export default function App() {
+  return (
+    <Squircle cornerRadius={16} className="bg-blue-500 w-32 h-32">
+      <p>Hello</p>
+    </Squircle>
+  );
+}
+```
+
+The component measures its own size via a `ResizeObserver` and generates an SVG clip-path that produces the smooth, continuous-curve corners characteristic of iOS app icons.
+
+## How it works
+
+Standard CSS `border-radius` uses circular arcs that connect abruptly to the straight edges of the element. The squircle shape uses a superellipse curve where the corner flows smoothly all the way to the midpoint of each side. The result looks noticeably more refined, especially at larger corner radii.
+
+`@squircle-js/react` uses the `figma-squircle` library to compute the SVG path, then applies it as a CSS `clip-path` on the element.
+
+## Minimal example
+
+A working Next.js page using a squircle as an avatar container:
+
+```jsx
+import { Squircle } from "@squircle-js/react";
+
+export default function Profile() {
+  return (
+    <Squircle
+      cornerRadius={24}
+      cornerSmoothing={0.6}
+      className="w-16 h-16 overflow-hidden"
+    >
+      <img src="/avatar.jpg" alt="Avatar" className="w-full h-full object-cover" />
+    </Squircle>
+  );
+}
+```
+
+## Requirements
+
+- React 18 or later
+- A browser that supports `clip-path: path()` (all modern browsers)
+- JavaScript must be enabled — see [No-JavaScript Fallback](/docs/no-javascript-fallback) for graceful degradation

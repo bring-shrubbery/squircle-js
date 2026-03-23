@@ -1,0 +1,104 @@
+---
+title: "StaticSquircle Component"
+description: "API reference for StaticSquircle — a performant squircle component for elements with known dimensions."
+keywords: ["static squircle", "squircle performance", "squircle fixed size"]
+slug: "static-squircle"
+order: 3
+---
+
+## Overview
+
+`StaticSquircle` is a leaner alternative to `Squircle` for situations where you already know the element's width and height. It computes the clip-path once and never sets up a `ResizeObserver`, making it more efficient in list-heavy UIs or server-rendered contexts.
+
+```jsx
+import { StaticSquircle } from "@squircle-js/react";
+```
+
+## When to use StaticSquircle
+
+Use `StaticSquircle` when:
+
+- The element has a fixed, known size (e.g. an avatar, icon, or thumbnail with explicit dimensions)
+- You are rendering many squircle elements and want to minimise browser overhead
+- The size comes from design tokens or constants rather than layout
+
+Use the regular [`Squircle`](/docs/squircle-component) when:
+
+- The element size is determined by CSS or content
+- The element can resize (fluid layouts, responsive containers)
+- You don't want to track dimensions manually
+
+## Props
+
+All four core props are **required** — `StaticSquircle` has no internal measurement and cannot infer them.
+
+| Prop | Type | Required | Description |
+|---|---|---|---|
+| `width` | `number` | Yes | Element width in pixels. |
+| `height` | `number` | Yes | Element height in pixels. |
+| `cornerRadius` | `number` | Yes | Corner radius in pixels. |
+| `cornerSmoothing` | `number` | Yes | Smoothing intensity from `0` to `1`. |
+| `asChild` | `boolean` | No | Merges props onto the child element instead of rendering a `div`. |
+
+All standard HTML `div` props are also accepted.
+
+## Examples
+
+### Avatar
+
+```jsx
+<StaticSquircle
+  width={48}
+  height={48}
+  cornerRadius={12}
+  cornerSmoothing={0.6}
+  className="overflow-hidden"
+>
+  <img src="/user.jpg" alt="User" className="w-full h-full object-cover" />
+</StaticSquircle>
+```
+
+### App icon grid
+
+Rendering many fixed-size icons in a grid is a good fit for `StaticSquircle`:
+
+```jsx
+const ICON_SIZE = 60;
+
+export function AppGrid({ apps }) {
+  return (
+    <div className="grid grid-cols-4 gap-4">
+      {apps.map((app) => (
+        <StaticSquircle
+          key={app.id}
+          width={ICON_SIZE}
+          height={ICON_SIZE}
+          cornerRadius={13}
+          cornerSmoothing={0.6}
+          className="overflow-hidden"
+        >
+          <img src={app.icon} alt={app.name} />
+        </StaticSquircle>
+      ))}
+    </div>
+  );
+}
+```
+
+### With asChild on an image
+
+```jsx
+<StaticSquircle
+  width={200}
+  height={200}
+  cornerRadius={32}
+  cornerSmoothing={1}
+  asChild
+>
+  <img src="/hero.jpg" alt="Hero" />
+</StaticSquircle>
+```
+
+## Performance note
+
+Because `StaticSquircle` skips `ResizeObserver`, it can be used in server components (it has no `"use client"` directive of its own) and produces no runtime measurement cost. The SVG path is computed synchronously via `useMemo` and memoised by React so it only recomputes when props change.

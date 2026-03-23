@@ -1,0 +1,140 @@
+---
+title: "The asChild Pattern"
+description: "Learn how to use the asChild prop to compose Squircle with any HTML element or React component using the Radix UI Slot pattern."
+keywords: ["squircle asChild", "radix slot", "squircle composition"]
+slug: "as-child"
+order: 4
+---
+
+## What is asChild?
+
+Both `Squircle` and `StaticSquircle` accept an `asChild` prop. When `true`, instead of rendering a `<div>` wrapper, the component merges all its props — including `style`, `data-squircle`, and event handlers — onto the single child element you provide.
+
+This is implemented using [Radix UI's Slot primitive](https://www.radix-ui.com/primitives/docs/utilities/slot), which performs a safe prop merge without adding a DOM node.
+
+## Why use asChild?
+
+Without `asChild`, a squircle button looks like:
+
+```jsx
+<Squircle cornerRadius={12} className="bg-blue-600">
+  <button className="px-4 py-2 text-white">Click me</button>
+</Squircle>
+```
+
+This creates two DOM elements: a `div` with the clip-path, and a `button` inside it. The button won't be clipped properly unless you apply `overflow-hidden` or match sizes exactly.
+
+With `asChild`, the squircle renders directly as the `button`:
+
+```jsx
+<Squircle cornerRadius={12} className="bg-blue-600 px-4 py-2 text-white" asChild>
+  <button>Click me</button>
+</Squircle>
+```
+
+One DOM element. The clip-path, `data-squircle`, and `border-radius` are applied directly to the `button`.
+
+## Rules
+
+- `asChild` requires exactly **one** child element
+- The child must accept a `ref` and `style` prop (all HTML elements do; most component libraries do too)
+- Props from `Squircle` and props from the child are merged — the child's props take precedence for conflicts
+
+## Examples
+
+### Squircle button
+
+```jsx
+import { Squircle } from "@squircle-js/react";
+
+export function SquircleButton({ children, onClick }) {
+  return (
+    <Squircle
+      cornerRadius={14}
+      cornerSmoothing={0.6}
+      className="bg-indigo-600 px-5 py-2.5 text-white font-medium"
+      asChild
+    >
+      <button type="button" onClick={onClick}>
+        {children}
+      </button>
+    </Squircle>
+  );
+}
+```
+
+### Squircle link
+
+```jsx
+import Link from "next/link";
+import { Squircle } from "@squircle-js/react";
+
+export function SquircleLink({ href, children }) {
+  return (
+    <Squircle
+      cornerRadius={12}
+      cornerSmoothing={0.6}
+      className="inline-flex items-center bg-gray-900 px-4 py-2 text-white"
+      asChild
+    >
+      <Link href={href}>{children}</Link>
+    </Squircle>
+  );
+}
+```
+
+### Squircle image
+
+Clip an image directly without a wrapper div:
+
+```jsx
+import { StaticSquircle } from "@squircle-js/react";
+
+export function SquircleImage({ src, alt }) {
+  return (
+    <StaticSquircle
+      width={200}
+      height={200}
+      cornerRadius={28}
+      cornerSmoothing={0.6}
+      asChild
+    >
+      <img src={src} alt={alt} className="object-cover" />
+    </StaticSquircle>
+  );
+}
+```
+
+### Squircle with a third-party component
+
+`asChild` works with any component that forwards its ref and spreads props onto a DOM element:
+
+```jsx
+import { motion } from "framer-motion";
+import { Squircle } from "@squircle-js/react";
+
+export function AnimatedSquircle() {
+  return (
+    <Squircle
+      cornerRadius={20}
+      cornerSmoothing={0.6}
+      className="bg-rose-500 w-24 h-24"
+      asChild
+    >
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 2, repeat: Infinity }}
+      />
+    </Squircle>
+  );
+}
+```
+
+## Comparison: with and without asChild
+
+| | Without asChild | With asChild |
+|---|---|---|
+| DOM nodes | 2 (div + child) | 1 (child only) |
+| Clip-path target | outer div | child element |
+| Needs overflow-hidden | Often yes | No |
+| Semantic element | div | Whatever you pass |
