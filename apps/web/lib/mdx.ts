@@ -4,6 +4,7 @@ import { evaluate } from "@mdx-js/mdx";
 import matter from "gray-matter";
 import type { ComponentType } from "react";
 import * as jsxRuntime from "react/jsx-runtime";
+import remarkGfm from "remark-gfm";
 
 const contentDirectory = path.join(process.cwd(), "content");
 
@@ -45,6 +46,7 @@ export async function compileMdx(
 ): Promise<ComponentType> {
   const { default: Content } = await evaluate(source, {
     ...(jsxRuntime as Record<string, unknown>),
+    remarkPlugins: [remarkGfm],
     useMDXComponents: () => components,
   });
   return Content as ComponentType;
