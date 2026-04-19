@@ -24,7 +24,7 @@
 - 💃 Responsive squircle element that can be used any an intrinsic component.
 - 🙏 Fallback solution for No-JavaScript.
 - 👌 CommonJS and ES6 (tree-shakeable).
-- 🚀 For React (supports `react@16.8+`). Also available for Solid via [`@squircle-js/solid`](https://www.npmjs.com/package/@squircle-js/solid).
+- 🚀 For React (supports `react@16.8+`). Also available for [Vue](https://www.npmjs.com/package/@squircle-js/vue), [Svelte](https://www.npmjs.com/package/@squircle-js/svelte), and [Solid](https://www.npmjs.com/package/@squircle-js/solid).
 - 🐁 Just `2.1kB` gzipped.
 - 🧨 Documented usage examples.
 
