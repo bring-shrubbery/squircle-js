@@ -5,10 +5,11 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import type { DocsFrontmatter } from "@/lib/mdx";
 
-const GROUP_ORDER = ["react", "solid"];
+const GROUP_ORDER = ["react", "solid", "svelte"];
 const GROUP_LABELS: Record<string, string> = {
   react: "React",
   solid: "Solid",
+  svelte: "Svelte",
 };
 
 function groupDocs(items: DocsFrontmatter[]) {
