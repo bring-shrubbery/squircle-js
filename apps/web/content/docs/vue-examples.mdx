@@ -1,0 +1,274 @@
+---
+title: "Examples & Recipes"
+description: "Common patterns for @squircle-js/vue: buttons, cards, avatars, image containers, and more."
+keywords: ["vue squircle examples", "vue squircle button", "vue squircle card", "vue squircle avatar"]
+slug: "vue-examples"
+order: 8
+group: "vue"
+---
+
+## Button
+
+Use the `v-squircle` directive to render a button with no wrapper element:
+
+```vue
+<script setup lang="ts">
+import { squircleDirective as vSquircle } from "@squircle-js/vue";
+
+defineProps<{ onClick?: () => void }>();
+</script>
+
+<template>
+  <button
+    type="button"
+    v-squircle="{ cornerRadius: 12, cornerSmoothing: 0.6 }"
+    class="bg-indigo-600 px-5 py-2.5 text-white font-semibold text-sm"
+    @click="onClick"
+  >
+    <slot />
+  </button>
+</template>
+```
+
+## Card
+
+A card with responsive width — the `Squircle` component measures itself:
+
+```vue
+<script setup lang="ts">
+import { Squircle } from "@squircle-js/vue";
+
+defineProps<{ title: string; body: string }>();
+</script>
+
+<template>
+  <Squircle
+    :corner-radius="20"
+    :corner-smoothing="0.6"
+    class="bg-white shadow-md p-6 space-y-2"
+  >
+    <h3 class="font-semibold text-lg">{{ title }}</h3>
+    <p class="text-gray-600 text-sm">{{ body }}</p>
+  </Squircle>
+</template>
+```
+
+## Avatar
+
+Fixed-size avatars are a perfect use case for `v-static-squircle`:
+
+```vue
+<script setup lang="ts">
+import { staticSquircleDirective as vStaticSquircle } from "@squircle-js/vue";
+
+const props = withDefaults(
+  defineProps<{ src: string; alt: string; size?: number }>(),
+  { size: 48 },
+);
+</script>
+
+<template>
+  <img
+    :src="src"
+    :alt="alt"
+    v-static-squircle="{
+      width: props.size,
+      height: props.size,
+      cornerRadius: Math.round(props.size * 0.25),
+      cornerSmoothing: 0.6,
+    }"
+    class="object-cover shrink-0"
+  />
+</template>
+```
+
+## Image container
+
+Clip a hero image with a large squircle radius:
+
+```vue
+<script setup lang="ts">
+import { staticSquircleDirective as vStaticSquircle } from "@squircle-js/vue";
+
+defineProps<{ src: string; alt: string }>();
+</script>
+
+<template>
+  <img
+    :src="src"
+    :alt="alt"
+    v-static-squircle="{
+      width: 600,
+      height: 400,
+      cornerRadius: 32,
+      cornerSmoothing: 0.8,
+    }"
+    class="object-cover"
+  />
+</template>
+```
+
+## App icon
+
+Replicate the iOS app icon shape exactly:
+
+```vue
+<script setup lang="ts">
+import { staticSquircleDirective as vStaticSquircle } from "@squircle-js/vue";
+
+defineProps<{ src: string; name: string }>();
+</script>
+
+<template>
+  <div class="flex flex-col items-center gap-1.5">
+    <img
+      :src="src"
+      :alt="name"
+      v-static-squircle="{
+        width: 60,
+        height: 60,
+        cornerRadius: 13,
+        cornerSmoothing: 0.6,
+      }"
+    />
+    <span class="text-xs text-gray-700">{{ name }}</span>
+  </div>
+</template>
+```
+
+## Notification badge
+
+Small squircle badges with dynamic content:
+
+```vue
+<script setup lang="ts">
+import { Squircle } from "@squircle-js/vue";
+
+defineProps<{ count: number }>();
+</script>
+
+<template>
+  <Squircle
+    :corner-radius="6"
+    :corner-smoothing="0.6"
+    class="bg-red-500 px-1.5 py-0.5 text-white text-xs font-bold min-w-[20px] text-center"
+  >
+    {{ count }}
+  </Squircle>
+</template>
+```
+
+## Icon button
+
+Equal-width-and-height buttons benefit from `v-static-squircle`:
+
+```vue
+<script setup lang="ts">
+import { staticSquircleDirective as vStaticSquircle } from "@squircle-js/vue";
+
+defineProps<{ label: string; onClick?: () => void }>();
+</script>
+
+<template>
+  <button
+    type="button"
+    :aria-label="label"
+    v-static-squircle="{
+      width: 40,
+      height: 40,
+      cornerRadius: 10,
+      cornerSmoothing: 0.6,
+    }"
+    class="bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
+    @click="onClick"
+  >
+    <slot />
+  </button>
+</template>
+```
+
+## Reactive squircle
+
+Driving `cornerRadius` from a `ref` — Vue's fine-grained reactivity only recomputes the `clip-path`:
+
+```vue
+<script setup>
+import { ref } from "vue";
+import { Squircle } from "@squircle-js/vue";
+
+const radius = ref(16);
+</script>
+
+<template>
+  <div class="flex items-center gap-4">
+    <input type="range" min="0" max="64" v-model.number="radius" />
+    <Squircle :corner-radius="radius" class="w-32 h-32 bg-emerald-500" />
+  </div>
+</template>
+```
+
+## List of squircles
+
+Vue's `v-for` pairs naturally with keyed squircles:
+
+```vue
+<script setup lang="ts">
+import { staticSquircleDirective as vStaticSquircle } from "@squircle-js/vue";
+
+defineProps<{ tags: Array<{ id: string; label: string }> }>();
+</script>
+
+<template>
+  <div class="flex flex-wrap gap-2">
+    <div
+      v-for="tag in tags"
+      :key="tag.id"
+      v-static-squircle="{
+        width: 80,
+        height: 28,
+        cornerRadius: 8,
+        cornerSmoothing: 0.6,
+      }"
+      class="bg-sky-100 text-sky-800 text-xs font-medium flex items-center justify-center"
+    >
+      {{ tag.label }}
+    </div>
+  </div>
+</template>
+```
+
+## Composition with transitions
+
+Directives compose with Vue's `<Transition>` element — you can add a fade-in without affecting the squircle:
+
+```vue
+<script setup>
+import { ref } from "vue";
+import { squircleDirective as vSquircle } from "@squircle-js/vue";
+
+const visible = ref(true);
+</script>
+
+<template>
+  <Transition name="fade">
+    <div
+      v-if="visible"
+      v-squircle="{ cornerRadius: 20, cornerSmoothing: 0.6 }"
+      class="bg-gradient-to-br from-violet-500 to-indigo-600 p-6 w-64 h-32"
+    >
+      Animated squircle card
+    </div>
+  </Transition>
+</template>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 200ms;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
+```
