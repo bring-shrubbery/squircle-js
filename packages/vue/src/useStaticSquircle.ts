@@ -16,7 +16,7 @@ export interface UseStaticSquircleOptions {
 
 export function useStaticSquircle(
   elRef: Ref<HTMLElement | null | undefined>,
-  options: MaybeRefOrGetter<UseStaticSquircleOptions>,
+  options: MaybeRefOrGetter<UseStaticSquircleOptions>
 ): void {
   const apply = (node: HTMLElement, opts: UseStaticSquircleOptions) => {
     const path = computeClipPath({

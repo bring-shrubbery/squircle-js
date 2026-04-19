@@ -19,7 +19,7 @@ export interface UseSquircleOptions {
 
 export function useSquircle(
   elRef: Ref<HTMLElement | null | undefined>,
-  options: MaybeRefOrGetter<UseSquircleOptions> = {},
+  options: MaybeRefOrGetter<UseSquircleOptions> = {}
 ): void {
   let observer: ResizeObserver | null = null;
 
@@ -27,7 +27,7 @@ export function useSquircle(
     node: HTMLElement,
     width: number,
     height: number,
-    opts: UseSquircleOptions,
+    opts: UseSquircleOptions
   ) => {
     const path = computeClipPath({
       width,

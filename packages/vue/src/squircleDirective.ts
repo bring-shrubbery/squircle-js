@@ -21,7 +21,7 @@ function apply(
   node: HTMLElement,
   width: number,
   height: number,
-  opts: SquircleDirectiveOptions,
+  opts: SquircleDirectiveOptions
 ) {
   const path = computeClipPath({
     width,

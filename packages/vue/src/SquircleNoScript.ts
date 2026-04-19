@@ -1,7 +1,7 @@
 import { defineComponent, h, Teleport } from "vue";
 
 const NOSCRIPT_INNER_HTML =
-  '<style>[data-squircle] { clip-path: none !important; border-radius: attr(data-squircle) !important; }</style>';
+  "<style>[data-squircle] { clip-path: none !important; border-radius: attr(data-squircle) !important; }</style>";
 
 export const SquircleNoScript = defineComponent({
   name: "SquircleNoScript",

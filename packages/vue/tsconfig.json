@@ -6,6 +6,7 @@
     "declaration": true,
     "noImplicitAny": false,
     "strictNullChecks": true,
+    "lib": ["ES2022", "DOM"],
     "types": ["vitest/globals"],
     "moduleResolution": "bundler",
     "jsx": "preserve"
