@@ -4,5 +4,5 @@
   "buildCommand": "cd ../.. && pnpm turbo build --filter=@squircle-js/examples-solid",
   "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
   "outputDirectory": "dist",
-  "ignoreCommand": "git diff HEAD^ HEAD --quiet ./ ../../packages/solid ../../packages/figma-squircle"
+  "ignoreCommand": "git diff HEAD^ HEAD --quiet ./ ../../packages/solid ../../pnpm-lock.yaml"
 }

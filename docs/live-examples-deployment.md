@@ -30,12 +30,12 @@ To avoid rebuilding all three apps on every PR, set an Ignored Build Step per
 project. In project Settings → Git → Ignored Build Step:
 
 ```bash
-git diff HEAD^ HEAD --quiet ./ ../../packages/{framework} ../../packages/figma-squircle 2>/dev/null
+git diff HEAD^ HEAD --quiet ./ ../../packages/{framework} ../../pnpm-lock.yaml
 ```
 
 Substitute `{framework}` with `vue`, `svelte`, or `solid` for the matching
 project. The build runs only if something under the demo app itself, its
-framework package, or `figma-squircle` changed.
+framework package, or the workspace lockfile changed.
 
 ## Wire the URLs into `apps/web`
 

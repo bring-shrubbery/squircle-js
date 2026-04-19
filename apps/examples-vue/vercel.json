@@ -4,5 +4,5 @@
   "buildCommand": "cd ../.. && pnpm turbo build --filter=@squircle-js/examples-vue",
   "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
   "outputDirectory": "dist",
-  "ignoreCommand": "git diff HEAD^ HEAD --quiet ./ ../../packages/vue ../../packages/figma-squircle"
+  "ignoreCommand": "git diff HEAD^ HEAD --quiet ./ ../../packages/vue ../../pnpm-lock.yaml"
 }

@@ -4,5 +4,5 @@
   "buildCommand": "cd ../.. && pnpm turbo build --filter=@squircle-js/examples-svelte",
   "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
   "outputDirectory": "dist",
-  "ignoreCommand": "git diff HEAD^ HEAD --quiet ./ ../../packages/svelte ../../packages/figma-squircle"
+  "ignoreCommand": "git diff HEAD^ HEAD --quiet ./ ../../packages/svelte ../../pnpm-lock.yaml"
 }
