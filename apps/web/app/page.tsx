@@ -16,17 +16,19 @@ export default function Page() {
   return (
     <>
       <Navbar className="max-w-240" />
-      <SquircleDemoSection />
-      <FeaturesSection />
-      <UsageSection reactUsageContent={<UsageSectionReactContent />} />
-      <ExamplesSection
-        asChildPropExample={<ExamplesSectionAsChildExample />}
-        constantSizeExample={<ExampleSectionConstantSizeExample />}
-        defaultSizeExample={<ExamplesSectionDefaultSizeExample />}
-        dynamicSizeExample={<ExamplesSectionDynamicSizeExample />}
-      />
-      <LicenseSection />
-      <LinksSection />
+      <div className="px-4 sm:px-0">
+        <SquircleDemoSection />
+        <FeaturesSection />
+        <UsageSection reactUsageContent={<UsageSectionReactContent />} />
+        <ExamplesSection
+          asChildPropExample={<ExamplesSectionAsChildExample />}
+          constantSizeExample={<ExampleSectionConstantSizeExample />}
+          defaultSizeExample={<ExamplesSectionDefaultSizeExample />}
+          dynamicSizeExample={<ExamplesSectionDynamicSizeExample />}
+        />
+        <LicenseSection />
+        <LinksSection />
+      </div>
     </>
   );
 }
