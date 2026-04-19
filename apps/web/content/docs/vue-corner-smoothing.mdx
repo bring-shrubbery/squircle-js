@@ -1,0 +1,99 @@
+---
+title: "Corner Smoothing Explained"
+description: "Understand what cornerSmoothing values mean in @squircle-js/vue, from 0 (standard border-radius) to 0.6 (iOS-like) to 1 (maximum smoothing)."
+keywords: ["vue corner smoothing", "vue squircle smoothing", "cornerSmoothing vue"]
+slug: "vue-corner-smoothing"
+order: 6
+group: "vue"
+---
+
+## What is corner smoothing?
+
+The `cornerSmoothing` prop controls how much the corner curve extends beyond the strict arc that CSS `border-radius` would produce. It ranges from `0` to `1`.
+
+At `0`, the squircle path is mathematically equivalent to `border-radius` — circular arcs that meet the straight edges at a tangent point. At `1`, the curve flows smoothly from the corner all the way to the midpoint of each side, producing the continuous superellipse shape used in iOS app icons.
+
+The values are identical across all `@squircle-js/*` packages — this is a property of the underlying `figma-squircle` path algorithm, not of the framework bindings.
+
+## Values explained
+
+### 0 — Standard border-radius
+
+```vue
+<Squircle :corner-radius="24" :corner-smoothing="0" class="w-32 h-32 bg-gray-800" />
+```
+
+Equivalent to `border-radius: 24px`. The transition from the straight edge to the corner arc is abrupt at the tangent point. Use this if you want the squircle path API but no visible difference from plain CSS.
+
+### 0.6 — iOS style (default)
+
+```vue
+<Squircle :corner-radius="24" :corner-smoothing="0.6" class="w-32 h-32 bg-gray-800" />
+```
+
+The default. Matches the smoothing Apple uses for iOS app icons and system UI. The curve begins extending onto the straight edge, creating a softer, more refined look. Most visible at larger `cornerRadius` values.
+
+### 1 — Maximum smoothing
+
+```vue
+<Squircle :corner-radius="24" :corner-smoothing="1" class="w-32 h-32 bg-gray-800" />
+```
+
+The curve flows from each corner to the midpoint of every side. The "squircle" in its purest form. Use for decorative shapes or when you want a distinctly smooth aesthetic.
+
+## Recommendations
+
+| Use case | Suggested value |
+|---|---|
+| App icons, iOS-style UI | `0.6` |
+| Subtle softening of cards/buttons | `0.4` – `0.6` |
+| Decorative shapes, illustrations | `0.8` – `1` |
+| Matching plain CSS border-radius | `0` |
+
+## How it interacts with cornerRadius
+
+`cornerSmoothing` only extends as far as the midpoint of each side. On a small element with a large radius, a high smoothing value will look similar to a lower one because there's no room for the curve to extend further. On a large element, the effect is pronounced.
+
+```vue
+<!-- Small element — smoothing differences are subtle -->
+<Squircle :corner-radius="8" :corner-smoothing="1" class="w-10 h-10 bg-slate-600" />
+
+<!-- Large element — smoothing differences are very visible -->
+<Squircle :corner-radius="32" :corner-smoothing="1" class="w-64 h-64 bg-slate-600" />
+```
+
+## Fractional values
+
+Any value between `0` and `1` is valid:
+
+```vue
+<Squircle :corner-radius="20" :corner-smoothing="0.8" class="w-32 h-32 bg-violet-500" />
+```
+
+The interpolation is smooth and continuous — tune to match your design system exactly.
+
+## Binding to reactive state
+
+Vue's `ref` lets you drive `cornerSmoothing` from state:
+
+```vue
+<script setup>
+import { ref } from "vue";
+import { Squircle } from "@squircle-js/vue";
+
+const smoothing = ref(0.6);
+</script>
+
+<template>
+  <div class="flex flex-col gap-4">
+    <input type="range" min="0" max="1" step="0.05" v-model.number="smoothing" />
+    <Squircle
+      :corner-radius="32"
+      :corner-smoothing="smoothing"
+      class="w-48 h-48 bg-violet-500"
+    />
+  </div>
+</template>
+```
+
+Only the `clip-path` style recomputes — no component re-render.
