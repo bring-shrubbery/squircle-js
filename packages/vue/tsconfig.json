@@ -1,0 +1,15 @@
+{
+  "extends": "@squircle-js/tsconfig/base.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "dist",
+    "declaration": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "types": ["vitest/globals"],
+    "moduleResolution": "bundler",
+    "jsx": "preserve"
+  },
+  "include": ["src/**/*.ts", "src/**/*.vue"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts"]
+}
