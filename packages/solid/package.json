@@ -1,0 +1,60 @@
+{
+  "name": "@squircle-js/solid",
+  "version": "0.0.0",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "solid": "./dist/index.jsx",
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "clean": "rm -rf .turbo dist node_modules",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@solid-primitives/resize-observer": "^2.0.26",
+    "figma-squircle": "1.1.0"
+  },
+  "devDependencies": {
+    "@solidjs/testing-library": "^0.8.10",
+    "@squircle-js/tsconfig": "workspace:*",
+    "jsdom": "^25.0.1",
+    "solid-js": "^1.9.0",
+    "tsup": "catalog:",
+    "tsup-preset-solid": "^2.2.0",
+    "typescript": "catalog:",
+    "vite-plugin-solid": "^2.11.0",
+    "vitest": "^2.1.0"
+  },
+  "peerDependencies": {
+    "solid-js": "^1.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bring-shrubbery/squircle-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bring-shrubbery/squircle-js/issues"
+  },
+  "homepage": "https://squircle.js.org",
+  "author": {
+    "name": "Antoni Silvestrovic",
+    "email": "antoni@quassum.com"
+  }
+}
