@@ -8,7 +8,9 @@ export interface ComputeClipPathOptions {
 }
 
 export function computeClipPath(opts: ComputeClipPathOptions): string {
-  if (opts.width === 0 || opts.height === 0) return "";
+  if (opts.width === 0 || opts.height === 0) {
+    return "";
+  }
   return getSvgPath({
     width: opts.width,
     height: opts.height,

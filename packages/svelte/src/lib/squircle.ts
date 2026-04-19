@@ -27,15 +27,19 @@ export const squircle: Action<
     });
     node.style.clipPath = path ? `path('${path}')` : "";
 
-    if (opts.cornerRadius !== undefined) {
+    if (opts.cornerRadius === undefined) {
+      node.removeAttribute("data-squircle");
+    } else {
       node.style.borderRadius = `${opts.cornerRadius}px`;
       node.setAttribute("data-squircle", String(opts.cornerRadius));
-    } else {
-      node.removeAttribute("data-squircle");
     }
 
-    if (opts.width !== undefined) node.style.width = `${opts.width}px`;
-    if (opts.height !== undefined) node.style.height = `${opts.height}px`;
+    if (opts.width !== undefined) {
+      node.style.width = `${opts.width}px`;
+    }
+    if (opts.height !== undefined) {
+      node.style.height = `${opts.height}px`;
+    }
   };
 
   const measure = () => {

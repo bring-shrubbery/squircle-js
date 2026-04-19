@@ -14,7 +14,9 @@
       "default": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "svelte-package -i src/lib -o dist",
     "dev": "svelte-package -i src/lib -o dist --watch",

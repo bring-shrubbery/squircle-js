@@ -1,6 +1,9 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "extends": ["ultracite/biome/core"],
+  "files": {
+    "includes": ["!**/*.svelte"]
+  },
   "assist": {
     "actions": {
       "source": {
