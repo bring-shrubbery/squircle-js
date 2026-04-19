@@ -1,0 +1,54 @@
+{
+  "name": "@squircle-js/svelte",
+  "version": "0.0.0",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "svelte": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "svelte": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "svelte-package",
+    "dev": "svelte-package --watch",
+    "clean": "rm -rf .turbo dist node_modules",
+    "typecheck": "svelte-check --tsconfig ./tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "figma-squircle": "1.1.0"
+  },
+  "devDependencies": {
+    "@squircle-js/tsconfig": "workspace:*",
+    "@sveltejs/package": "^2.3.7",
+    "@sveltejs/vite-plugin-svelte": "^4.0.0",
+    "@testing-library/svelte": "^5.2.4",
+    "jsdom": "^25.0.1",
+    "svelte": "^5.0.0",
+    "svelte-check": "^4.0.0",
+    "typescript": "catalog:",
+    "vitest": "^2.1.0"
+  },
+  "peerDependencies": {
+    "svelte": "^5.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bring-shrubbery/squircle-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bring-shrubbery/squircle-js/issues"
+  },
+  "homepage": "https://squircle.js.org",
+  "author": {
+    "name": "Antoni Silvestrovic",
+    "email": "antoni@quassum.com"
+  }
+}
