@@ -1,0 +1,97 @@
+---
+title: "No-JavaScript Fallback"
+description: "How SquircleNoScript provides graceful degradation in @squircle-js/vue when JavaScript is disabled, using CSS border-radius as a fallback."
+keywords: ["vue squircle noscript", "vue squircle ssr", "nuxt squircle", "vue squircle fallback"]
+slug: "vue-no-javascript-fallback"
+order: 7
+group: "vue"
+---
+
+## The problem
+
+`@squircle-js/vue` relies on JavaScript to measure element dimensions (via `ResizeObserver`) and compute the SVG clip-path. When JavaScript is disabled or hasn't loaded yet, the element will have no `clip-path` applied, leaving it unstyled.
+
+To handle this gracefully, the package ships `SquircleNoScript`.
+
+## How SquircleNoScript works
+
+`SquircleNoScript` renders a `<noscript>` block into the document `<head>` containing a CSS rule:
+
+```css
+[data-squircle] {
+  clip-path: none !important;
+  border-radius: attr(data-squircle) !important;
+}
+```
+
+Every `Squircle` (or element with `v-squircle`) writes the `cornerRadius` value to a `data-squircle` attribute. When JavaScript is disabled, the browser applies the noscript CSS, which:
+
+1. Removes the (non-functional) clip-path
+2. Falls back to standard `border-radius` using the radius stored in `data-squircle`
+
+The result is a rounded element that looks correct even without JavaScript — not a perfect squircle, but a clean, rounded shape that matches the intended `cornerRadius`.
+
+## Setup
+
+Add `SquircleNoScript` once — typically in your app's root component:
+
+```vue
+<!-- App.vue -->
+<script setup>
+import { SquircleNoScript } from "@squircle-js/vue";
+</script>
+
+<template>
+  <SquircleNoScript />
+  <RouterView />
+</template>
+```
+
+`SquircleNoScript` uses Vue's `<Teleport to="head">` internally, so the `<noscript>` block lands in the document `<head>` where it belongs. It only renders inside a `<noscript>` tag, so it has zero impact on JavaScript-enabled users.
+
+No other configuration is needed. All `Squircle` components and `v-squircle` elements on the page automatically benefit from the fallback.
+
+## Setup in Nuxt 3
+
+Place `SquircleNoScript` in your `app.vue`:
+
+```vue
+<!-- app.vue -->
+<script setup>
+import { SquircleNoScript } from "@squircle-js/vue";
+</script>
+
+<template>
+  <SquircleNoScript />
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
+</template>
+```
+
+Nuxt's SSR serializes Teleport content into the initial HTML, so the noscript CSS is present in the server response — it works for users who hit your page with JavaScript disabled from the first byte.
+
+## SSR considerations
+
+During server-side rendering, the clip-path is not yet computed — composables and directives only run on the client in Vue 3. This means there is a brief window on first paint where a `Squircle` element may appear without a clip-path, particularly when neither `defaultWidth` / `defaultHeight` nor explicit `width` / `height` are provided.
+
+To minimise this:
+
+- **Prefer `StaticSquircle`** for elements with fixed dimensions. Once the client hydrates, the clip-path applies immediately and stably.
+- **Provide `defaultWidth` and `defaultHeight`** to dynamic `Squircle` instances when you know a reasonable starting size.
+
+## What users see
+
+| Scenario | Visual result |
+|---|---|
+| JavaScript enabled | Full squircle clip-path |
+| JavaScript disabled, `SquircleNoScript` present | Rounded corners via `border-radius` |
+| JavaScript disabled, no `SquircleNoScript` | Square element (no rounding) |
+| SSR, before hydration | Square element; clip-path applies on mount |
+
+## Progressive enhancement checklist
+
+- Include `<SquircleNoScript />` once in your `App.vue` (or `app.vue` for Nuxt)
+- Prefer `StaticSquircle` for any element whose size is known at authoring time
+- Pass `defaultWidth` / `defaultHeight` to dynamic `Squircle` instances when possible
+- Treat the squircle shape as a visual polish, not a structural guarantee — content should remain readable without it
