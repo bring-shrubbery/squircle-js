@@ -1,0 +1,85 @@
+---
+title: "The StaticSquircle Component"
+description: "<StaticSquircle> is the fixed-dimension variant — no ResizeObserver, lower runtime cost, best for elements with known sizes in Vue 3."
+keywords: ["vue static squircle", "vue squircle fixed size", "vue performant squircle"]
+slug: "vue-static-squircle"
+order: 3
+group: "vue"
+---
+
+## When to use
+
+Use `<StaticSquircle>` when the element's width and height are fixed at authoring time — avatars, app icons, fixed-size buttons, thumbnails. It skips the `ResizeObserver` that `<Squircle>` uses, reducing runtime cost to a single path computation at mount.
+
+```vue
+<script setup>
+import { StaticSquircle } from "@squircle-js/vue";
+</script>
+
+<template>
+  <StaticSquircle
+    :width="48"
+    :height="48"
+    :corner-radius="12"
+    :corner-smoothing="0.6"
+  >
+    <img src="/avatar.jpg" alt="Avatar" class="object-cover" />
+  </StaticSquircle>
+</template>
+```
+
+## Props
+
+| Prop | Type | Required | Description |
+|---|---|---|---|
+| `width` | `number` | ✅ | Element width in pixels. |
+| `height` | `number` | ✅ | Element height in pixels. |
+| `cornerRadius` | `number` | ✅ | Corner radius in pixels. |
+| `cornerSmoothing` | `number` | — | Squircle smoothing from `0` to `1`. Defaults to `0.6`. |
+
+All four size and shape props are required except `cornerSmoothing`. If you don't know the dimensions, use `<Squircle>` instead.
+
+## Behavior
+
+- Computes the path once on mount and applies `clip-path`, `border-radius`, `width`, `height`, and `data-squircle` as inline styles.
+- Re-applies if any of the four props change.
+- Never attaches a `ResizeObserver`.
+
+## Performance note
+
+On a page with hundreds of small squircles (e.g. a grid of app icons), `<StaticSquircle>` is noticeably cheaper than `<Squircle>` because each observer costs memory and adds work on layout changes. A list of 200 avatars is the classic use case.
+
+## Static vs dynamic at a glance
+
+| | `<Squircle>` | `<StaticSquircle>` |
+|---|---|---|
+| Measures element | Yes (`ResizeObserver`) | No — trusts the provided `width`/`height` |
+| Re-applies on resize | Yes | No |
+| Cost per instance | Observer + listener | Single path computation |
+| When to use | Responsive, fluid layouts | Fixed-size elements |
+
+## The directive alternative
+
+For applying static clipping directly to an existing element (e.g. an `<img>`), skip the wrapper:
+
+```vue
+<script setup>
+import { staticSquircleDirective as vStaticSquircle } from "@squircle-js/vue";
+</script>
+
+<template>
+  <img
+    src="/avatar.jpg"
+    alt=""
+    v-static-squircle="{
+      width: 48,
+      height: 48,
+      cornerRadius: 12,
+      cornerSmoothing: 0.6,
+    }"
+    class="object-cover"
+  />
+</template>
+```
+
+See [The Directive Pattern](/docs/vue-directive).
