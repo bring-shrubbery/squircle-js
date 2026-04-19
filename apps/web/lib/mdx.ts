@@ -43,7 +43,7 @@ export function getContentBySlug<T extends "blog" | "docs">(
 
 export async function compileMdx(
   source: string,
-  components: Record<string, ComponentType> = {}
+  components: Record<string, ComponentType<any>> = {}
 ): Promise<ComponentType> {
   const { default: Content } = await evaluate(source, {
     ...(jsxRuntime as Record<string, unknown>),

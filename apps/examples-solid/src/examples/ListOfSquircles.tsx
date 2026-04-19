@@ -1,5 +1,5 @@
-import { For } from "solid-js";
 import { StaticSquircle } from "@squircle-js/solid";
+import { For } from "solid-js";
 
 type Tag = { id: string; label: string };
 
@@ -9,11 +9,11 @@ export function TagList(props: { tags: Tag[] }) {
       <For each={props.tags}>
         {(tag) => (
           <StaticSquircle
-            width={80}
-            height={28}
+            class="flex items-center justify-center bg-sky-100 font-medium text-sky-800 text-xs"
             cornerRadius={8}
             cornerSmoothing={0.6}
-            class="bg-sky-100 text-sky-800 text-xs font-medium flex items-center justify-center"
+            height={28}
+            width={80}
           >
             {tag.label}
           </StaticSquircle>

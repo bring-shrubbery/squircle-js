@@ -1,5 +1,5 @@
-import { createSignal } from "solid-js";
 import { Squircle } from "@squircle-js/solid";
+import { createSignal } from "solid-js";
 
 export function Adjustable() {
   const [radius, setRadius] = createSignal(16);
@@ -7,16 +7,13 @@ export function Adjustable() {
   return (
     <div class="flex items-center gap-4">
       <input
-        type="range"
-        min="0"
         max="64"
-        value={radius()}
+        min="0"
         onInput={(e) => setRadius(Number(e.currentTarget.value))}
+        type="range"
+        value={radius()}
       />
-      <Squircle
-        cornerRadius={radius()}
-        class="w-32 h-32 bg-emerald-500"
-      />
+      <Squircle class="h-32 w-32 bg-emerald-500" cornerRadius={radius()} />
     </div>
   );
 }

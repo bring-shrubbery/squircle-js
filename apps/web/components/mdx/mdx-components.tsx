@@ -1,5 +1,6 @@
 import type { ComponentPropsWithoutRef } from "react";
 import { CodeBlock } from "./code-block";
+import { LiveExample } from "./live-example";
 import { SquircleComparison } from "./squircle-comparison";
 import { SquircleDemo } from "./squircle-demo";
 
@@ -81,4 +82,5 @@ export const mdxComponents = {
   ),
   SquircleDemo,
   SquircleComparison,
+  LiveExample,
 };

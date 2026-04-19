@@ -4,5 +4,5 @@ import "../styles.css";
 
 render(
   () => <Button onClick={() => {}}>Press me</Button>,
-  document.getElementById("app")!,
+  document.getElementById("app")!
 );

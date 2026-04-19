@@ -3,13 +3,13 @@ import { StaticSquircle } from "@squircle-js/solid";
 export function HeroImage(props: { src: string; alt: string }) {
   return (
     <StaticSquircle
-      width={600}
-      height={400}
+      asChild
       cornerRadius={32}
       cornerSmoothing={0.8}
-      asChild
+      height={400}
+      width={600}
     >
-      <img src={props.src} alt={props.alt} class="w-full h-full object-cover" />
+      <img alt={props.alt} class="h-full w-full object-cover" src={props.src} />
     </StaticSquircle>
   );
 }

@@ -5,9 +5,9 @@ import "../styles.css";
 render(
   () => (
     <HeroImage
-      src="https://picsum.photos/seed/squircle-hero/600/400"
       alt="Hero image"
+      src="https://picsum.photos/seed/squircle-hero/600/400"
     />
   ),
-  document.getElementById("app")!,
+  document.getElementById("app")!
 );

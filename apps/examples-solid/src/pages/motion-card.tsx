@@ -9,5 +9,5 @@ render(
       <p class="text-sm text-white/80">Animating in from below.</p>
     </AnimatedCard>
   ),
-  document.getElementById("app")!,
+  document.getElementById("app")!
 );

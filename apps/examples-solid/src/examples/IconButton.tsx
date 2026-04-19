@@ -1,5 +1,5 @@
-import type { Component } from "solid-js";
 import { StaticSquircle } from "@squircle-js/solid";
+import type { Component } from "solid-js";
 
 export function IconButton(props: {
   icon: Component<{ class?: string }>;
@@ -9,15 +9,15 @@ export function IconButton(props: {
   const Icon = props.icon;
   return (
     <StaticSquircle
-      width={40}
-      height={40}
+      asChild
+      class="flex items-center justify-center bg-gray-100 transition-colors hover:bg-gray-200"
       cornerRadius={10}
       cornerSmoothing={0.6}
-      class="bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
-      asChild
+      height={40}
+      width={40}
     >
-      <button type="button" aria-label={props.label} onClick={props.onClick}>
-        <Icon class="w-5 h-5 text-gray-700" />
+      <button aria-label={props.label} onClick={props.onClick} type="button">
+        <Icon class="h-5 w-5 text-gray-700" />
       </button>
     </StaticSquircle>
   );

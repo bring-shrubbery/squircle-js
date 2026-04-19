@@ -4,14 +4,14 @@ export function Avatar(props: { src: string; alt: string; size?: number }) {
   const size = () => props.size ?? 48;
   return (
     <StaticSquircle
-      width={size()}
-      height={size()}
+      asChild
+      class="shrink-0 overflow-hidden"
       cornerRadius={Math.round(size() * 0.25)}
       cornerSmoothing={0.6}
-      class="overflow-hidden shrink-0"
-      asChild
+      height={size()}
+      width={size()}
     >
-      <img src={props.src} alt={props.alt} class="w-full h-full object-cover" />
+      <img alt={props.alt} class="h-full w-full object-cover" src={props.src} />
     </StaticSquircle>
   );
 }

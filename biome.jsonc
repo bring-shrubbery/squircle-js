@@ -42,5 +42,28 @@
         "noUnknownAtRules": "off"
       }
     }
-  }
+  },
+  "overrides": [
+    {
+      "includes": [
+        "apps/examples-vue/**",
+        "apps/examples-svelte/**",
+        "apps/examples-solid/**"
+      ],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "useImageSize": "off"
+          },
+          "style": {
+            "noNonNullAssertion": "off",
+            "useConsistentTypeDefinitions": "off"
+          },
+          "suspicious": {
+            "noEmptyBlockStatements": "off"
+          }
+        }
+      }
+    }
+  ]
 }

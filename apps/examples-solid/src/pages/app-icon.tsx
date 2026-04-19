@@ -5,10 +5,10 @@ import "../styles.css";
 render(
   () => (
     <div class="flex gap-6">
-      <AppIcon src="https://picsum.photos/seed/icon-1/120/120" name="Photos" />
-      <AppIcon src="https://picsum.photos/seed/icon-2/120/120" name="Notes" />
-      <AppIcon src="https://picsum.photos/seed/icon-3/120/120" name="Weather" />
+      <AppIcon name="Photos" src="https://picsum.photos/seed/icon-1/120/120" />
+      <AppIcon name="Notes" src="https://picsum.photos/seed/icon-2/120/120" />
+      <AppIcon name="Weather" src="https://picsum.photos/seed/icon-3/120/120" />
     </div>
   ),
-  document.getElementById("app")!,
+  document.getElementById("app")!
 );

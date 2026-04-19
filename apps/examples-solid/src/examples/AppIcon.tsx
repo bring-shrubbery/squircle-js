@@ -4,16 +4,16 @@ export function AppIcon(props: { src: string; name: string }) {
   return (
     <div class="flex flex-col items-center gap-1.5">
       <StaticSquircle
-        width={60}
-        height={60}
+        asChild
+        class="overflow-hidden"
         cornerRadius={13}
         cornerSmoothing={0.6}
-        class="overflow-hidden"
-        asChild
+        height={60}
+        width={60}
       >
-        <img src={props.src} alt={props.name} />
+        <img alt={props.name} src={props.src} />
       </StaticSquircle>
-      <span class="text-xs text-gray-700">{props.name}</span>
+      <span class="text-gray-700 text-xs">{props.name}</span>
     </div>
   );
 }
