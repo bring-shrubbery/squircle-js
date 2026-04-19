@@ -51,6 +51,7 @@ Visually, [this post from Figma Blog](https://www.figma.com/blog/desperately-see
 | --- | --- | --- |
 | [`@squircle-js/react`](./packages/squircle-element-react) | [`@squircle-js/react`](https://www.npmjs.com/package/@squircle-js/react) | React 16.8+ |
 | [`@squircle-js/solid`](./packages/solid) | [`@squircle-js/solid`](https://www.npmjs.com/package/@squircle-js/solid) | Solid 1.8+ |
+| [`@squircle-js/svelte`](./packages/svelte) | [`@squircle-js/svelte`](https://www.npmjs.com/package/@squircle-js/svelte) | Svelte 5+ |
 
 ## Usage
 
@@ -118,6 +119,36 @@ export default function App() {
 ```
 
 See the [package README](./packages/solid/README.md) for the full Solid API.
+
+### With Svelte
+
+```bash
+pnpm add @squircle-js/svelte
+```
+
+```svelte
+<script>
+  import { Squircle } from "@squircle-js/svelte";
+</script>
+
+<Squircle cornerRadius={10} cornerSmoothing={1} class="bg-black p-4 text-white">
+  Squircle!
+</Squircle>
+```
+
+Svelte users can also apply a squircle directly to any element via the `use:squircle` action — no wrapper required:
+
+```svelte
+<script>
+  import { squircle } from "@squircle-js/svelte";
+</script>
+
+<button use:squircle={{ cornerRadius: 10, cornerSmoothing: 0.6 }}>
+  Click me
+</button>
+```
+
+See the [package README](./packages/svelte/README.md) for the full Svelte API.
 
 ## Why not use CSS superellipse() ?
 
