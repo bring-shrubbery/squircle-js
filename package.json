@@ -13,6 +13,7 @@
     "dev:next": "turbo watch dev -F @squircle-js/nextjs...",
     "lint:ws": "pnpm dlx sherif@latest",
     "postinstall": "pnpm lint:ws",
+    "test": "turbo run test",
     "typecheck": "turbo run typecheck",
     "ui-add": "turbo run ui-add",
     "changeset:version": "changeset version",

@@ -18,6 +18,10 @@
       "dependsOn": ["^topo", "^build"],
       "outputs": ["node_modules/.cache/tsbuildinfo.json"]
     },
+    "test": {
+      "dependsOn": ["^topo", "^build"],
+      "outputs": []
+    },
     "clean": {
       "cache": false
     },
