@@ -1,0 +1,167 @@
+---
+title: "The Action Pattern"
+description: "use:squircle and use:staticSquircle attach squircle clipping directly to any element — the idiomatic Svelte equivalent of React's asChild."
+keywords: ["svelte squircle action", "svelte use:squircle", "svelte ios squircle button"]
+slug: "svelte-action"
+order: 4
+group: "svelte"
+---
+
+## What is an action?
+
+A Svelte **action** is a function that attaches behavior to an element, invoked via `use:name={options}`. It has access to the DOM node directly and gets lifecycle hooks (`update`, `destroy`).
+
+`@squircle-js/svelte` ships two actions:
+
+- `use:squircle` — dynamic, observes element size
+- `use:staticSquircle` — synchronous, takes explicit `width` / `height`
+
+## Why actions instead of `asChild`?
+
+React and Solid's `asChild` pattern works because JSX children can be cloned and augmented with extra props. Svelte's snippets don't expose the DOM element to the parent component, so there's no clean way to "forward" clip-path styles through a snippet.
+
+Svelte's answer is the action directive — a primitive specifically for attaching behavior to any element. It's lighter than wrapping, works for any intrinsic element, composes with Svelte transitions and third-party actions, and reads naturally in templates.
+
+## `use:squircle`
+
+```svelte
+<script>
+  import { squircle } from "@squircle-js/svelte";
+</script>
+
+<button
+  use:squircle={{ cornerRadius: 12, cornerSmoothing: 0.6 }}
+  class="bg-indigo-600 px-5 py-2.5 text-white font-semibold"
+>
+  Click me
+</button>
+```
+
+**Behavior:**
+
+- Sets `data-squircle`, `border-radius`, and `clip-path` on the element
+- Observes size via `ResizeObserver` — updates clip-path on resize
+- Respects explicit `width` / `height` (skips the observer when both are given)
+- Cleans up the observer when the element is removed
+
+**Options:**
+
+| Option | Type | Description |
+|---|---|---|
+| `cornerRadius` | `number` | Corner radius in pixels. |
+| `cornerSmoothing` | `number` | Squircle smoothing from `0` to `1`. Defaults to `0.6`. |
+| `width` | `number` | Explicit width override. |
+| `height` | `number` | Explicit height override. |
+| `defaultWidth` | `number` | Fallback width used before first measurement. |
+| `defaultHeight` | `number` | Fallback height used before first measurement. |
+
+## `use:staticSquircle`
+
+Synchronous variant. No observer. All four size/shape options are required.
+
+```svelte
+<script>
+  import { staticSquircle } from "@squircle-js/svelte";
+</script>
+
+<img
+  src="/avatar.jpg"
+  alt="Avatar"
+  use:staticSquircle={{
+    width: 48,
+    height: 48,
+    cornerRadius: 12,
+    cornerSmoothing: 0.6,
+  }}
+  class="object-cover"
+/>
+```
+
+## Examples
+
+### Link
+
+```svelte
+<script>
+  import { squircle } from "@squircle-js/svelte";
+</script>
+
+<a
+  href="/docs"
+  use:squircle={{ cornerRadius: 12, cornerSmoothing: 0.6 }}
+  class="inline-flex items-center bg-gray-900 px-4 py-2 text-white"
+>
+  Read the docs
+</a>
+```
+
+### Image
+
+```svelte
+<script>
+  import { staticSquircle } from "@squircle-js/svelte";
+</script>
+
+<img
+  src="/hero.jpg"
+  alt="Hero"
+  use:staticSquircle={{
+    width: 600,
+    height: 400,
+    cornerRadius: 32,
+    cornerSmoothing: 0.8,
+  }}
+  class="object-cover"
+/>
+```
+
+### Reactive options
+
+```svelte
+<script>
+  import { squircle } from "@squircle-js/svelte";
+
+  let radius = $state(16);
+</script>
+
+<input type="range" min="0" max="64" bind:value={radius} />
+
+<div
+  use:squircle={{ cornerRadius: radius, cornerSmoothing: 0.6 }}
+  class="w-40 h-40 bg-rose-500"
+></div>
+```
+
+When the `radius` rune updates, the action's `update` hook fires and recomputes the clip-path. No component re-render.
+
+### Composition with other actions
+
+Actions compose naturally — you can stack multiple directives on the same element:
+
+```svelte
+<script>
+  import { squircle } from "@squircle-js/svelte";
+  import { fade } from "svelte/transition";
+</script>
+
+<div
+  use:squircle={{ cornerRadius: 20 }}
+  transition:fade
+  class="bg-violet-500 p-6"
+>
+  Fades in with a squircle clip-path
+</div>
+```
+
+## Comparison: component vs action
+
+| | `<Squircle>` component | `use:squircle` action |
+|---|---|---|
+| DOM nodes | 1 extra `<div>` wrapper | 0 (clip-path on the element itself) |
+| Target element | Always `<div>` | Any element |
+| Needs `overflow-hidden` | Often yes | No — clip-path clips contents |
+| When to use | Wrapping arbitrary content | Clipping a specific `<button>`, `<img>`, `<a>`, etc. |
+
+## Fallback behavior
+
+If the browser doesn't support `ResizeObserver`, the action applies a one-time measurement on mount (using `offsetWidth` / `offsetHeight` or `defaultWidth` / `defaultHeight`) and skips the observer. The clip-path won't update on resize, but the initial shape is still applied.

@@ -1,0 +1,248 @@
+---
+title: "Examples & Recipes"
+description: "Common patterns for @squircle-js/svelte: buttons, cards, avatars, image containers, and more."
+keywords: ["svelte squircle examples", "svelte squircle button", "svelte squircle card", "svelte squircle avatar"]
+slug: "svelte-examples"
+order: 7
+group: "svelte"
+---
+
+## Button
+
+Use the `use:squircle` action to render a button with no wrapper element:
+
+```svelte
+<script lang="ts">
+  import { squircle } from "@squircle-js/svelte";
+
+  let { onclick, children } = $props<{
+    onclick?: () => void;
+    children: import("svelte").Snippet;
+  }>();
+</script>
+
+<button
+  type="button"
+  {onclick}
+  use:squircle={{ cornerRadius: 12, cornerSmoothing: 0.6 }}
+  class="bg-indigo-600 px-5 py-2.5 text-white font-semibold text-sm"
+>
+  {@render children()}
+</button>
+```
+
+## Card
+
+A card with responsive width — the `Squircle` component measures itself:
+
+```svelte
+<script lang="ts">
+  import { Squircle } from "@squircle-js/svelte";
+
+  let { title, body } = $props<{ title: string; body: string }>();
+</script>
+
+<Squircle
+  cornerRadius={20}
+  cornerSmoothing={0.6}
+  class="bg-white shadow-md p-6 space-y-2"
+>
+  <h3 class="font-semibold text-lg">{title}</h3>
+  <p class="text-gray-600 text-sm">{body}</p>
+</Squircle>
+```
+
+## Avatar
+
+Fixed-size avatars are a perfect use case for `use:staticSquircle`:
+
+```svelte
+<script lang="ts">
+  import { staticSquircle } from "@squircle-js/svelte";
+
+  let { src, alt, size = 48 } = $props<{
+    src: string;
+    alt: string;
+    size?: number;
+  }>();
+</script>
+
+<img
+  {src}
+  {alt}
+  use:staticSquircle={{
+    width: size,
+    height: size,
+    cornerRadius: Math.round(size * 0.25),
+    cornerSmoothing: 0.6,
+  }}
+  class="object-cover shrink-0"
+/>
+```
+
+## Image container
+
+Clip a hero image with a large squircle radius:
+
+```svelte
+<script lang="ts">
+  import { staticSquircle } from "@squircle-js/svelte";
+
+  let { src, alt } = $props<{ src: string; alt: string }>();
+</script>
+
+<img
+  {src}
+  {alt}
+  use:staticSquircle={{
+    width: 600,
+    height: 400,
+    cornerRadius: 32,
+    cornerSmoothing: 0.8,
+  }}
+  class="object-cover"
+/>
+```
+
+## App icon
+
+Replicate the iOS app icon shape exactly:
+
+```svelte
+<script lang="ts">
+  import { staticSquircle } from "@squircle-js/svelte";
+
+  let { src, name } = $props<{ src: string; name: string }>();
+</script>
+
+<div class="flex flex-col items-center gap-1.5">
+  <img
+    {src}
+    alt={name}
+    use:staticSquircle={{
+      width: 60,
+      height: 60,
+      cornerRadius: 13,
+      cornerSmoothing: 0.6,
+    }}
+  />
+  <span class="text-xs text-gray-700">{name}</span>
+</div>
+```
+
+## Notification badge
+
+Small squircle badges with dynamic content:
+
+```svelte
+<script lang="ts">
+  import { Squircle } from "@squircle-js/svelte";
+
+  let { count } = $props<{ count: number }>();
+</script>
+
+<Squircle
+  cornerRadius={6}
+  cornerSmoothing={0.6}
+  class="bg-red-500 px-1.5 py-0.5 text-white text-xs font-bold min-w-[20px] text-center"
+>
+  {count}
+</Squircle>
+```
+
+## Icon button
+
+Equal-width-and-height buttons benefit from `use:staticSquircle`:
+
+```svelte
+<script lang="ts">
+  import { staticSquircle } from "@squircle-js/svelte";
+
+  let { label, onclick, children } = $props<{
+    label: string;
+    onclick?: () => void;
+    children: import("svelte").Snippet;
+  }>();
+</script>
+
+<button
+  type="button"
+  aria-label={label}
+  {onclick}
+  use:staticSquircle={{
+    width: 40,
+    height: 40,
+    cornerRadius: 10,
+    cornerSmoothing: 0.6,
+  }}
+  class="bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
+>
+  {@render children()}
+</button>
+```
+
+## Reactive squircle
+
+Driving `cornerRadius` from a `$state` rune — Svelte's fine-grained reactivity only recomputes the `clip-path`:
+
+```svelte
+<script>
+  import { Squircle } from "@squircle-js/svelte";
+
+  let radius = $state(16);
+</script>
+
+<div class="flex items-center gap-4">
+  <input type="range" min="0" max="64" bind:value={radius} />
+  <Squircle cornerRadius={radius} class="w-32 h-32 bg-emerald-500" />
+</div>
+```
+
+## List of squircles
+
+`{#each}` is Svelte's idiomatic list primitive — each item is keyed automatically when you provide a key expression:
+
+```svelte
+<script lang="ts">
+  import { staticSquircle } from "@squircle-js/svelte";
+
+  type Tag = { id: string; label: string };
+
+  let { tags } = $props<{ tags: Tag[] }>();
+</script>
+
+<div class="flex flex-wrap gap-2">
+  {#each tags as tag (tag.id)}
+    <div
+      use:staticSquircle={{
+        width: 80,
+        height: 28,
+        cornerRadius: 8,
+        cornerSmoothing: 0.6,
+      }}
+      class="bg-sky-100 text-sky-800 text-xs font-medium flex items-center justify-center"
+    >
+      {tag.label}
+    </div>
+  {/each}
+</div>
+```
+
+## Composition with transitions
+
+Actions compose with Svelte's built-in transitions — you can add a fade-in without affecting the squircle:
+
+```svelte
+<script>
+  import { squircle } from "@squircle-js/svelte";
+  import { fade } from "svelte/transition";
+</script>
+
+<div
+  use:squircle={{ cornerRadius: 20, cornerSmoothing: 0.6 }}
+  transition:fade={{ duration: 200 }}
+  class="bg-gradient-to-br from-violet-500 to-indigo-600 p-6 w-64 h-32"
+>
+  Animated squircle card
+</div>
+```

@@ -1,0 +1,76 @@
+---
+title: "StaticSquircle"
+description: "StaticSquircle skips the ResizeObserver for elements with known dimensions — cheaper, SSR-friendly, ideal for avatars, icons, and grid cells."
+keywords: ["svelte static squircle", "svelte squircle fixed size", "svelte squircle ssr"]
+slug: "svelte-static-squircle"
+order: 3
+group: "svelte"
+---
+
+## Overview
+
+`StaticSquircle` is for elements whose dimensions are known at authoring time. It computes the clip-path synchronously from its props — no `ResizeObserver`, no measurement. This makes it cheaper at runtime.
+
+```svelte
+<script>
+  import { StaticSquircle } from "@squircle-js/svelte";
+</script>
+
+<StaticSquircle width={48} height={48} cornerRadius={12} cornerSmoothing={0.6}>
+  <img src="/avatar.jpg" alt="" class="w-full h-full object-cover" />
+</StaticSquircle>
+```
+
+## Props
+
+All four size/shape props are required:
+
+| Prop | Type | Description |
+|---|---|---|
+| `width` | `number` | Element width in pixels. |
+| `height` | `number` | Element height in pixels. |
+| `cornerRadius` | `number` | Corner radius in pixels. |
+| `cornerSmoothing` | `number` | Squircle smoothing from `0` to `1`. |
+| `class` | `string` | Forwarded to the rendered `<div>`. |
+| `style` | `string` | Forwarded. |
+| `children` | `Snippet` | Standard children snippet. |
+
+## When to prefer StaticSquircle
+
+- **Avatars, app icons, tag chips, fixed badges** — anything with known width/height
+- **Grid cells of a known size**
+- **Frequently rendered lists** where skipping the observer matters
+
+## Performance note
+
+Svelte 5's reactivity is fine-grained — a `StaticSquircle` whose props change recomputes only the clip-path style, not the component. This means using it inside an `{#each}` with reactive sizes is still inexpensive.
+
+```svelte
+<script>
+  import { StaticSquircle } from "@squircle-js/svelte";
+
+  const icons = [
+    { src: "/mail.png", name: "Mail" },
+    { src: "/calendar.png", name: "Calendar" },
+    { src: "/notes.png", name: "Notes" },
+  ];
+</script>
+
+<div class="grid grid-cols-3 gap-4">
+  {#each icons as icon}
+    <StaticSquircle
+      width={60}
+      height={60}
+      cornerRadius={13}
+      cornerSmoothing={0.6}
+      class="overflow-hidden"
+    >
+      <img src={icon.src} alt={icon.name} class="w-full h-full object-cover" />
+    </StaticSquircle>
+  {/each}
+</div>
+```
+
+## When to use the action instead
+
+If you'd rather not introduce a wrapper `<div>` around your element, use the [`use:staticSquircle` action](/docs/svelte-action) to apply the clip-path directly.

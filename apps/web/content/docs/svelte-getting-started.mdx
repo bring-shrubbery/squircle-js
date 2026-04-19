@@ -1,0 +1,67 @@
+---
+title: "Getting Started"
+description: "Install @squircle-js/svelte and render your first squircle in Svelte 5."
+keywords: ["svelte squircle", "svelte ios squircle", "svelte smooth corners"]
+slug: "svelte-getting-started"
+order: 1
+group: "svelte"
+---
+
+## Install
+
+```bash
+pnpm add @squircle-js/svelte
+# or
+npm install @squircle-js/svelte
+```
+
+Requires Svelte 5 or later. For SvelteKit projects, the package works out of the box — no additional configuration needed.
+
+## Basic usage
+
+```svelte
+<script>
+  import { Squircle } from "@squircle-js/svelte";
+</script>
+
+<Squircle cornerRadius={24} cornerSmoothing={0.6} class="bg-indigo-500 p-6">
+  <h2 class="text-white font-semibold text-lg">Hello, squircle</h2>
+</Squircle>
+```
+
+`Squircle` renders a `<div>` that auto-measures itself with a `ResizeObserver` and applies a computed SVG `clip-path` for the smooth-corner effect.
+
+## The action alternative
+
+Svelte's `asChild` equivalent is an **action** — apply the squircle clip-path directly to any element without a wrapper:
+
+```svelte
+<script>
+  import { squircle } from "@squircle-js/svelte";
+</script>
+
+<button
+  use:squircle={{ cornerRadius: 12, cornerSmoothing: 0.6 }}
+  class="bg-blue-600 px-4 py-2 text-white"
+>
+  Click me
+</button>
+```
+
+See [The Action Pattern](/docs/svelte-action) for the full story.
+
+## SvelteKit SSR
+
+Everything works with SvelteKit's SSR and prerendering. The action runs only on the client (actions are client-only by design in Svelte), so initial server-rendered HTML omits the `clip-path` unless you pass `defaultWidth` / `defaultHeight` (or use `StaticSquircle` for fixed-size elements).
+
+See [No-JavaScript Fallback](/docs/svelte-no-javascript-fallback) for progressive enhancement details.
+
+## Coming from React or Solid?
+
+The component API is nearly identical:
+
+- `Squircle`, `StaticSquircle`, `SquircleNoScript` — same names, same props
+- `cornerRadius`, `cornerSmoothing`, `width`, `height`, `defaultWidth`, `defaultHeight` — same semantics
+- `asChild` → replaced by `use:squircle` action (idiomatic Svelte)
+
+The one deviation: this package uses `class` (Svelte's attribute name) rather than `className`, and children are passed as snippets rather than JSX children.

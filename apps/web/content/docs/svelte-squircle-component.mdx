@@ -1,0 +1,84 @@
+---
+title: "Squircle Component"
+description: "API reference for the Squircle Svelte component: props, ResizeObserver behavior, and SvelteKit SSR considerations."
+keywords: ["svelte squircle component", "svelte squircle api", "svelte squircle props"]
+slug: "svelte-squircle-component"
+order: 2
+group: "svelte"
+---
+
+## Overview
+
+`Squircle` is the dynamic, size-observing component. It measures its own rendered size via `ResizeObserver` and recomputes the SVG clip-path whenever the size or corner props change.
+
+```svelte
+<script>
+  import { Squircle } from "@squircle-js/svelte";
+</script>
+
+<Squircle cornerRadius={20} cornerSmoothing={0.6} class="bg-gray-800 p-6">
+  <span class="text-white">Content</span>
+</Squircle>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `cornerRadius` | `number` | `undefined` | Corner radius in pixels. Also written to `border-radius` and `data-squircle`. |
+| `cornerSmoothing` | `number` | `0.6` | Squircle smoothing from `0` (standard arc) to `1` (maximum). |
+| `width` | `number` | — | Explicit width override; disables the observer when combined with `height`. |
+| `height` | `number` | — | Explicit height override. |
+| `defaultWidth` | `number` | — | Width used before first measurement (useful for SSR). |
+| `defaultHeight` | `number` | — | Height used before first measurement. |
+| `class` | `string` | — | Forwarded to the rendered `<div>`. |
+| `style` | `string` | — | Forwarded; the squircle's `clip-path` is set directly on the element, not the attribute. |
+| `children` | `Snippet` | — | Standard Svelte 5 children snippet. |
+
+Any additional HTML attributes are forwarded to the underlying `<div>`.
+
+## How measurement works
+
+`Squircle` uses the `squircle` action internally, which sets up a `ResizeObserver` on mount. The observer fires:
+
+- After the initial mount (producing the first clip-path)
+- Whenever the element's content box resizes
+- Whenever the options passed to the action change (corner props, explicit dimensions)
+
+When both `width` and `height` are provided explicitly, the observer is skipped — the clip-path is computed once and updated only when options change.
+
+## SSR & hydration
+
+The action runs only on the client, so during SSR the element is emitted with no `clip-path` unless you provide fallbacks:
+
+- **`defaultWidth` / `defaultHeight`** — consumed by the action on first measurement (if the real offset is `0`), allowing a reasonable initial clip-path after hydration.
+- **Prefer `StaticSquircle`** for any element whose size is known at authoring time — cheaper at runtime (no observer).
+- **`SquircleNoScript`** provides a `border-radius` fallback when JavaScript is disabled entirely.
+
+## Reactive props
+
+Because options are passed through the action, updates to `cornerRadius` and other props reactively recompute the clip-path:
+
+```svelte
+<script>
+  import { Squircle } from "@squircle-js/svelte";
+
+  let radius = $state(16);
+</script>
+
+<input type="range" min="0" max="64" bind:value={radius} />
+
+<Squircle cornerRadius={radius} class="w-32 h-32 bg-emerald-500" />
+```
+
+Svelte's fine-grained reactivity means only the `clip-path` style is updated — no component re-render.
+
+## When to use `Squircle` vs `StaticSquircle`
+
+- **Unknown / responsive dimensions** → `Squircle`.
+- **Fixed dimensions known at authoring time** → `StaticSquircle`. Cheaper (no observer).
+
+## When to use the component vs the action
+
+- **Need a wrapper `<div>` around arbitrary children** → use `<Squircle>`.
+- **Want to apply squircle clipping directly to a `<button>`, `<img>`, `<a>`, etc.** → use the [`use:squircle` action](/docs/svelte-action).
