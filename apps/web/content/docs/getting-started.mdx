@@ -71,3 +71,37 @@ export default function Profile() {
 - React 18 or later
 - A browser that supports `clip-path: path()` (all modern browsers)
 - JavaScript must be enabled — see [No-JavaScript Fallback](/docs/no-javascript-fallback) for graceful degradation
+
+## Using Solid
+
+`@squircle-js/solid` provides the same API for [Solid.js](https://solidjs.com/).
+
+### Installation
+
+```bash
+npm install @squircle-js/solid
+```
+
+```bash
+pnpm add @squircle-js/solid
+```
+
+```bash
+yarn add @squircle-js/solid
+```
+
+### Basic usage
+
+```tsx
+import { Squircle } from "@squircle-js/solid";
+
+export default function App() {
+  return (
+    <Squircle cornerRadius={16} class="bg-blue-500 w-32 h-32">
+      <p>Hello</p>
+    </Squircle>
+  );
+}
+```
+
+`StaticSquircle`, `SquircleNoScript`, and `asChild` all work the same as their React counterparts — see the [package README](https://www.npmjs.com/package/@squircle-js/solid) for details. Works with SolidStart; `ResizeObserver` is set up on mount, so SSR renders use `defaultWidth` / `defaultHeight` until the client hydrates.
