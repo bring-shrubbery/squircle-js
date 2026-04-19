@@ -2,7 +2,7 @@
   import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
 
-  import { squircle } from "./squircle.svelte.js";
+  import { squircle } from "./squircle.js";
 
   interface Props extends HTMLAttributes<HTMLDivElement> {
     cornerRadius?: number;

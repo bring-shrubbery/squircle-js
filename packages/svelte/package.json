@@ -16,8 +16,8 @@
   },
   "files": ["dist"],
   "scripts": {
-    "build": "svelte-package",
-    "dev": "svelte-package --watch",
+    "build": "svelte-package -i src/lib -o dist",
+    "dev": "svelte-package -i src/lib -o dist --watch",
     "clean": "rm -rf .turbo dist node_modules",
     "typecheck": "svelte-check --tsconfig ./tsconfig.json",
     "test": "vitest run"
