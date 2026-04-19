@@ -3,14 +3,19 @@
 import { useAtom } from "jotai";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { LANGUAGE_SELECTOR_ATOM } from "@/lib/atoms";
+import { type Framework, LANGUAGE_SELECTOR_ATOM } from "@/lib/atoms";
 
 export const UsageSection = ({
   reactUsageContent,
+  vueUsageContent,
+  svelteUsageContent,
+  solidUsageContent,
 }: {
   reactUsageContent: ReactNode;
+  vueUsageContent: ReactNode;
+  svelteUsageContent: ReactNode;
+  solidUsageContent: ReactNode;
 }) => {
   const [language, setLanguage] = useAtom(LANGUAGE_SELECTOR_ATOM);
 
@@ -23,25 +28,27 @@ export const UsageSection = ({
       <Tabs
         className="flex w-full flex-col items-center"
         defaultValue="react"
-        // TODO: Update this later when other languages are supported.
-        onValueChange={(newLang) => setLanguage(newLang as "react")}
+        onValueChange={(newLang) => setLanguage(newLang as Framework)}
         value={language}
       >
         <TabsList>
           <TabsTrigger value="react">React</TabsTrigger>
-          <TabsTrigger disabled value="vue">
-            Vue <Badge className="ml-2 hidden sm:block">soon</Badge>
-          </TabsTrigger>
-          <TabsTrigger disabled value="svelte">
-            Svelte <Badge className="ml-2 hidden sm:block">soon</Badge>
-          </TabsTrigger>
-          <TabsTrigger disabled value="solid">
-            Solid <Badge className="ml-2 hidden sm:block">soon</Badge>
-          </TabsTrigger>
+          <TabsTrigger value="vue">Vue</TabsTrigger>
+          <TabsTrigger value="svelte">Svelte</TabsTrigger>
+          <TabsTrigger value="solid">Solid</TabsTrigger>
         </TabsList>
 
         <TabsContent className="mx-auto w-fit" value="react">
           {reactUsageContent}
+        </TabsContent>
+        <TabsContent className="mx-auto w-fit" value="vue">
+          {vueUsageContent}
+        </TabsContent>
+        <TabsContent className="mx-auto w-fit" value="svelte">
+          {svelteUsageContent}
+        </TabsContent>
+        <TabsContent className="mx-auto w-fit" value="solid">
+          {solidUsageContent}
         </TabsContent>
       </Tabs>
 

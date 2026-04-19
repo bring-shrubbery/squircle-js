@@ -17,9 +17,16 @@ export const ExamplesSection = ({
   asChildPropExample: JSX.Element;
   dynamicSizeExample: JSX.Element;
 }) => {
-  const [language] = useAtom<"react" | "svelte">(LANGUAGE_SELECTOR_ATOM);
+  const [language] = useAtom(LANGUAGE_SELECTOR_ATOM);
 
-  const langLabel = language === "react" ? "React" : "";
+  const langLabel =
+    language === "react"
+      ? "React"
+      : language === "vue"
+        ? "Vue"
+        : language === "svelte"
+          ? "Svelte"
+          : "Solid";
 
   return (
     <div className="container mx-auto mb-36 w-fit">

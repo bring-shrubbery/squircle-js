@@ -7,8 +7,8 @@ export const FeaturesSection = () => {
 
       <ul className="list-inside list-none space-y-2">
         <li>{"💃 Easy to use primitive for building your own components."}</li>
-        <li>{"🚀 Available for React, (other libraries coming soon)"}</li>
-        <li>{"😏 React 18 support (server components)"}</li>
+        <li>{"🚀 Available for React, Vue, Svelte, and Solid"}</li>
+        <li>{"😏 React 18+ support (server components)"}</li>
         <li>
           {"🙏 Fallback for no JavaScript (try disabling JS for this page)"}
           <noscript>

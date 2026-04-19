@@ -11,6 +11,9 @@ import { LinksSection } from "./sections/LinksSection";
 import { SquircleDemoSection } from "./sections/SquircleDemoSection";
 import { UsageSection } from "./sections/UsageSection";
 import { UsageSectionReactContent } from "./sections/UsageSectionReactContent";
+import { UsageSectionSolidContent } from "./sections/UsageSectionSolidContent";
+import { UsageSectionSvelteContent } from "./sections/UsageSectionSvelteContent";
+import { UsageSectionVueContent } from "./sections/UsageSectionVueContent";
 
 export default function Page() {
   return (
@@ -19,7 +22,12 @@ export default function Page() {
       <div className="px-4 sm:px-0">
         <SquircleDemoSection />
         <FeaturesSection />
-        <UsageSection reactUsageContent={<UsageSectionReactContent />} />
+        <UsageSection
+          reactUsageContent={<UsageSectionReactContent />}
+          solidUsageContent={<UsageSectionSolidContent />}
+          svelteUsageContent={<UsageSectionSvelteContent />}
+          vueUsageContent={<UsageSectionVueContent />}
+        />
         <ExamplesSection
           asChildPropExample={<ExamplesSectionAsChildExample />}
           constantSizeExample={<ExampleSectionConstantSizeExample />}
