@@ -1,0 +1,157 @@
+---
+title: "The Composable API"
+description: "useSquircle and useStaticSquircle attach squircle clipping to a template ref in Vue 3 — the Composition API primitive."
+keywords: ["vue squircle composable", "useSquircle", "vue squircle template ref"]
+slug: "vue-composable"
+order: 5
+group: "vue"
+---
+
+## What is a composable?
+
+A Vue **composable** is a function that encapsulates reusable Composition API logic. It runs inside `setup()` (or `<script setup>`) and returns reactive state or side effects. Composables are Vue's idiomatic primitive for stateful logic that isn't tied to a specific component shape.
+
+`@squircle-js/vue` ships two composables:
+
+- `useSquircle(elRef, options)` — dynamic, observes element size
+- `useStaticSquircle(elRef, options)` — synchronous, takes explicit `width` / `height`
+
+## When to reach for the composable
+
+- You already have a template ref for reasons unrelated to squircling (focus management, animation, measurement).
+- You want options to derive from other reactive state via `computed()`.
+- You're composing squircle behavior alongside other composables (e.g. VueUse's `useElementSize`, `useFocus`).
+
+For plain template-level usage, prefer the component or the directive.
+
+## `useSquircle`
+
+```vue
+<script setup>
+import { ref } from "vue";
+import { useSquircle } from "@squircle-js/vue";
+
+const el = ref<HTMLElement | null>(null);
+useSquircle(el, { cornerRadius: 16, cornerSmoothing: 0.6 });
+</script>
+
+<template>
+  <div ref="el" class="bg-indigo-500 p-6 w-64">Hello</div>
+</template>
+```
+
+**Signature:**
+
+```ts
+useSquircle(
+  elRef: Ref<HTMLElement | null | undefined>,
+  options?: UseSquircleOptions | Ref<UseSquircleOptions> | (() => UseSquircleOptions),
+): void
+```
+
+Options can be a plain object, a `ref`, a `computed`, or a getter function. When reactive, the composable re-applies the clip-path whenever the options change.
+
+## Reactive options
+
+### Pass a getter
+
+```vue
+<script setup>
+import { ref } from "vue";
+import { useSquircle } from "@squircle-js/vue";
+
+const el = ref<HTMLElement | null>(null);
+const radius = ref(16);
+
+useSquircle(el, () => ({ cornerRadius: radius.value, cornerSmoothing: 0.6 }));
+</script>
+
+<template>
+  <input type="range" min="0" max="64" v-model.number="radius" />
+  <div ref="el" class="w-40 h-40 bg-rose-500" />
+</template>
+```
+
+### Pass a `computed`
+
+```vue
+<script setup>
+import { computed, ref } from "vue";
+import { useSquircle } from "@squircle-js/vue";
+
+const el = ref<HTMLElement | null>(null);
+const size = ref(40);
+
+const options = computed(() => ({
+  cornerRadius: size.value / 2.5,
+  cornerSmoothing: 0.6,
+}));
+
+useSquircle(el, options);
+</script>
+
+<template>
+  <div ref="el" :style="{ width: size + 'px', height: size + 'px' }" class="bg-teal-500" />
+</template>
+```
+
+## `useStaticSquircle`
+
+```vue
+<script setup>
+import { ref } from "vue";
+import { useStaticSquircle } from "@squircle-js/vue";
+
+const el = ref<HTMLElement | null>(null);
+useStaticSquircle(el, {
+  width: 48,
+  height: 48,
+  cornerRadius: 12,
+  cornerSmoothing: 0.6,
+});
+</script>
+
+<template>
+  <img ref="el" src="/avatar.jpg" alt="" class="object-cover" />
+</template>
+```
+
+No `ResizeObserver`. All four options (`width`, `height`, `cornerRadius`, `cornerSmoothing`) are required — if you don't know the dimensions, use `useSquircle` instead.
+
+## Composition with other composables
+
+Because composables are just functions, you can combine them freely:
+
+```vue
+<script setup>
+import { ref } from "vue";
+import { useElementSize } from "@vueuse/core";
+import { useSquircle } from "@squircle-js/vue";
+
+const el = ref<HTMLElement | null>(null);
+const { width, height } = useElementSize(el);
+
+useSquircle(el, () => ({
+  cornerRadius: Math.min(width.value, height.value) * 0.15,
+  cornerSmoothing: 0.6,
+}));
+</script>
+
+<template>
+  <div ref="el" class="bg-purple-500 aspect-video w-full">Adaptive</div>
+</template>
+```
+
+Here the corner radius scales with the element's measured size — something that's awkward to express with the component or directive alone.
+
+## Composable vs directive
+
+| | `useSquircle` composable | `v-squircle` directive |
+|---|---|---|
+| Where it lives | `<script setup>` | Template attribute |
+| Options source | Plain, ref, computed, or getter | Template expression |
+| Requires template ref | Yes | No |
+| Fits Options API | Via `setup()` function | Native |
+| Best for | Complex logic, composition | Simple template-level use |
+
+Both wrap the same core computation. Pick whichever reads more clearly in context.
