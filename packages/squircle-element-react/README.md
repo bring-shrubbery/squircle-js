@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./content/squircle-js-logo.png" width="420px" alt="SquircleJS" />
+  <img src="https://raw.githubusercontent.com/bring-shrubbery/squircle-js/main/content/squircle-js-logo.png" width="420px" alt="SquircleJS" />
 </p>
 
 <!-- <h1 align="center">SquircleJS</h1> -->
@@ -24,7 +24,7 @@
 - 💃 Responsive squircle element that can be used any an intrinsic component.
 - 🙏 Fallback solution for No-JavaScript.
 - 👌 CommonJS and ES6 (tree-shakeable).
-- 🚀 Available for React (with `react@18` support), with other frameworks coming later.
+- 🚀 For React (supports `react@16.8+`). Also available for Solid via [`@squircle-js/solid`](https://www.npmjs.com/package/@squircle-js/solid).
 - 🐁 Just `2.1kB` gzipped.
 - 🧨 Documented usage examples.
 
@@ -44,13 +44,6 @@ It's a [long story](https://www.figma.com/blog/desperately-seeking-squircles/), 
 Visually, [this post from Figma Blog](https://www.figma.com/blog/desperately-seeking-squircles/) shows the difference really well:
 
 ![preview-example](https://github.com/bring-shrubbery/squircle-js/assets/29360707/e64bacb9-9881-476b-9064-01a72df06a9e)
-
-## Framework support
-
-| Package | npm | Framework |
-| --- | --- | --- |
-| [`@squircle-js/react`](./packages/squircle-element-react) | [`@squircle-js/react`](https://www.npmjs.com/package/@squircle-js/react) | React 16.8+ |
-| [`@squircle-js/solid`](./packages/solid) | [`@squircle-js/solid`](https://www.npmjs.com/package/@squircle-js/solid) | Solid 1.8+ |
 
 ## Usage
 
@@ -99,26 +92,6 @@ import { SquircleNoScript } from "@squircle-js/react";
 ...
 ```
 
-### With Solid
-
-```bash
-pnpm add @squircle-js/solid
-```
-
-```tsx
-import { Squircle } from "@squircle-js/solid";
-
-export default function App() {
-  return (
-    <Squircle cornerRadius={10} cornerSmoothing={1} class="bg-black p-4 text-white">
-      Squircle!
-    </Squircle>
-  );
-}
-```
-
-See the [package README](./packages/solid/README.md) for the full Solid API.
-
 ## Why not use CSS superellipse() ?
 
 As of 2025, superellipse is only supported on select browsers. If you don't mind supporting just one browser, you should just use CSS. If you want every user to have the same experience, you should use squircle.js.
@@ -128,7 +101,7 @@ As of 2025, superellipse is only supported on select browsers. If you don't mind
 
 ## Contributing
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md)
+Read [CONTRIBUTING.md](https://github.com/bring-shrubbery/squircle-js/blob/main/CONTRIBUTING.md)
 
 ## Websites using it
 
@@ -140,4 +113,4 @@ Please consider following this project's author, Antoni Silvestrovič on [Github
 
 ## License
 
-This project is licensed under [MIT License](./LICENSE)
+This project is licensed under [MIT License](https://github.com/bring-shrubbery/squircle-js/blob/main/LICENSE)
