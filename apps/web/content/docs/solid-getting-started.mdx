@@ -1,0 +1,89 @@
+---
+title: "Getting Started"
+description: "Install and start using @squircle-js/solid to add iOS-style squircle shapes to your Solid.js project."
+keywords: ["squircle solid", "squircle js solid", "install squircle solid", "solid squircle component"]
+slug: "solid-getting-started"
+order: 1
+group: "solid"
+---
+
+## Installation
+
+Install `@squircle-js/solid` using your preferred package manager:
+
+```bash
+npm install @squircle-js/solid
+```
+
+```bash
+pnpm add @squircle-js/solid
+```
+
+```bash
+yarn add @squircle-js/solid
+```
+
+`solid-js` is a peer dependency — make sure you already have it installed in your project.
+
+## Basic Usage
+
+Import the `Squircle` component and use it like any other `div`. Set `cornerRadius` to control the corner size and the component handles everything else automatically.
+
+```tsx
+import { Squircle } from "@squircle-js/solid";
+
+export default function App() {
+  return (
+    <Squircle cornerRadius={16} class="bg-blue-500 w-32 h-32">
+      <p>Hello</p>
+    </Squircle>
+  );
+}
+```
+
+The component measures its own size via a `ResizeObserver` (via `@solid-primitives/resize-observer`) and generates an SVG clip-path that produces the smooth, continuous-curve corners characteristic of iOS app icons.
+
+## How it works
+
+Standard CSS `border-radius` uses circular arcs that connect abruptly to the straight edges of the element. The squircle shape uses a superellipse curve where the corner flows smoothly all the way to the midpoint of each side. The result looks noticeably more refined, especially at larger corner radii.
+
+`@squircle-js/solid` uses the `figma-squircle` library to compute the SVG path, then applies it as a CSS `clip-path` on the element.
+
+## Minimal example
+
+A working SolidStart page using a squircle as an avatar container:
+
+```tsx
+import { Squircle } from "@squircle-js/solid";
+
+export default function Profile() {
+  return (
+    <Squircle
+      cornerRadius={24}
+      cornerSmoothing={0.6}
+      class="w-16 h-16 overflow-hidden"
+    >
+      <img src="/avatar.jpg" alt="Avatar" class="w-full h-full object-cover" />
+    </Squircle>
+  );
+}
+```
+
+## Solid-specific details
+
+A few things worth knowing when coming from the React package:
+
+- Use `class`, not `className`. Solid uses standard DOM attribute names.
+- Event handlers use Solid's `on:click` / `onClick` syntax. All forwarded HTML props work as you'd expect in Solid.
+- Reactive props stay reactive — destructuring props is discouraged in Solid, so the component uses `splitProps` internally to preserve reactivity.
+- Under SolidStart / SSR, `ResizeObserver` is only wired up on the client. Server-rendered output uses `defaultWidth` / `defaultHeight` (or any explicit `width` / `height` prop) until hydration.
+
+## Requirements
+
+- Solid 1.8 or later
+- A browser that supports `clip-path: path()` (all modern browsers)
+- JavaScript must be enabled — see [No-JavaScript Fallback](/docs/solid-no-javascript-fallback) for graceful degradation
+
+## Coming from React?
+
+If you're already familiar with `@squircle-js/react`, the Solid package mirrors the same three components — `Squircle`, `StaticSquircle`, and `SquircleNoScript` — and the same `asChild` composition pattern. The main differences are Solid-native syntax (`class` instead of `className`, reactive `createSignal` instead of `useState`) and the use of Solid primitives (`@solid-primitives/resize-observer`) in place of React hooks.

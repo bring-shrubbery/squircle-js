@@ -22,6 +22,7 @@ export interface DocsFrontmatter {
   keywords: string[];
   slug: string;
   order: number;
+  group?: string;
 }
 
 export function getContentBySlug<T extends "blog" | "docs">(

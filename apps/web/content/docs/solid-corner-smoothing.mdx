@@ -1,10 +1,10 @@
 ---
 title: "Corner Smoothing Explained"
-description: "Understand what cornerSmoothing values mean, from 0 (standard border-radius) to 0.6 (iOS-like) to 1 (maximum smoothing)."
-keywords: ["corner smoothing", "squircle smoothing", "ios corner smoothing", "cornerSmoothing"]
-slug: "corner-smoothing"
+description: "Understand what cornerSmoothing values mean in @squircle-js/solid, from 0 (standard border-radius) to 0.6 (iOS-like) to 1 (maximum smoothing)."
+keywords: ["solid corner smoothing", "solid squircle smoothing", "cornerSmoothing solid"]
+slug: "solid-corner-smoothing"
 order: 5
-group: "react"
+group: "solid"
 ---
 
 ## What is corner smoothing?
@@ -13,30 +13,30 @@ The `cornerSmoothing` prop controls how much the corner curve extends beyond the
 
 At `0`, the squircle path is mathematically equivalent to `border-radius` — circular arcs that meet the straight edges at a tangent point. At `1`, the curve smoothly flows from the corner all the way to the midpoint of each side, producing the continuous superellipse shape used in iOS app icons.
 
-<SquircleDemo />
+The values and their visual impact are identical to the React package — this is a property of the underlying `figma-squircle` path algorithm, not of the framework bindings.
 
 ## Values explained
 
 ### 0 — Standard border-radius
 
-```jsx
-<Squircle cornerRadius={24} cornerSmoothing={0} className="w-32 h-32 bg-gray-800" />
+```tsx
+<Squircle cornerRadius={24} cornerSmoothing={0} class="w-32 h-32 bg-gray-800" />
 ```
 
 Equivalent to `border-radius: 24px`. The transition from the straight edge to the corner arc is abrupt at the tangent point. Use this value if you want the squircle path API without any visual difference from CSS.
 
 ### 0.6 — iOS style (default)
 
-```jsx
-<Squircle cornerRadius={24} cornerSmoothing={0.6} className="w-32 h-32 bg-gray-800" />
+```tsx
+<Squircle cornerRadius={24} cornerSmoothing={0.6} class="w-32 h-32 bg-gray-800" />
 ```
 
 The default value. This matches the corner smoothing Apple uses for iOS app icons and system UI elements. The curve begins extending onto the straight edge, creating a softer, more refined look. The difference becomes most visible at larger `cornerRadius` values.
 
 ### 1 — Maximum smoothing
 
-```jsx
-<Squircle cornerRadius={24} cornerSmoothing={1} className="w-32 h-32 bg-gray-800" />
+```tsx
+<Squircle cornerRadius={24} cornerSmoothing={1} class="w-32 h-32 bg-gray-800" />
 ```
 
 The curve flows from each corner all the way to the middle of each side. This is the "squircle" in its purest mathematical form. Use this for decorative shapes or when you want a distinctly smooth aesthetic. At small radii relative to the element size the effect is subtle; at large radii it becomes pronounced.
@@ -54,20 +54,51 @@ The curve flows from each corner all the way to the middle of each side. This is
 
 `cornerSmoothing` and `cornerRadius` interact: the smoothing effect only extends as far as the midpoint of each side. On a small element with a large radius, a high smoothing value will look similar to a lower one because there is no room for the curve to extend further. On a large element, the effect is pronounced.
 
-```jsx
+```tsx
 // Small element — smoothing differences are subtle
-<Squircle cornerRadius={8} cornerSmoothing={1} className="w-10 h-10 bg-slate-600" />
+<Squircle cornerRadius={8} cornerSmoothing={1} class="w-10 h-10 bg-slate-600" />
 
 // Large element — smoothing differences are very visible
-<Squircle cornerRadius={32} cornerSmoothing={1} className="w-64 h-64 bg-slate-600" />
+<Squircle cornerRadius={32} cornerSmoothing={1} class="w-64 h-64 bg-slate-600" />
 ```
 
 ## Fractional values
 
 Any value between `0` and `1` is valid. You don't need to use the exact values shown above:
 
-```jsx
-<Squircle cornerRadius={20} cornerSmoothing={0.8} className="w-32 h-32 bg-violet-500" />
+```tsx
+<Squircle cornerRadius={20} cornerSmoothing={0.8} class="w-32 h-32 bg-violet-500" />
 ```
 
 The interpolation is smooth and continuous, so you can tune the value to match your design system exactly.
+
+## Using a signal to tune smoothing
+
+Because Solid's reactivity propagates through the component, you can connect `cornerSmoothing` directly to a signal and see the effect update live:
+
+```tsx
+import { createSignal } from "solid-js";
+import { Squircle } from "@squircle-js/solid";
+
+export default function SmoothingPlayground() {
+  const [smoothing, setSmoothing] = createSignal(0.6);
+
+  return (
+    <div class="flex flex-col gap-4">
+      <input
+        type="range"
+        min="0"
+        max="1"
+        step="0.05"
+        value={smoothing()}
+        onInput={(e) => setSmoothing(Number(e.currentTarget.value))}
+      />
+      <Squircle
+        cornerRadius={32}
+        cornerSmoothing={smoothing()}
+        class="w-48 h-48 bg-violet-500"
+      />
+    </div>
+  );
+}
+```

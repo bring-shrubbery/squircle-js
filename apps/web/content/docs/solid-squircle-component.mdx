@@ -1,0 +1,132 @@
+---
+title: "Squircle Component"
+description: "API reference for the Solid Squircle component — a responsive squircle element that automatically adapts to its size."
+keywords: ["squircle solid component", "solid squircle api", "solid squircle resize observer"]
+slug: "solid-squircle-component"
+order: 2
+group: "solid"
+---
+
+## Overview
+
+`Squircle` is the primary component in `@squircle-js/solid`. It wraps a `div` (or any element via `asChild`) and applies a smooth squircle clip-path that automatically updates whenever the element changes size.
+
+```tsx
+import { Squircle } from "@squircle-js/solid";
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `cornerRadius` | `number` | — | Corner radius in pixels. Required for a visible squircle effect. |
+| `cornerSmoothing` | `number` | `0.6` | Smoothing intensity from `0` (circle arcs) to `1` (maximum superellipse). |
+| `asChild` | `boolean` | `false` | Merges squircle props onto the immediate child element instead of rendering a `div`. |
+| `width` | `number` | — | Override the measured width. Use when you know the exact size. |
+| `height` | `number` | — | Override the measured height. Use when you know the exact size. |
+| `defaultWidth` | `number` | — | Initial width used before the ResizeObserver fires. Prevents a flash of unstyled content on first render. |
+| `defaultHeight` | `number` | — | Initial height used before the ResizeObserver fires. |
+
+All standard HTML `div` props (`class`, `style`, `onClick`, `data-*`, etc.) are also accepted and forwarded to the rendered element.
+
+> In Solid, use `class` rather than `className`. Style objects use the CSS property names directly (`"background-color"` rather than `backgroundColor`).
+
+## How ResizeObserver works
+
+Internally, `Squircle` uses the `createElementSize` primitive from `@solid-primitives/resize-observer` to track the DOM node's size. Whenever the element's size changes — due to CSS, layout shifts, viewport resizing, or content changes — the tracked signal updates, the `createMemo` that computes the SVG path re-runs, and the `clip-path` style updates.
+
+Because Solid is a fine-grained reactive system, only the computed path re-runs — the component itself does not re-render.
+
+This means `Squircle` works correctly without any manual size management:
+
+```tsx
+<Squircle cornerRadius={16} class="w-full max-w-sm bg-gray-100 p-6">
+  <p>Responsive squircle container</p>
+</Squircle>
+```
+
+The SVG path is computed using `figma-squircle`'s `getSvgPath` function and applied as `clip-path: path('...')` on the element's inline style.
+
+## SSR and hydration
+
+Under SolidStart (or any SSR setup), `ResizeObserver` does not exist on the server. The component falls back to `defaultWidth` / `defaultHeight` — or explicit `width` / `height` — for the server-rendered output. After hydration on the client, the observer attaches and real dimensions take over.
+
+To avoid a visual jump on hydration, supply `defaultWidth` / `defaultHeight` that match the element's expected size. For truly known dimensions, use [StaticSquircle](/docs/solid-static-squircle) instead.
+
+## Usage examples
+
+### Simple card
+
+```tsx
+<Squircle
+  cornerRadius={20}
+  cornerSmoothing={0.6}
+  class="bg-white shadow-lg p-6"
+>
+  <h2>Card title</h2>
+  <p>Card content goes here.</p>
+</Squircle>
+```
+
+### Fixed size with default dimensions
+
+Supply `defaultWidth` and `defaultHeight` to avoid a flash of the unclipped shape on first render when the size is known ahead of time:
+
+```tsx
+<Squircle
+  cornerRadius={32}
+  defaultWidth={128}
+  defaultHeight={128}
+  class="w-32 h-32 bg-indigo-500"
+/>
+```
+
+### Overriding measured size
+
+Pass `width` and `height` directly to skip ResizeObserver measurement entirely for that render:
+
+```tsx
+<Squircle
+  cornerRadius={16}
+  width={200}
+  height={100}
+  class="bg-emerald-400"
+>
+  Fixed dimensions
+</Squircle>
+```
+
+> When both `width` / `height` props and a measured size are available, the explicit props take precedence. If you always know the size, consider [StaticSquircle](/docs/solid-static-squircle) for better performance.
+
+### Reactive corner radius
+
+Because props flow through Solid's reactive system, you can drive `cornerRadius` from a signal and the clip-path updates automatically:
+
+```tsx
+import { createSignal } from "solid-js";
+import { Squircle } from "@squircle-js/solid";
+
+export default function Adjustable() {
+  const [radius, setRadius] = createSignal(16);
+
+  return (
+    <>
+      <input
+        type="range"
+        min="0"
+        max="64"
+        value={radius()}
+        onInput={(e) => setRadius(Number(e.currentTarget.value))}
+      />
+      <Squircle
+        cornerRadius={radius()}
+        class="w-48 h-48 bg-violet-500"
+      />
+    </>
+  );
+}
+```
+
+## CSS fallback
+
+The component always sets `border-radius` and `data-squircle` on the rendered element so that browsers without `clip-path: path()` support still get rounded corners. See [No-JavaScript Fallback](/docs/solid-no-javascript-fallback) for the noscript case.

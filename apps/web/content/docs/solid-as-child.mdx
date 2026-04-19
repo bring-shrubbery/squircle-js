@@ -1,0 +1,149 @@
+---
+title: "The asChild Pattern"
+description: "Learn how to use the asChild prop to compose the Solid Squircle with any HTML element or Solid component."
+keywords: ["solid squircle asChild", "solid squircle composition", "solid slot pattern"]
+slug: "solid-as-child"
+order: 4
+group: "solid"
+---
+
+## What is asChild?
+
+Both `Squircle` and `StaticSquircle` accept an `asChild` prop. When `true`, instead of rendering a `<div>` wrapper, the component merges all its props — including `style`, `data-squircle`, and event handlers — onto the single child element you provide.
+
+Internally this uses a small polymorphic helper built on Solid's `children()` accessor and the `spread` utility from `solid-js/web`. There is no equivalent of Radix Slot — none is needed because Solid's reactive primitives compose naturally with DOM nodes resolved from JSX.
+
+## Why use asChild?
+
+Without `asChild`, a squircle button looks like:
+
+```tsx
+<Squircle cornerRadius={12} class="bg-blue-600">
+  <button class="px-4 py-2 text-white">Click me</button>
+</Squircle>
+```
+
+This creates two DOM elements: a `div` with the clip-path, and a `button` inside it. The button won't be clipped properly unless you apply `overflow-hidden` or match sizes exactly.
+
+With `asChild`, the squircle renders directly as the `button`:
+
+```tsx
+<Squircle cornerRadius={12} class="bg-blue-600 px-4 py-2 text-white" asChild>
+  <button>Click me</button>
+</Squircle>
+```
+
+One DOM element. The clip-path, `data-squircle`, and `border-radius` are applied directly to the `button`.
+
+## Rules
+
+- `asChild` requires exactly **one** child element. Arrays of children or plain strings will cause the component to fall back to rendering a `<div>`.
+- The child must resolve to a real DOM element — intrinsic JSX (`<button>`, `<a>`, `<img>`, etc.) and Solid components that render a single DOM element both work.
+- Props from `Squircle` and props from the child are merged — the child's props take precedence on conflicts, and `style` objects are shallow-merged (the squircle's `clip-path` is preserved).
+- Because Solid resolves the child once at render time, `asChild` works best with stable children. Wrapping the squircle around a dynamically-swapping element is usually better done without `asChild`.
+
+## Examples
+
+### Squircle button
+
+```tsx
+import { Squircle } from "@squircle-js/solid";
+
+export function SquircleButton(props: {
+  children: any;
+  onClick?: () => void;
+}) {
+  return (
+    <Squircle
+      cornerRadius={14}
+      cornerSmoothing={0.6}
+      class="bg-indigo-600 px-5 py-2.5 text-white font-medium"
+      asChild
+    >
+      <button type="button" onClick={props.onClick}>
+        {props.children}
+      </button>
+    </Squircle>
+  );
+}
+```
+
+### Squircle link (SolidStart)
+
+```tsx
+import { A } from "@solidjs/router";
+import { Squircle } from "@squircle-js/solid";
+
+export function SquircleLink(props: { href: string; children: any }) {
+  return (
+    <Squircle
+      cornerRadius={12}
+      cornerSmoothing={0.6}
+      class="inline-flex items-center bg-gray-900 px-4 py-2 text-white"
+      asChild
+    >
+      <A href={props.href}>{props.children}</A>
+    </Squircle>
+  );
+}
+```
+
+### Squircle image
+
+Clip an image directly without a wrapper div:
+
+```tsx
+import { StaticSquircle } from "@squircle-js/solid";
+
+export function SquircleImage(props: { src: string; alt: string }) {
+  return (
+    <StaticSquircle
+      width={200}
+      height={200}
+      cornerRadius={28}
+      cornerSmoothing={0.6}
+      asChild
+    >
+      <img src={props.src} alt={props.alt} class="object-cover" />
+    </StaticSquircle>
+  );
+}
+```
+
+### Squircle with a third-party component
+
+`asChild` works with any Solid component that resolves to a single DOM element. For example, with `@motionone/solid`:
+
+```tsx
+import { Motion } from "@motionone/solid";
+import { Squircle } from "@squircle-js/solid";
+
+export function AnimatedSquircle() {
+  return (
+    <Squircle
+      cornerRadius={20}
+      cornerSmoothing={0.6}
+      class="bg-rose-500 w-24 h-24"
+      asChild
+    >
+      <Motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 2, repeat: Infinity }}
+      />
+    </Squircle>
+  );
+}
+```
+
+## Comparison: with and without asChild
+
+| | Without asChild | With asChild |
+|---|---|---|
+| DOM nodes | 2 (div + child) | 1 (child only) |
+| Clip-path target | outer div | child element |
+| Needs overflow-hidden | Often yes | No |
+| Semantic element | div | Whatever you pass |
+
+## Fallback behaviour
+
+If the resolved child isn't a single DOM element (for example, because you passed a fragment, a string, or an array), the component falls back to rendering a normal `<div>` and puts your content inside it. This keeps the component resilient even when callers accidentally pass multiple children.

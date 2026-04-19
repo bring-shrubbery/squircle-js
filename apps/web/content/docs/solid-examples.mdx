@@ -1,0 +1,263 @@
+---
+title: "Examples & Recipes"
+description: "Common patterns and recipes for using @squircle-js/solid: buttons, cards, avatars, image containers, and more."
+keywords: ["solid squircle examples", "solid squircle button", "solid squircle card", "solid squircle avatar"]
+slug: "solid-examples"
+order: 7
+group: "solid"
+---
+
+## Button
+
+Using `asChild` renders the squircle clip-path directly on the `button` element with no extra wrapper:
+
+```tsx
+import { Squircle } from "@squircle-js/solid";
+
+export function Button(props: { children: any; onClick?: () => void }) {
+  return (
+    <Squircle
+      cornerRadius={12}
+      cornerSmoothing={0.6}
+      class="bg-indigo-600 px-5 py-2.5 text-white font-semibold text-sm"
+      asChild
+    >
+      <button type="button" onClick={props.onClick}>
+        {props.children}
+      </button>
+    </Squircle>
+  );
+}
+```
+
+## Card
+
+A card with responsive width — `Squircle` measures itself so no manual sizing is needed:
+
+```tsx
+import { Squircle } from "@squircle-js/solid";
+
+export function Card(props: { title: string; body: string }) {
+  return (
+    <Squircle
+      cornerRadius={20}
+      cornerSmoothing={0.6}
+      class="bg-white shadow-md p-6 space-y-2"
+    >
+      <h3 class="font-semibold text-lg">{props.title}</h3>
+      <p class="text-gray-600 text-sm">{props.body}</p>
+    </Squircle>
+  );
+}
+```
+
+## Avatar
+
+Fixed-size avatars are a perfect use case for `StaticSquircle` — no ResizeObserver overhead:
+
+```tsx
+import { StaticSquircle } from "@squircle-js/solid";
+
+export function Avatar(props: { src: string; alt: string; size?: number }) {
+  const size = () => props.size ?? 48;
+  return (
+    <StaticSquircle
+      width={size()}
+      height={size()}
+      cornerRadius={Math.round(size() * 0.25)}
+      cornerSmoothing={0.6}
+      class="overflow-hidden shrink-0"
+      asChild
+    >
+      <img src={props.src} alt={props.alt} class="w-full h-full object-cover" />
+    </StaticSquircle>
+  );
+}
+```
+
+## Image container
+
+Clip a hero image with a large squircle radius for a distinctive editorial look:
+
+```tsx
+import { StaticSquircle } from "@squircle-js/solid";
+
+export function HeroImage(props: { src: string; alt: string }) {
+  return (
+    <StaticSquircle
+      width={600}
+      height={400}
+      cornerRadius={32}
+      cornerSmoothing={0.8}
+      asChild
+    >
+      <img src={props.src} alt={props.alt} class="w-full h-full object-cover" />
+    </StaticSquircle>
+  );
+}
+```
+
+## App icon
+
+Replicate the iOS app icon shape exactly:
+
+```tsx
+import { StaticSquircle } from "@squircle-js/solid";
+
+export function AppIcon(props: { src: string; name: string }) {
+  return (
+    <div class="flex flex-col items-center gap-1.5">
+      <StaticSquircle
+        width={60}
+        height={60}
+        cornerRadius={13}
+        cornerSmoothing={0.6}
+        class="overflow-hidden"
+        asChild
+      >
+        <img src={props.src} alt={props.name} />
+      </StaticSquircle>
+      <span class="text-xs text-gray-700">{props.name}</span>
+    </div>
+  );
+}
+```
+
+## Notification badge
+
+Small squircle badges with dynamic content:
+
+```tsx
+import { Squircle } from "@squircle-js/solid";
+
+export function Badge(props: { count: number }) {
+  return (
+    <Squircle
+      cornerRadius={6}
+      cornerSmoothing={0.6}
+      class="bg-red-500 px-1.5 py-0.5 text-white text-xs font-bold min-w-[20px] text-center"
+    >
+      {props.count}
+    </Squircle>
+  );
+}
+```
+
+## Animated card with Motion One
+
+`asChild` composes with Solid animation libraries that render a single DOM element — for example, `@motionone/solid`:
+
+```tsx
+import { Motion } from "@motionone/solid";
+import { Squircle } from "@squircle-js/solid";
+
+export function AnimatedCard(props: { children: any }) {
+  return (
+    <Squircle
+      cornerRadius={20}
+      cornerSmoothing={0.6}
+      class="bg-gradient-to-br from-violet-500 to-indigo-600 p-6"
+      asChild
+    >
+      <Motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        {props.children}
+      </Motion.div>
+    </Squircle>
+  );
+}
+```
+
+## Icon button
+
+Round icon buttons with equal width and height benefit from `StaticSquircle`:
+
+```tsx
+import type { Component } from "solid-js";
+import { StaticSquircle } from "@squircle-js/solid";
+
+export function IconButton(props: {
+  icon: Component<{ class?: string }>;
+  label: string;
+  onClick?: () => void;
+}) {
+  const Icon = props.icon;
+  return (
+    <StaticSquircle
+      width={40}
+      height={40}
+      cornerRadius={10}
+      cornerSmoothing={0.6}
+      class="bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
+      asChild
+    >
+      <button type="button" aria-label={props.label} onClick={props.onClick}>
+        <Icon class="w-5 h-5 text-gray-700" />
+      </button>
+    </StaticSquircle>
+  );
+}
+```
+
+## Reactive squircle
+
+Driving `cornerRadius` from a signal shows off Solid's fine-grained reactivity — only the `clip-path` style recomputes, no component re-render:
+
+```tsx
+import { createSignal } from "solid-js";
+import { Squircle } from "@squircle-js/solid";
+
+export function Adjustable() {
+  const [radius, setRadius] = createSignal(16);
+
+  return (
+    <div class="flex items-center gap-4">
+      <input
+        type="range"
+        min="0"
+        max="64"
+        value={radius()}
+        onInput={(e) => setRadius(Number(e.currentTarget.value))}
+      />
+      <Squircle
+        cornerRadius={radius()}
+        class="w-32 h-32 bg-emerald-500"
+      />
+    </div>
+  );
+}
+```
+
+## List of squircles
+
+`<For>` is the idiomatic way to render lists in Solid — each item is keyed automatically:
+
+```tsx
+import { For } from "solid-js";
+import { StaticSquircle } from "@squircle-js/solid";
+
+type Tag = { id: string; label: string };
+
+export function TagList(props: { tags: Tag[] }) {
+  return (
+    <div class="flex flex-wrap gap-2">
+      <For each={props.tags}>
+        {(tag) => (
+          <StaticSquircle
+            width={80}
+            height={28}
+            cornerRadius={8}
+            cornerSmoothing={0.6}
+            class="bg-sky-100 text-sky-800 text-xs font-medium flex items-center justify-center"
+          >
+            {tag.label}
+          </StaticSquircle>
+        )}
+      </For>
+    </div>
+  );
+}
+```

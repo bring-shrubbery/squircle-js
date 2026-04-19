@@ -1,18 +1,18 @@
 ---
 title: "StaticSquircle Component"
-description: "API reference for StaticSquircle — a performant squircle component for elements with known dimensions."
-keywords: ["static squircle", "squircle performance", "squircle fixed size"]
-slug: "static-squircle"
+description: "API reference for the Solid StaticSquircle — a performant squircle component for elements with known dimensions."
+keywords: ["solid static squircle", "solid squircle performance", "solid squircle fixed size"]
+slug: "solid-static-squircle"
 order: 3
-group: "react"
+group: "solid"
 ---
 
 ## Overview
 
 `StaticSquircle` is a leaner alternative to `Squircle` for situations where you already know the element's width and height. It computes the clip-path once and never sets up a `ResizeObserver`, making it more efficient in list-heavy UIs or server-rendered contexts.
 
-```jsx
-import { StaticSquircle } from "@squircle-js/react";
+```tsx
+import { StaticSquircle } from "@squircle-js/solid";
 ```
 
 ## When to use StaticSquircle
@@ -22,8 +22,9 @@ Use `StaticSquircle` when:
 - The element has a fixed, known size (e.g. an avatar, icon, or thumbnail with explicit dimensions)
 - You are rendering many squircle elements and want to minimise browser overhead
 - The size comes from design tokens or constants rather than layout
+- You want a stable clip-path in the server-rendered HTML
 
-Use the regular [`Squircle`](/docs/squircle-component) when:
+Use the regular [`Squircle`](/docs/solid-squircle-component) when:
 
 - The element size is determined by CSS or content
 - The element can resize (fluid layouts, responsive containers)
@@ -47,15 +48,15 @@ All standard HTML `div` props are also accepted.
 
 ### Avatar
 
-```jsx
+```tsx
 <StaticSquircle
   width={48}
   height={48}
   cornerRadius={12}
   cornerSmoothing={0.6}
-  className="overflow-hidden"
+  class="overflow-hidden"
 >
-  <img src="/user.jpg" alt="User" className="w-full h-full object-cover" />
+  <img src="/user.jpg" alt="User" class="w-full h-full object-cover" />
 </StaticSquircle>
 ```
 
@@ -63,24 +64,28 @@ All standard HTML `div` props are also accepted.
 
 Rendering many fixed-size icons in a grid is a good fit for `StaticSquircle`:
 
-```jsx
+```tsx
+import { For } from "solid-js";
+import { StaticSquircle } from "@squircle-js/solid";
+
 const ICON_SIZE = 60;
 
-export function AppGrid({ apps }) {
+export function AppGrid(props: { apps: { id: string; icon: string; name: string }[] }) {
   return (
-    <div className="grid grid-cols-4 gap-4">
-      {apps.map((app) => (
-        <StaticSquircle
-          key={app.id}
-          width={ICON_SIZE}
-          height={ICON_SIZE}
-          cornerRadius={13}
-          cornerSmoothing={0.6}
-          className="overflow-hidden"
-        >
-          <img src={app.icon} alt={app.name} />
-        </StaticSquircle>
-      ))}
+    <div class="grid grid-cols-4 gap-4">
+      <For each={props.apps}>
+        {(app) => (
+          <StaticSquircle
+            width={ICON_SIZE}
+            height={ICON_SIZE}
+            cornerRadius={13}
+            cornerSmoothing={0.6}
+            class="overflow-hidden"
+          >
+            <img src={app.icon} alt={app.name} />
+          </StaticSquircle>
+        )}
+      </For>
     </div>
   );
 }
@@ -88,7 +93,7 @@ export function AppGrid({ apps }) {
 
 ### With asChild on an image
 
-```jsx
+```tsx
 <StaticSquircle
   width={200}
   height={200}
@@ -102,4 +107,10 @@ export function AppGrid({ apps }) {
 
 ## Performance note
 
-Because `StaticSquircle` skips `ResizeObserver`, it can be used in server components (it has no `"use client"` directive of its own) and produces no runtime measurement cost. The SVG path is computed synchronously via `useMemo` and memoised by React so it only recomputes when props change.
+Because `StaticSquircle` skips `ResizeObserver`, it has no measurement overhead at runtime and produces a stable clip-path during SSR. The SVG path is computed inside a `createMemo`, so it only recomputes when `width`, `height`, `cornerRadius`, or `cornerSmoothing` actually change. Solid's fine-grained reactivity means no component re-render is triggered either way — only the `style` attribute updates.
+
+This makes `StaticSquircle` a good default for:
+
+- Long lists of avatars, icons, or thumbnails
+- Server-rendered pages where you want the clip-path in the initial HTML
+- Components where the dimensions are driven by design tokens and never change per instance

@@ -1,0 +1,110 @@
+---
+title: "No-JavaScript Fallback"
+description: "How SquircleNoScript provides graceful degradation in @squircle-js/solid when JavaScript is disabled, using CSS border-radius as a fallback."
+keywords: ["solid squircle noscript", "solid squircle ssr", "solid squircle fallback", "no javascript solid"]
+slug: "solid-no-javascript-fallback"
+order: 6
+group: "solid"
+---
+
+## The problem
+
+`@squircle-js/solid` relies on JavaScript to measure element dimensions (via `ResizeObserver`) and compute the SVG clip-path. When JavaScript is disabled or hasn't loaded yet, the element will have no `clip-path` applied, leaving it unstyled.
+
+To handle this gracefully, the package ships `SquircleNoScript`.
+
+## How SquircleNoScript works
+
+`SquircleNoScript` renders a `<noscript>` block containing a CSS rule:
+
+```css
+[data-squircle] {
+  clip-path: none !important;
+  border-radius: attr(data-squircle) !important;
+}
+```
+
+Every `Squircle` component writes the `cornerRadius` value to a `data-squircle` attribute on its DOM node. When JavaScript is disabled, the browser applies the noscript CSS, which:
+
+1. Removes the (non-functional) clip-path
+2. Falls back to standard `border-radius` using the radius value stored in `data-squircle`
+
+The result is a rounded element that looks correct even without JavaScript — not a perfect squircle, but a clean, rounded shape that matches the intended `cornerRadius`.
+
+## Setup
+
+Add `SquircleNoScript` once at the top of your app. In SolidStart this is typically your root component:
+
+```tsx
+// src/root.tsx
+import { Suspense } from "solid-js";
+import { Body, Head, Html, Routes, FileRoutes, Scripts } from "solid-start";
+import { SquircleNoScript } from "@squircle-js/solid";
+
+export default function Root() {
+  return (
+    <Html>
+      <Head>{/* ... */}</Head>
+      <Body>
+        <SquircleNoScript />
+        <Suspense>
+          <Routes>
+            <FileRoutes />
+          </Routes>
+        </Suspense>
+        <Scripts />
+      </Body>
+    </Html>
+  );
+}
+```
+
+For a client-only Solid app, include `SquircleNoScript` once at the top of your `App` component. It only renders inside a `<noscript>` tag, so it has zero impact on JavaScript-enabled users.
+
+No other configuration is needed. All `Squircle` components on the page will automatically benefit from the fallback.
+
+## SSR considerations
+
+During server-side rendering, the clip-path style is not yet computed — `ResizeObserver` only exists on the client. This means there is a brief window on first paint where a `Squircle` element may appear without a clip-path, particularly when neither `defaultWidth` / `defaultHeight` nor explicit `width` / `height` are provided.
+
+To minimise this:
+
+- Provide `defaultWidth` and `defaultHeight` when the element size is known, so the clip-path can be computed on the first render pass
+- Use `StaticSquircle` for elements with fixed dimensions — it computes the path synchronously (no `ResizeObserver`) and produces a stable clip-path in the server-rendered HTML
+
+```tsx
+// Server-friendly: clip-path computable immediately
+<StaticSquircle
+  width={48}
+  height={48}
+  cornerRadius={12}
+  cornerSmoothing={0.6}
+  class="bg-blue-500"
+/>
+
+// Also works: defaultWidth/defaultHeight give the component a starting point
+<Squircle
+  defaultWidth={128}
+  defaultHeight={128}
+  cornerRadius={20}
+  cornerSmoothing={0.6}
+  class="bg-blue-500"
+/>
+```
+
+## What users see
+
+| Scenario | Visual result |
+|---|---|
+| JavaScript enabled | Full squircle clip-path |
+| JavaScript disabled, `SquircleNoScript` present | Rounded corners via `border-radius` |
+| JavaScript disabled, no `SquircleNoScript` | Square element (no rounding) |
+| SSR, before hydration, with `defaultWidth` / `defaultHeight` | Full squircle clip-path |
+| SSR, before hydration, without defaults | No clip-path on first paint |
+
+## Progressive enhancement checklist
+
+- Include `<SquircleNoScript />` once in your root component
+- Prefer `StaticSquircle` for any element whose size is known at authoring time
+- Pass `defaultWidth` / `defaultHeight` to dynamic `Squircle` instances when you can
+- Treat the squircle shape as a visual polish, not a structural guarantee — content should remain readable without it
