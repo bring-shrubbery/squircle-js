@@ -11,6 +11,8 @@ group: "svelte"
 
 Use the `use:squircle` action to render a button with no wrapper element:
 
+<LiveExample framework="svelte" example="button" height={120} />
+
 ```svelte
 <script lang="ts">
   import { squircle } from "@squircle-js/svelte";
@@ -35,6 +37,8 @@ Use the `use:squircle` action to render a button with no wrapper element:
 
 A card with responsive width — the `Squircle` component measures itself:
 
+<LiveExample framework="svelte" example="card" height={220} />
+
 ```svelte
 <script lang="ts">
   import { Squircle } from "@squircle-js/svelte";
@@ -55,6 +59,8 @@ A card with responsive width — the `Squircle` component measures itself:
 ## Avatar
 
 Fixed-size avatars are a perfect use case for `use:staticSquircle`:
+
+<LiveExample framework="svelte" example="avatar" height={160} />
 
 ```svelte
 <script lang="ts">
@@ -84,6 +90,8 @@ Fixed-size avatars are a perfect use case for `use:staticSquircle`:
 
 Clip a hero image with a large squircle radius:
 
+<LiveExample framework="svelte" example="image-container" height={460} />
+
 ```svelte
 <script lang="ts">
   import { staticSquircle } from "@squircle-js/svelte";
@@ -107,6 +115,8 @@ Clip a hero image with a large squircle radius:
 ## App icon
 
 Replicate the iOS app icon shape exactly:
+
+<LiveExample framework="svelte" example="app-icon" height={180} />
 
 ```svelte
 <script lang="ts">
@@ -134,6 +144,8 @@ Replicate the iOS app icon shape exactly:
 
 Small squircle badges with dynamic content:
 
+<LiveExample framework="svelte" example="notification-badge" height={80} />
+
 ```svelte
 <script lang="ts">
   import { Squircle } from "@squircle-js/svelte";
@@ -153,6 +165,8 @@ Small squircle badges with dynamic content:
 ## Icon button
 
 Equal-width-and-height buttons benefit from `use:staticSquircle`:
+
+<LiveExample framework="svelte" example="icon-button" height={100} />
 
 ```svelte
 <script lang="ts">
@@ -185,6 +199,8 @@ Equal-width-and-height buttons benefit from `use:staticSquircle`:
 
 Driving `cornerRadius` from a `$state` rune — Svelte's fine-grained reactivity only recomputes the `clip-path`:
 
+<LiveExample framework="svelte" example="reactive-squircle" height={200} />
+
 ```svelte
 <script>
   import { Squircle } from "@squircle-js/svelte";
@@ -201,6 +217,8 @@ Driving `cornerRadius` from a `$state` rune — Svelte's fine-grained reactivity
 ## List of squircles
 
 `{#each}` is Svelte's idiomatic list primitive — each item is keyed automatically when you provide a key expression:
+
+<LiveExample framework="svelte" example="list-of-squircles" height={120} />
 
 ```svelte
 <script lang="ts">
@@ -231,6 +249,8 @@ Driving `cornerRadius` from a `$state` rune — Svelte's fine-grained reactivity
 ## Composition with transitions
 
 Actions compose with Svelte's built-in transitions — you can add a fade-in without affecting the squircle:
+
+<LiveExample framework="svelte" example="transitions" height={200} />
 
 ```svelte
 <script>
