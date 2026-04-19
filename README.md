@@ -52,6 +52,7 @@ Visually, [this post from Figma Blog](https://www.figma.com/blog/desperately-see
 | [`@squircle-js/react`](./packages/squircle-element-react) | [`@squircle-js/react`](https://www.npmjs.com/package/@squircle-js/react) | React 16.8+ |
 | [`@squircle-js/solid`](./packages/solid) | [`@squircle-js/solid`](https://www.npmjs.com/package/@squircle-js/solid) | Solid 1.8+ |
 | [`@squircle-js/svelte`](./packages/svelte) | [`@squircle-js/svelte`](https://www.npmjs.com/package/@squircle-js/svelte) | Svelte 5+ |
+| [`@squircle-js/vue`](./packages/vue) | [`@squircle-js/vue`](https://www.npmjs.com/package/@squircle-js/vue) | Vue 3.3+ |
 
 ## Usage
 
@@ -149,6 +150,40 @@ Svelte users can also apply a squircle directly to any element via the `use:squi
 ```
 
 See the [package README](./packages/svelte/README.md) for the full Svelte API.
+
+### With Vue
+
+```bash
+pnpm add @squircle-js/vue
+```
+
+```vue
+<script setup>
+import { Squircle } from "@squircle-js/vue";
+</script>
+
+<template>
+  <Squircle :corner-radius="10" :corner-smoothing="1" class="bg-black p-4 text-white">
+    Squircle!
+  </Squircle>
+</template>
+```
+
+Vue users can also apply a squircle directly to any element via the `v-squircle` directive — no wrapper required:
+
+```vue
+<script setup>
+import { squircleDirective as vSquircle } from "@squircle-js/vue";
+</script>
+
+<template>
+  <button v-squircle="{ cornerRadius: 10, cornerSmoothing: 0.6 }">
+    Click me
+  </button>
+</template>
+```
+
+See the [package README](./packages/vue/README.md) for the full Vue API.
 
 ## Why not use CSS superellipse() ?
 
