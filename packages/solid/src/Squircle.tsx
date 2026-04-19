@@ -3,9 +3,9 @@ import { getSvgPath } from "figma-squircle";
 import {
   createMemo,
   createSignal,
+  type JSX,
   mergeProps,
   splitProps,
-  type JSX,
 } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
@@ -28,7 +28,7 @@ export interface SquircleProps {
 
 export function Squircle(
   rawProps: SquircleProps &
-    Omit<JSX.HTMLAttributes<HTMLDivElement>, keyof SquircleProps>,
+    Omit<JSX.HTMLAttributes<HTMLDivElement>, keyof SquircleProps>
 ) {
   const props = mergeProps({ cornerSmoothing: 0.6 }, rawProps);
 
@@ -62,7 +62,9 @@ export function Squircle(
   const path = createMemo(() => {
     const w = actualWidth();
     const h = actualHeight();
-    if (w === 0 || h === 0) return "";
+    if (w === 0 || h === 0) {
+      return "";
+    }
     return getSvgPath({
       width: w,
       height: h,
@@ -72,7 +74,7 @@ export function Squircle(
   });
 
   const toPx = (value: number | undefined) =>
-    value !== undefined ? `${value}px` : undefined;
+    value === undefined ? undefined : `${value}px`;
 
   const mergedStyle = createMemo<JSX.CSSProperties>(() => {
     const extraStyle =
@@ -104,7 +106,9 @@ export function Squircle(
 
   if (local.asChild) {
     const rendered = renderAsChild(() => local.children, elementProps);
-    if (rendered) return rendered;
+    if (rendered) {
+      return rendered;
+    }
   }
 
   return <Dynamic component="div" {...elementProps} />;

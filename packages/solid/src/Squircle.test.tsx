@@ -6,7 +6,7 @@ import { Squircle } from "./Squircle";
 describe("Squircle", () => {
   test("renders a div with data-squircle and a path() clip-path", () => {
     const { container } = render(() => (
-      <Squircle cornerRadius={16} defaultWidth={100} defaultHeight={100}>
+      <Squircle cornerRadius={16} defaultHeight={100} defaultWidth={100}>
         <span>content</span>
       </Squircle>
     ));

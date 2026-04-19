@@ -1,5 +1,5 @@
 import { getSvgPath } from "figma-squircle";
-import { createMemo, mergeProps, splitProps, type JSX } from "solid-js";
+import { createMemo, type JSX, mergeProps, splitProps } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
 import { renderAsChild } from "./polymorphic";
@@ -16,7 +16,7 @@ export interface StaticSquircleProps {
 
 export function StaticSquircle(
   rawProps: StaticSquircleProps &
-    Omit<JSX.HTMLAttributes<HTMLDivElement>, keyof StaticSquircleProps>,
+    Omit<JSX.HTMLAttributes<HTMLDivElement>, keyof StaticSquircleProps>
 ) {
   const [local, others] = splitProps(rawProps, [
     "asChild",
@@ -34,7 +34,7 @@ export function StaticSquircle(
       height: local.height,
       cornerRadius: local.cornerRadius,
       cornerSmoothing: local.cornerSmoothing,
-    }),
+    })
   );
 
   const mergedStyle = createMemo<JSX.CSSProperties>(() => {
@@ -59,7 +59,9 @@ export function StaticSquircle(
 
   if (local.asChild) {
     const rendered = renderAsChild(() => local.children, elementProps);
-    if (rendered) return rendered;
+    if (rendered) {
+      return rendered;
+    }
   }
 
   return <Dynamic component="div" {...elementProps} />;

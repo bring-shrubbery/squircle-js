@@ -11,7 +11,7 @@ export type PolymorphicProps = Record<string, unknown>;
  */
 export function renderAsChild(
   getChildren: () => JSX.Element,
-  props: PolymorphicProps,
+  props: PolymorphicProps
 ): Element | null {
   const resolved = children(getChildren);
   const node = resolved();
