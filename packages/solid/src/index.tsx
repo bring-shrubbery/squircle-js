@@ -1,1 +1,1 @@
-export {};
+export { SquircleNoScript } from "./SquircleNoScript";
