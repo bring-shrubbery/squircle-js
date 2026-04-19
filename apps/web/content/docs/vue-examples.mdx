@@ -11,6 +11,8 @@ group: "vue"
 
 Use the `v-squircle` directive to render a button with no wrapper element:
 
+<LiveExample framework="vue" example="button" height={120} />
+
 ```vue
 <script setup lang="ts">
 import { squircleDirective as vSquircle } from "@squircle-js/vue";
@@ -34,6 +36,8 @@ defineProps<{ onClick?: () => void }>();
 
 A card with responsive width — the `Squircle` component measures itself:
 
+<LiveExample framework="vue" example="card" height={220} />
+
 ```vue
 <script setup lang="ts">
 import { Squircle } from "@squircle-js/vue";
@@ -56,6 +60,8 @@ defineProps<{ title: string; body: string }>();
 ## Avatar
 
 Fixed-size avatars are a perfect use case for `v-static-squircle`:
+
+<LiveExample framework="vue" example="avatar" height={160} />
 
 ```vue
 <script setup lang="ts">
@@ -86,6 +92,8 @@ const props = withDefaults(
 
 Clip a hero image with a large squircle radius:
 
+<LiveExample framework="vue" example="image-container" height={460} />
+
 ```vue
 <script setup lang="ts">
 import { staticSquircleDirective as vStaticSquircle } from "@squircle-js/vue";
@@ -111,6 +119,8 @@ defineProps<{ src: string; alt: string }>();
 ## App icon
 
 Replicate the iOS app icon shape exactly:
+
+<LiveExample framework="vue" example="app-icon" height={180} />
 
 ```vue
 <script setup lang="ts">
@@ -140,6 +150,8 @@ defineProps<{ src: string; name: string }>();
 
 Small squircle badges with dynamic content:
 
+<LiveExample framework="vue" example="notification-badge" height={80} />
+
 ```vue
 <script setup lang="ts">
 import { Squircle } from "@squircle-js/vue";
@@ -161,6 +173,8 @@ defineProps<{ count: number }>();
 ## Icon button
 
 Equal-width-and-height buttons benefit from `v-static-squircle`:
+
+<LiveExample framework="vue" example="icon-button" height={100} />
 
 ```vue
 <script setup lang="ts">
@@ -191,6 +205,8 @@ defineProps<{ label: string; onClick?: () => void }>();
 
 Driving `cornerRadius` from a `ref` — Vue's fine-grained reactivity only recomputes the `clip-path`:
 
+<LiveExample framework="vue" example="reactive-squircle" height={200} />
+
 ```vue
 <script setup>
 import { ref } from "vue";
@@ -210,6 +226,8 @@ const radius = ref(16);
 ## List of squircles
 
 Vue's `v-for` pairs naturally with keyed squircles:
+
+<LiveExample framework="vue" example="list-of-squircles" height={120} />
 
 ```vue
 <script setup lang="ts">
@@ -240,6 +258,8 @@ defineProps<{ tags: Array<{ id: string; label: string }> }>();
 ## Composition with transitions
 
 Directives compose with Vue's `<Transition>` element — you can add a fade-in without affecting the squircle:
+
+<LiveExample framework="vue" example="transitions" height={200} />
 
 ```vue
 <script setup>
