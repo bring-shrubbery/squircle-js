@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { DocsFeedback } from "@/components/docs-feedback";
 import { mdxComponents } from "@/components/mdx/mdx-components";
 import { compileMdx, getAllContent, getContentBySlug } from "@/lib/mdx";
 
@@ -51,6 +52,8 @@ export default async function DocsPage({ params }: Props) {
     <article>
       <h1 className="mb-6 font-bold text-3xl">{doc.frontmatter.title}</h1>
       <Content />
+
+      <DocsFeedback />
 
       <script
         dangerouslySetInnerHTML={{

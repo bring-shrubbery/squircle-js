@@ -12,6 +12,7 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
+    "@futurebase/feedback": "^0.1.2",
     "@mdx-js/mdx": "^3.1.1",
     "@radix-ui/react-label": "^2.1.2",
     "@radix-ui/react-menubar": "^1.1.6",
