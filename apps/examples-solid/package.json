@@ -1,0 +1,27 @@
+{
+  "name": "@squircle-js/examples-solid",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview",
+    "clean": "rm -rf .turbo dist node_modules",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@motionone/solid": "^10.16.4",
+    "@squircle-js/solid": "workspace:*",
+    "solid-js": "^1.9.0"
+  },
+  "devDependencies": {
+    "@squircle-js/tsconfig": "workspace:*",
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/node": "^20.17.22",
+    "tailwindcss": "^4.0.0",
+    "typescript": "catalog:",
+    "vite": "^5.4.0",
+    "vite-plugin-solid": "^2.11.0"
+  }
+}
