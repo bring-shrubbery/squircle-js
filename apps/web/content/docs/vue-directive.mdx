@@ -1,0 +1,150 @@
+---
+title: "The Directive Pattern"
+description: "v-squircle and v-static-squircle attach squircle clipping directly to any element — the idiomatic Vue equivalent of React's asChild."
+keywords: ["vue squircle directive", "v-squircle", "vue ios squircle button"]
+slug: "vue-directive"
+order: 4
+group: "vue"
+---
+
+## What is a directive?
+
+A Vue **directive** is a lightweight primitive for attaching low-level DOM behavior to an element. Directives get direct access to the element and lifecycle hooks (`mounted`, `updated`, `beforeUnmount`) — they don't render new DOM, they augment an existing element.
+
+`@squircle-js/vue` ships two directives:
+
+- `v-squircle` — dynamic, observes element size
+- `v-static-squircle` — synchronous, takes explicit `width` / `height`
+
+## Why directives instead of `asChild`?
+
+React and Solid's `asChild` pattern works because JSX children can be cloned and augmented with extra props. Vue's slot system can't clone a slot child and inject styles into it — there's no equivalent of `cloneElement`.
+
+Vue's answer is the directive system — a primitive specifically for attaching behavior to any element. It's lighter than wrapping, works for any intrinsic element (`<button>`, `<img>`, `<a>`, `<section>`), composes with Vue transitions and third-party directives, and reads naturally in templates.
+
+## Registering the directives
+
+Two options — local registration per component, or global via the plugin.
+
+**Local (tree-shakable):**
+
+```vue
+<script setup>
+import { squircleDirective as vSquircle } from "@squircle-js/vue";
+</script>
+
+<template>
+  <div v-squircle="{ cornerRadius: 16 }">...</div>
+</template>
+```
+
+Vue's `<script setup>` automatically registers any variable starting with `v` followed by an uppercase letter as a directive.
+
+**Global:**
+
+```ts
+// main.ts
+import { createApp } from "vue";
+import { SquirclePlugin } from "@squircle-js/vue";
+import App from "./App.vue";
+
+createApp(App).use(SquirclePlugin).mount("#app");
+```
+
+After `app.use(SquirclePlugin)`, `v-squircle` and `v-static-squircle` work in every template.
+
+## `v-squircle`
+
+```vue
+<script setup>
+import { squircleDirective as vSquircle } from "@squircle-js/vue";
+</script>
+
+<template>
+  <button
+    v-squircle="{ cornerRadius: 12, cornerSmoothing: 0.6 }"
+    class="bg-indigo-600 px-5 py-2.5 text-white font-semibold"
+  >
+    Click me
+  </button>
+</template>
+```
+
+**Behavior:**
+
+- Sets `data-squircle`, `border-radius`, and `clip-path` on the element
+- Observes size via `ResizeObserver` — updates clip-path on resize
+- Respects explicit `width` / `height` (skips the observer when both are given)
+- Cleans up the observer when the element is removed
+
+**Options:**
+
+| Option | Type | Description |
+|---|---|---|
+| `cornerRadius` | `number` | Corner radius in pixels. |
+| `cornerSmoothing` | `number` | Squircle smoothing from `0` to `1`. Defaults to `0.6`. |
+| `width` | `number` | Explicit width override. |
+| `height` | `number` | Explicit height override. |
+| `defaultWidth` | `number` | Fallback width used before first measurement. |
+| `defaultHeight` | `number` | Fallback height used before first measurement. |
+
+## `v-static-squircle`
+
+Synchronous variant. No observer. All four size/shape options are required.
+
+```vue
+<script setup>
+import { staticSquircleDirective as vStaticSquircle } from "@squircle-js/vue";
+</script>
+
+<template>
+  <img
+    src="/avatar.jpg"
+    alt="Avatar"
+    v-static-squircle="{
+      width: 48,
+      height: 48,
+      cornerRadius: 12,
+      cornerSmoothing: 0.6,
+    }"
+    class="object-cover"
+  />
+</template>
+```
+
+## Reactive bindings
+
+The binding value is reactive — Vue calls the directive's `updated` hook whenever the bound object changes, and the clip-path re-applies:
+
+```vue
+<script setup>
+import { ref } from "vue";
+import { squircleDirective as vSquircle } from "@squircle-js/vue";
+
+const radius = ref(16);
+</script>
+
+<template>
+  <input type="range" min="0" max="64" v-model.number="radius" />
+  <div
+    v-squircle="{ cornerRadius: radius, cornerSmoothing: 0.6 }"
+    class="w-40 h-40 bg-rose-500"
+  />
+</template>
+```
+
+No component re-render — only the `clip-path` recomputes.
+
+## Comparison: component vs directive
+
+| | `<Squircle>` component | `v-squircle` directive |
+|---|---|---|
+| DOM nodes | 1 extra `<div>` wrapper | 0 (clip-path on the element itself) |
+| Target element | Always `<div>` | Any element |
+| Needs `overflow-hidden` | Often yes | No — clip-path clips contents |
+| When to use | Wrapping arbitrary content | Clipping a specific `<button>`, `<img>`, `<a>`, etc. |
+| SSR preview | Supports `defaultWidth`/`defaultHeight` | Client-side only |
+
+## Fallback behavior
+
+If the browser doesn't support `ResizeObserver`, the directive applies a one-time measurement on mount (using `offsetWidth` / `offsetHeight` or `defaultWidth` / `defaultHeight`) and skips the observer. The clip-path won't update on resize, but the initial shape is still applied.
