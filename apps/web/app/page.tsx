@@ -15,7 +15,7 @@ import { UsageSectionReactContent } from "./sections/UsageSectionReactContent";
 export default function Page() {
   return (
     <>
-      <Navbar />
+      <Navbar className="max-w-240" />
       <SquircleDemoSection />
       <FeaturesSection />
       <UsageSection reactUsageContent={<UsageSectionReactContent />} />
