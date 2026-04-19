@@ -1,0 +1,8 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "buildCommand": "cd ../.. && pnpm turbo build --filter=@squircle-js/examples-svelte",
+  "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
+  "outputDirectory": "dist",
+  "ignoreCommand": "git diff HEAD^ HEAD --quiet ./ ../../packages/svelte ../../packages/figma-squircle"
+}
