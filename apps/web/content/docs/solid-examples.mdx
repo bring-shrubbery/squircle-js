@@ -11,6 +11,8 @@ group: "solid"
 
 Using `asChild` renders the squircle clip-path directly on the `button` element with no extra wrapper:
 
+<LiveExample framework="solid" example="button" height={120} />
+
 ```tsx
 import { Squircle } from "@squircle-js/solid";
 
@@ -34,6 +36,8 @@ export function Button(props: { children: any; onClick?: () => void }) {
 
 A card with responsive width — `Squircle` measures itself so no manual sizing is needed:
 
+<LiveExample framework="solid" example="card" height={220} />
+
 ```tsx
 import { Squircle } from "@squircle-js/solid";
 
@@ -54,6 +58,8 @@ export function Card(props: { title: string; body: string }) {
 ## Avatar
 
 Fixed-size avatars are a perfect use case for `StaticSquircle` — no ResizeObserver overhead:
+
+<LiveExample framework="solid" example="avatar" height={160} />
 
 ```tsx
 import { StaticSquircle } from "@squircle-js/solid";
@@ -79,6 +85,8 @@ export function Avatar(props: { src: string; alt: string; size?: number }) {
 
 Clip a hero image with a large squircle radius for a distinctive editorial look:
 
+<LiveExample framework="solid" example="image-container" height={460} />
+
 ```tsx
 import { StaticSquircle } from "@squircle-js/solid";
 
@@ -100,6 +108,8 @@ export function HeroImage(props: { src: string; alt: string }) {
 ## App icon
 
 Replicate the iOS app icon shape exactly:
+
+<LiveExample framework="solid" example="app-icon" height={180} />
 
 ```tsx
 import { StaticSquircle } from "@squircle-js/solid";
@@ -127,6 +137,8 @@ export function AppIcon(props: { src: string; name: string }) {
 
 Small squircle badges with dynamic content:
 
+<LiveExample framework="solid" example="notification-badge" height={80} />
+
 ```tsx
 import { Squircle } from "@squircle-js/solid";
 
@@ -146,6 +158,8 @@ export function Badge(props: { count: number }) {
 ## Animated card with Motion One
 
 `asChild` composes with Solid animation libraries that render a single DOM element — for example, `@motionone/solid`:
+
+<LiveExample framework="solid" example="motion-card" height={220} />
 
 ```tsx
 import { Motion } from "@motionone/solid";
@@ -174,6 +188,8 @@ export function AnimatedCard(props: { children: any }) {
 ## Icon button
 
 Round icon buttons with equal width and height benefit from `StaticSquircle`:
+
+<LiveExample framework="solid" example="icon-button" height={100} />
 
 ```tsx
 import type { Component } from "solid-js";
@@ -206,6 +222,8 @@ export function IconButton(props: {
 
 Driving `cornerRadius` from a signal shows off Solid's fine-grained reactivity — only the `clip-path` style recomputes, no component re-render:
 
+<LiveExample framework="solid" example="reactive-squircle" height={200} />
+
 ```tsx
 import { createSignal } from "solid-js";
 import { Squircle } from "@squircle-js/solid";
@@ -234,6 +252,8 @@ export function Adjustable() {
 ## List of squircles
 
 `<For>` is the idiomatic way to render lists in Solid — each item is keyed automatically:
+
+<LiveExample framework="solid" example="list-of-squircles" height={120} />
 
 ```tsx
 import { For } from "solid-js";
