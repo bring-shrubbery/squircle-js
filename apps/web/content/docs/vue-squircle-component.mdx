@@ -1,0 +1,89 @@
+---
+title: "The Squircle Component"
+description: "<Squircle> auto-sizes itself via ResizeObserver and applies a smooth-corner SVG clip-path in Vue 3."
+keywords: ["vue squircle component", "vue squircle props", "vue dynamic squircle"]
+slug: "vue-squircle-component"
+order: 2
+group: "vue"
+---
+
+## Overview
+
+`<Squircle>` is a dynamic component — it measures its own rendered size with `ResizeObserver` and re-applies the clip-path whenever the element resizes. Use it for responsive elements whose dimensions aren't known at authoring time.
+
+```vue
+<script setup>
+import { Squircle } from "@squircle-js/vue";
+</script>
+
+<template>
+  <Squircle :corner-radius="24" :corner-smoothing="0.6" class="bg-violet-500 p-6">
+    <p class="text-white">Hello, squircle</p>
+  </Squircle>
+</template>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `cornerRadius` | `number` | `undefined` | Corner radius in pixels. Also written to `data-squircle` for the noscript fallback. |
+| `cornerSmoothing` | `number` | `0.6` | Squircle smoothing from `0` (CSS border-radius) to `1` (maximum superellipse). |
+| `width` | `number` | `undefined` | Explicit width override. When both `width` and `height` are provided, the component skips the `ResizeObserver`. |
+| `height` | `number` | `undefined` | Explicit height override. |
+| `defaultWidth` | `number` | `undefined` | Fallback width used before first measurement — useful to avoid pop-in on first render. |
+| `defaultHeight` | `number` | `undefined` | Fallback height used before first measurement. |
+
+All other attributes (`class`, `style`, event handlers, ARIA attributes) are forwarded to the underlying `<div>`.
+
+## Reactive props
+
+Props can be driven by refs — the component re-applies the clip-path without re-rendering:
+
+```vue
+<script setup>
+import { ref } from "vue";
+import { Squircle } from "@squircle-js/vue";
+
+const radius = ref(16);
+</script>
+
+<template>
+  <input type="range" min="0" max="64" v-model.number="radius" />
+  <Squircle :corner-radius="radius" class="w-32 h-32 bg-rose-500" />
+</template>
+```
+
+## When not to use `<Squircle>`
+
+- **Fixed dimensions:** prefer [`<StaticSquircle>`](/docs/vue-static-squircle) — no observer, lower overhead.
+- **Clip arbitrary elements without a wrapper:** use [`v-squircle`](/docs/vue-directive) — skips the extra `<div>`.
+- **Compose with other reactive logic:** prefer [`useSquircle`](/docs/vue-composable).
+
+## Slot
+
+The default slot is rendered inside the clipped `<div>`. There are no named slots.
+
+```vue
+<template>
+  <Squircle :corner-radius="16">
+    <img src="..." />
+    <p>Caption</p>
+  </Squircle>
+</template>
+```
+
+## Underlying DOM
+
+`<Squircle>` renders exactly one element:
+
+```html
+<div
+  data-squircle="16"
+  style="border-radius: 16px; clip-path: path('...');"
+>
+  <!-- slot content -->
+</div>
+```
+
+No extra wrappers, no shadow DOM.
