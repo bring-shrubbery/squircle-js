@@ -50,3 +50,7 @@ dist/
 
 # turbo
 .turbo
+
+# transient bundler config files (vite / tsup load TS configs by bundling them to a temp file)
+vite.config.*.timestamp-*.mjs
+tsup.config.bundled_*.mjs
