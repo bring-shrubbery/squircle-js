@@ -76,9 +76,14 @@ Svelte's fine-grained reactivity means only the `clip-path` style is updated —
 ## When to use `Squircle` vs `StaticSquircle`
 
 - **Unknown / responsive dimensions** → `Squircle`.
-- **Fixed dimensions known at authoring time** → `StaticSquircle`. Cheaper (no observer).
+- **Fixed dimensions known at authoring time** → [`StaticSquircle`](/docs/svelte-static-squircle). Cheaper (no observer).
 
 ## When to use the component vs the action
 
 - **Need a wrapper `<div>` around arbitrary children** → use `<Squircle>`.
 - **Want to apply squircle clipping directly to a `<button>`, `<img>`, `<a>`, etc.** → use the [`use:squircle` action](/docs/svelte-action).
+
+## Related
+
+- [Examples & Recipes](/docs/svelte-examples) — `Squircle` in real button, card, and avatar patterns.
+- [StaticSquircle](/docs/svelte-static-squircle) — the cheaper, SSR-friendly option for fixed-size elements.
