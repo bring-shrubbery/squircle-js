@@ -7,7 +7,7 @@ export default defineConfig({
   external: ["react"],
   outExtension({ format }) {
     return {
-      js: format === "esm" ? ".mjs" : ".js",
+      js: format === "esm" ? ".mjs" : ".cjs",
     };
   },
 });
