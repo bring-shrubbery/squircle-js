@@ -17,6 +17,17 @@
         "default": "./dist/index.cjs"
       },
       "default": "./dist/index.mjs"
+    },
+    "./base": {
+      "import": {
+        "types": "./dist/base.d.ts",
+        "default": "./dist/base.mjs"
+      },
+      "require": {
+        "types": "./dist/base.d.cts",
+        "default": "./dist/base.cjs"
+      },
+      "default": "./dist/base.mjs"
     }
   },
   "files": [
@@ -33,6 +44,7 @@
     "figma-squircle": "1.1.0"
   },
   "devDependencies": {
+    "@base-ui/react": "^1.6.0",
     "@squircle-js/tsconfig": "workspace:*",
     "@swc/core": "^1.11.5",
     "@types/react": "catalog:react",
@@ -41,7 +53,13 @@
     "typescript": "catalog:"
   },
   "peerDependencies": {
+    "@base-ui/react": "^1.6.0",
     "react": "^16.8 || ^17 || ^18 || ^19"
+  },
+  "peerDependenciesMeta": {
+    "@base-ui/react": {
+      "optional": true
+    }
   },
   "repository": {
     "type": "git",
