@@ -1,25 +1,15 @@
 "use client";
 
 import { Slot } from "@radix-ui/react-slot";
-import { getSvgPath } from "figma-squircle";
 import type * as React from "react";
-import { useMemo } from "react";
 
-import { useElementSize } from "./use-element-size";
+import { type SquircleOptions, useSquircle } from "./use-squircle";
 
 export { SquircleNoScript } from "./no-js";
 
-interface SquircleProps {
-  cornerSmoothing?: number;
-  cornerRadius?: number;
+interface SquircleProps extends SquircleOptions {
   asChild?: boolean;
   children?: React.ReactNode;
-
-  width?: number;
-  height?: number;
-
-  defaultWidth?: number;
-  defaultHeight?: number;
 }
 
 function Squircle<E extends React.ElementType = "div">({
@@ -37,40 +27,17 @@ function Squircle<E extends React.ElementType = "div">({
   const Component = asChild ? Slot : "div";
 
   // Note: If you need to pass ref, wrap this component in another, and style to full-width/height.
-  const [ref, { width, height }] = useElementSize<HTMLDivElement>({
+  const { ref, elementProps } = useSquircle({
+    cornerRadius,
+    cornerSmoothing,
+    style,
+    width: w,
+    height: h,
     defaultWidth,
     defaultHeight,
   });
 
-  const actualWidth = w ?? width;
-  const actualHeight = h ?? height;
-
-  const path = useMemo(() => {
-    if (actualWidth === 0 || actualHeight === 0) {
-      return "";
-    }
-    return getSvgPath({
-      width: actualWidth,
-      height: actualHeight,
-      cornerRadius,
-      cornerSmoothing,
-    });
-  }, [actualWidth, actualHeight, cornerRadius, cornerSmoothing]);
-
-  return (
-    <Component
-      {...props}
-      data-squircle={cornerRadius}
-      ref={ref}
-      style={{
-        ...style,
-        borderRadius: cornerRadius,
-        width: w ?? defaultWidth,
-        height: h ?? defaultHeight,
-        clipPath: `path('${path}')`,
-      }}
-    />
-  );
+  return <Component {...props} {...elementProps} ref={ref} />;
 }
 
 export * from "./StaticSquircle";

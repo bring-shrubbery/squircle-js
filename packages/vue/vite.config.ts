@@ -17,7 +17,7 @@ export default defineConfig({
     lib: {
       entry: resolve(import.meta.dirname, "src/index.ts"),
       name: "SquircleJsVue",
-      fileName: (format) => (format === "es" ? "index.mjs" : "index.js"),
+      fileName: (format) => (format === "es" ? "index.mjs" : "index.cjs"),
       formats: ["es", "cjs"],
     },
     rollupOptions: {
