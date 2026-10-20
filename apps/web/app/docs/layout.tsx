@@ -1,5 +1,6 @@
 import { DocsSidebar } from "@/components/docs-sidebar";
 import { Navbar } from "@/components/navbar";
+import { SiteFooter } from "@/components/site-footer";
 import { getAllContent } from "@/lib/mdx";
 
 export default function DocsLayout({
@@ -16,6 +17,7 @@ export default function DocsLayout({
         <DocsSidebar items={docsItems} />
         <div className="min-w-0 flex-1">{children}</div>
       </div>
+      <SiteFooter className="max-w-4xl" />
     </>
   );
 }

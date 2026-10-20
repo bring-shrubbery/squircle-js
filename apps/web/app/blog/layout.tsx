@@ -1,4 +1,5 @@
 import { Navbar } from "@/components/navbar";
+import { SiteFooter } from "@/components/site-footer";
 
 export default function BlogLayout({
   children,
@@ -9,6 +10,7 @@ export default function BlogLayout({
     <>
       <Navbar className="max-w-2xl" />
       <div className="mx-auto max-w-2xl px-6 py-16">{children}</div>
+      <SiteFooter className="max-w-2xl" />
     </>
   );
 }
