@@ -1,4 +1,5 @@
 import { Navbar } from "@/components/navbar";
+import { SiteFooter } from "@/components/site-footer";
 
 import { ExamplesSection } from "./sections/ExamplesSection";
 import { ExamplesSectionAsChildExample } from "./sections/ExamplesSectionAsChildExample";
@@ -37,6 +38,7 @@ export default function Page() {
         <LicenseSection />
         <LinksSection />
       </div>
+      <SiteFooter className="max-w-240" />
     </>
   );
 }
